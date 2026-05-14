@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img">
+  <title>Mike Murphy — Loop mark 24px</title>
+  <desc>Loop mark at favicon source scale.</desc>
+  <path
+    d="M4 12
+       C4 7 7 3 12 3
+       C17 3 20 7 20 12
+       C20 17 17 21 12 21
+       C8 21 5 18 5 14
+       C5 11 7 9 10 9
+       C13 9 15 11 15 14
+       C15 16 13 18 11 17
+       C9 16 8 14 9 12"
+    fill="none"
+    stroke="#FF6434"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

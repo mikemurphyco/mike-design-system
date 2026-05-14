@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img">
+  <title>Mike Murphy — Loop mark 64px, chalk</title>
+  <desc>Loop mark at header scale. Single continuous spiral in mm-chalk. Use on navy or orange surfaces.</desc>
+  <path
+    d="M12 32
+       C12 19 20 8 32 8
+       C45 8 53 19 53 32
+       C53 44 45 55 32 55
+       C21 55 13 47 13 38
+       C13 29 19 23 27 23
+       C35 23 40 29 40 36
+       C40 42 35 46 29 44
+       C24 43 22 38 23 33"
+    fill="none"
+    stroke="#FAF7F2"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

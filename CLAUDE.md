@@ -1,0 +1,54 @@
+# CLAUDE.md — Working in this brand
+
+Read this before generating anything for Mike Murphy / AI Handyman.
+
+## The North Star
+
+Mike is the AI Handyman. He's the guy who already wrestled with the hard part and now shows you the shortcut. The brand is **clean, calm, technical, warm, lightly handmade, never corporate.**
+
+If a design feels like a SaaS landing page, it's wrong.
+If it feels like a guru funnel, it's wrong.
+If it feels like a calm, slightly handmade workbook from someone who actually used the tool yesterday — it's right.
+
+## Hard rules (do not break)
+
+1. **Read `BRAND-CANON.md` first.** The canon overrides anything in this file or any prior chat.
+2. **Consume semantic tokens only.** Never hardcode hex values in components. `var(--color-action-primary)`, not `#FF6434`.
+3. **The tagline is locked:** `LEARN · BUILD · MOVE FORWARD`. Mid-dots, ALL CAPS, IBM Plex Mono Bold. No periods, no commas, no "create," no "ship."
+4. **One AI pop per screen.** Teal `#1ECEBE` shows up on exactly one element — the cursor in a code block, a "live" status dot, the teal satellite in the Node mark. Never on two things at once.
+5. **Cut-shadow stamps go on content, not chrome.** Cards, code blocks, inputs, primary buttons get the 4×4 navy offset shadow. Nav, header, and footer do not.
+6. **Yellow is locked inside the AI Handyman badge.** Yellow ink on orange ground. Don't free yellow into other surfaces.
+7. **Murphydoodle is locked to the polaroid caption.** It says "Mike" on the polaroid. It does not say anything else, anywhere else.
+8. **Two marks, two jobs.** Loop mark = primary brand mark (header, social, personal surfaces). Node mark = system/content mark (tutorial cards, technical surfaces). Never swap their roles.
+
+## Voice rules
+
+- First person. "I" and "you." Mike is talking to one curious human, not "users."
+- Calm and technical. Real tool names, real workflows. No "unleash," "unlock," "supercharge."
+- Em dashes sparingly. Parentheses for quick side thoughts.
+- Exclamation marks rarely, only when genuinely human.
+- Phrases that are on-brand: "Here's what this actually does." "This is where people get stuck." "This part is a little janky, but it works."
+- Phrases that are off-brand: "wire up," "ship it," "level up," "10x," "game-changer," anything from the toolshed metaphor era.
+
+## The NOT list
+
+Never bring these back, no matter how nostalgic they look:
+
+- Cartoon Mike (illustrated character)
+- The toolshed / workshop metaphor in copy or visuals
+- Washi tape, hand-drawn arrows, deco illustrations, lighthouse, cloud
+- Unplugged Sans (the previous display font)
+- `LEARN. CREATE. MOVE FORWARD.` — old tagline with periods
+- "AI Unplugged" as a sub-brand name (the newsletter is just "the newsletter")
+
+## Working pattern
+
+When asked to design something new for the brand:
+
+1. **Start from the system, not from scratch.** Open `design-system-v2.html` and `ui_kits/website/index.html` and lift components and patterns. Don't reinvent the card, the badge, the polaroid.
+2. **Pick layouts from the locked vocabulary:** cut-shadow card grid, polaroid + headline + lede, eyebrow + display + body, badge row + headline + meta.
+3. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review, delete it now.
+
+## Versioning
+
+Stamp every shipped surface with `v2026.1` in the footer or meta row. When the canon changes, bump the version and update `BRAND-CANON.md` first, then propagate.

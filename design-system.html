@@ -1,0 +1,2079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mike Murphy · AI Handyman — Design System v2026.1</title>
+
+<style>
+  /* ── @font-face ─────────────────────────────────────────── */
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Thin.ttf") format("truetype");
+    font-weight: 100; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-ThinItalic.ttf") format("truetype");
+    font-weight: 100; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-ExtraLight.ttf") format("truetype");
+    font-weight: 200; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-ExtraLightItalic.ttf") format("truetype");
+    font-weight: 200; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Light.ttf") format("truetype");
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-LightItalic.ttf") format("truetype");
+    font-weight: 300; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Regular.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Italic.ttf") format("truetype");
+    font-weight: 400; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Medium.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-MediumItalic.ttf") format("truetype");
+    font-weight: 500; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-SemiBold.ttf") format("truetype");
+    font-weight: 600; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-SemiBoldItalic.ttf") format("truetype");
+    font-weight: 600; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-Bold.ttf") format("truetype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-BoldItalic.ttf") format("truetype");
+    font-weight: 700; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("fonts/IBMPlexSans-VariableFont.ttf") format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Murphydoodle";
+    src: url("fonts/Murphydoodle-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  :root {
+    /* Brand */
+    --mm-cream:        #F1ECE2;
+    --mm-chalk:        #FCFAF6;
+    --mm-navy:         #0D1B2A;
+    --mm-orange:       #FF6434;
+    --mm-orange-deep:  #E8501C;
+    --mm-yellow:       #F5C842;
+    --mm-teal:         #1ECEBE;
+
+    /* Semantic */
+    --color-bg-page:              var(--mm-cream);
+    --color-bg-surface:           var(--mm-chalk);
+    --color-text-primary:         var(--mm-navy);
+    --color-text-muted:           rgba(13, 27, 42, 0.62);
+    --color-action-primary:       var(--mm-orange);
+    --color-action-primary-hover: var(--mm-orange-deep);
+    --color-border-default:       rgba(13, 27, 42, 0.18);
+    --color-border-strong:        var(--mm-navy);
+    --color-accent-ai:            var(--mm-teal);
+
+    /* Type families */
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-hand: "Murphydoodle", "Caveat", cursive;
+
+    /* Type scale */
+    --fs-display: 88px;
+    --fs-h1:      56px;
+    --fs-h2:      36px;
+    --fs-h3:      22px;
+    --fs-eyebrow: 13px;
+    --fs-lede:    20px;
+    --fs-body:    16px;
+    --fs-mono-label: 12px;
+    --fs-code:    14px;
+
+    /* Line height */
+    --lh-display: 0.92;
+    --lh-tight:   1.1;
+    --lh-snug:    1.25;
+    --lh-body:    1.55;
+    --lh-code:    1.5;
+
+    /* Letter spacing */
+    --ls-display: -0.03em;
+    --ls-tight:   -0.02em;
+    --ls-normal:   0;
+    --ls-label:    0.14em;
+    --ls-eyebrow:  0.18em;
+
+    /* Spacing — 4px base */
+    --space-1:   4px;
+    --space-2:   8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-24: 96px;
+    --space-32: 128px;
+
+    /* Radii */
+    --radius-sm:   2px;
+    --radius-md:   4px;
+    --radius-lg:   8px;
+    --radius-pill: 999px;
+
+    /* Shadows */
+    --shadow-sm:       0 1px 2px rgba(13, 27, 42, 0.08);
+    --shadow-md:       0 4px 12px rgba(13, 27, 42, 0.10);
+    --shadow-cut:      4px 4px 0 var(--mm-navy);
+    --shadow-polaroid: 6px 12px 0 rgba(13, 27, 42, 0.55);
+
+    /* Motion */
+    --dur-fast:   120ms;
+    --dur-base:   200ms;
+    --ease-out:    cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  }
+
+  /* ── RESET / BASE ───────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--color-bg-page);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { display: block; max-width: 100%; }
+
+  /* ── PAGE LAYOUT ────────────────────────────────────────── */
+  .page {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-8) var(--space-24);
+  }
+
+  /* ── SECTION SCAFFOLD ───────────────────────────────────── */
+  .section { padding: var(--space-16) 0; border-top: 1px solid var(--color-border-default); }
+  .section:first-of-type { border-top: 0; padding-top: 0; }
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-action-primary);
+    margin: 0 0 var(--space-3) 0;
+  }
+  .section-heading {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-h2);
+    letter-spacing: var(--ls-tight);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-8) 0;
+    line-height: var(--lh-tight);
+  }
+  .section-heading-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+  .section-heading-row .section-heading { margin-bottom: 0; }
+  .section-meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ── HEADER (section 1) ─────────────────────────────────── */
+  .ds-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-bottom: var(--space-8);
+  }
+  .ds-header-left { display: flex; align-items: center; gap: var(--space-4); }
+  .wordmark-stack {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    font-size: 22px;
+    color: var(--color-text-primary);
+  }
+  .wordmark-stack span { display: block; }
+  .ds-header-right { display: flex; align-items: center; gap: var(--space-4); }
+  .version-stamp {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+  }
+
+  /* ── AI HANDYMAN BADGE (ribbon) ─────────────────────────── */
+  .badge-ai-handyman {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--mm-navy);
+    background: var(--mm-orange);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    border: 1px solid var(--color-border-strong);
+  }
+
+  /* ── PERSONALITY (section 2) ────────────────────────────── */
+  .rubric {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--fs-lede);
+    line-height: var(--lh-snug);
+    color: var(--color-text-primary);
+    max-width: 780px;
+    margin: 0 0 var(--space-6) 0;
+  }
+  .rubric em {
+    font-style: italic;
+    color: var(--color-action-primary);
+    font-weight: 600;
+  }
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    max-width: 980px;
+  }
+  .voice-note {
+    border-left: 2px solid var(--color-border-strong);
+    padding: var(--space-1) var(--space-4);
+  }
+  .voice-note-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-2) 0;
+  }
+  .voice-note p {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  /* ── TAGLINE LOCKUPS (section 3) ────────────────────────── */
+  .tagline {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-tight);
+    color: var(--color-text-primary);
+    line-height: var(--lh-tight);
+    display: inline-block;
+  }
+  .tagline .dot { color: var(--color-action-primary); padding: 0 0.35em; }
+  .tagline-hero   { font-size: 72px; }
+  .tagline-mid    { font-size: 28px; letter-spacing: 0; }
+  .tagline-footer { font-size: 14px; letter-spacing: var(--ls-label); }
+  .tagline-stack {
+    display: grid;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-8);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+  }
+  .tagline-row { display: flex; align-items: baseline; gap: var(--space-6); }
+  .tagline-row .scale-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    min-width: 88px;
+  }
+
+  /* ── COLOR TOKENS (section 4) ───────────────────────────── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .swatch {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .swatch-chip {
+    height: 120px;
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+  .swatch-meta {
+    padding: var(--space-3) var(--space-4) var(--space-4);
+    display: grid;
+    gap: 2px;
+  }
+  .swatch-token {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    color: var(--color-text-muted);
+  }
+  .swatch-role {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-text-primary);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .chip-cream       { background: var(--mm-cream); }
+  .chip-chalk       { background: var(--mm-chalk); }
+  .chip-navy        { background: var(--mm-navy); }
+  .chip-orange      { background: var(--mm-orange); }
+  .chip-orange-deep { background: var(--mm-orange-deep); }
+  .chip-yellow      { background: var(--mm-yellow); }
+  .chip-teal        { background: var(--mm-teal); }
+
+  /* ── TYPOGRAPHY (section 5) ─────────────────────────────── */
+  .type-table {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    overflow: hidden;
+  }
+  .type-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) var(--space-6);
+    border-bottom: 1px solid var(--color-border-default);
+    align-items: baseline;
+  }
+  .type-row:last-child { border-bottom: 0; }
+  .type-key { display: grid; gap: 4px; }
+  .type-key-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .type-key-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+  .type-specimen { color: var(--color-text-primary); }
+
+  .spec-display {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-display); line-height: var(--lh-display);
+    letter-spacing: var(--ls-display); text-transform: uppercase;
+  }
+  .spec-h1 {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-h1); line-height: var(--lh-tight);
+    letter-spacing: var(--ls-tight); text-transform: uppercase;
+  }
+  .spec-h2 {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-h2); line-height: var(--lh-tight);
+    letter-spacing: var(--ls-tight); text-transform: uppercase;
+  }
+  .spec-eyebrow {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase; color: var(--color-action-primary);
+  }
+  .spec-h3-sans {
+    font-family: var(--font-sans); font-weight: 600;
+    font-size: var(--fs-h3); line-height: var(--lh-snug);
+  }
+  .spec-lede {
+    font-family: var(--font-sans); font-weight: 400;
+    font-size: var(--fs-lede); line-height: var(--lh-snug);
+    color: var(--color-text-primary);
+  }
+  .spec-body {
+    font-family: var(--font-sans); font-weight: 400;
+    font-size: var(--fs-body); line-height: var(--lh-body);
+    max-width: 62ch;
+  }
+  .spec-mono-label {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-mono-label); letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+  .spec-code {
+    font-family: var(--font-mono); font-weight: 400;
+    font-size: var(--fs-code); line-height: var(--lh-code);
+    background: rgba(13,27,42,0.05);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+  }
+
+  /* ── LOGO + MARK (section 6) ────────────────────────────── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-4);
+  }
+  .logo-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-6);
+    min-height: 220px;
+  }
+  .logo-card-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) 0;
+  }
+  .logo-card-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    border-top: 1px solid var(--color-border-default);
+    padding-top: var(--space-3);
+  }
+  .logo-card-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono-label);
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .logo-card-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-align: right;
+  }
+  .col-6 { grid-column: span 6; }
+  .col-4 { grid-column: span 4; }
+
+  /* Wordmark — stacked two lines, Plex Mono 700, lh 0.92, ls -0.03 */
+  .wordmark-large {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    font-size: 72px;
+  }
+  .wordmark-large span { display: block; }
+
+  /* Horizontal lockup — M-mark + MIKE MURPHY + orange eyebrow */
+  .lockup-h {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .lockup-h .m-disc { width: 56px; height: 56px; border-radius: var(--radius-pill); }
+  .lockup-h-text { display: grid; gap: 2px; }
+  .lockup-h-name {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-size: 28px;
+    color: var(--color-text-primary);
+  }
+  .lockup-h-eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-action-primary);
+  }
+
+  /* M-mark — IBM Plex Mono "M" centered in navy disc */
+  .m-disc {
+    background: var(--mm-navy);
+    color: var(--mm-cream);
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .m-disc-72 { width: 72px; height: 72px; font-size: 38px; }
+  .m-disc-stage-cream  { background: var(--mm-cream); }
+  .m-disc-stage-navy   { background: var(--mm-navy); border: 1px solid var(--color-border-strong); }
+  .m-disc-stage-orange { background: var(--mm-orange); }
+  .m-disc-stage-cream  .m-disc-72,
+  .m-disc-stage-orange .m-disc-72 { background: var(--mm-navy); color: var(--mm-cream); }
+  .m-disc-stage-navy   .m-disc-72 { background: var(--mm-cream); color: var(--mm-navy); }
+  .m-disc-context {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Badge stage */
+  .badge-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+  .badge-stage .badge-ai-handyman { font-size: 14px; padding: 10px 16px; }
+
+  /* ── AVATAR LADDER (section 7) ──────────────────────────── */
+  .ladder-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .ladder-card {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-height: 360px;
+  }
+  .ladder-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) 0;
+  }
+  .ladder-meta { display: grid; gap: 6px; padding-top: var(--space-3); border-top: 1px solid var(--color-border-default); }
+  .ladder-rung-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-action-primary);
+  }
+  .ladder-rung-name {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .ladder-rung-use {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+  }
+
+  /* Rung 1: M-mark large */
+  .m-disc-128 { width: 128px; height: 128px; font-size: 72px; }
+
+  /* Rung 2: orange-bg avatar */
+  .avatar-orange {
+    width: 168px; height: 168px;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
+    background: var(--mm-orange);
+  }
+  .avatar-orange img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Rung 3: transparent cutout, page bg shows through */
+  .avatar-transparent {
+    width: 168px; height: 168px;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: var(--color-bg-page);
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .avatar-transparent img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Rung 4: polaroid */
+  .polaroid {
+    background: var(--mm-chalk);
+    padding: 14px 14px 28px 14px;
+    box-shadow: var(--shadow-polaroid);
+    transform: rotate(-2deg);
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid var(--color-border-default);
+  }
+  .polaroid-photo {
+    width: 168px; height: 168px;
+    background: var(--mm-orange);
+    overflow: hidden;
+  }
+  .polaroid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .polaroid-caption {
+    font-family: var(--font-hand);
+    font-size: 38px;
+    color: var(--mm-navy);
+    line-height: 1;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  /* ── COMPONENTS (section 8) ─────────────────────────────── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-4);
+  }
+  .comp-card {
+    grid-column: span 6;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .comp-card.span-12 { grid-column: span 12; }
+  .comp-card.span-4  { grid-column: span 4; }
+  .comp-card.span-8  { grid-column: span 8; }
+  .comp-card-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--color-border-default);
+    padding-bottom: var(--space-3);
+  }
+  .comp-card-name {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .comp-card-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .comp-stage {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4);
+    padding: var(--space-3) 0;
+  }
+
+  /* Buttons — one primary, one secondary, one text link */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+  .btn-primary {
+    background: var(--color-action-primary);
+    color: var(--mm-chalk);
+    box-shadow: var(--shadow-cut);
+  }
+  .btn-primary:hover { background: var(--color-action-primary-hover); }
+  .btn-primary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--mm-navy); }
+
+  .btn-secondary {
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-cut);
+  }
+  .btn-secondary:hover { background: var(--mm-cream); }
+  .btn-secondary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--mm-navy); }
+
+  .link-text {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--fs-body);
+    color: var(--color-action-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .link-text:hover { color: var(--color-action-primary-hover); }
+
+  /* Badges — content/status */
+  .badge-status {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+  }
+  .badge-status .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--color-accent-ai);
+    box-shadow: 0 0 0 2px rgba(30, 206, 190, 0.18);
+  }
+
+  /* Topic pill */
+  .pill-topic {
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border-strong);
+    background: transparent;
+    color: var(--color-text-primary);
+  }
+
+  /* Card — cut-shadow stamp on chalk */
+  .card-stamp {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    padding: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-3);
+    max-width: 360px;
+  }
+  .card-stamp-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+  .card-stamp-thumb {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--mm-orange);
+    border: 1px solid var(--color-border-strong);
+  }
+  .card-stamp-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .card-stamp-eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-action-primary);
+    margin: 0;
+  }
+  .card-stamp-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+  .card-stamp-body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  .card-stamp-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-2); }
+
+  /* Code block + inline code chip */
+  .code-block {
+    font-family: var(--font-mono);
+    font-size: var(--fs-code);
+    line-height: var(--lh-code);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    padding: var(--space-4) var(--space-4);
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
+  }
+  .code-block .prompt { color: var(--color-text-muted); }
+  .code-block .cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    background: var(--color-accent-ai);
+    vertical-align: -0.15em;
+    margin-left: 2px;
+  }
+  .code-inline {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: rgba(13, 27, 42, 0.06);
+    color: var(--color-text-primary);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Callout — single style */
+  .callout {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+  }
+  .callout-mark {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-action-primary);
+    line-height: 1.5;
+  }
+  .callout-body {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-primary);
+  }
+  .callout-body strong { font-weight: 600; }
+
+  /* Section heading specimen */
+  .heading-specimen {
+    display: grid; gap: 6px;
+    padding: var(--space-3) 0;
+  }
+
+  /* Form inputs */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-6);
+  }
+  .field { display: grid; gap: var(--space-2); }
+  .field-label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+  .field-state {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .field-state.is-error { color: var(--color-action-primary); }
+  .input,
+  .textarea,
+  .select {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    line-height: 1.4;
+    width: 100%;
+    transition: box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    box-shadow: 2px 2px 0 var(--mm-navy);
+  }
+  .textarea { min-height: 96px; resize: vertical; font-family: var(--font-sans); }
+  .input:focus, .textarea:focus, .select:focus {
+    outline: 2px solid var(--color-action-primary);
+    outline-offset: 2px;
+  }
+  .input.is-error, .textarea.is-error, .select.is-error {
+    border-color: var(--color-action-primary);
+  }
+  .input:disabled, .textarea:disabled, .select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    background: transparent;
+  }
+  .select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--mm-navy) 50%), linear-gradient(135deg, var(--mm-navy) 50%, transparent 50%); background-position: calc(100% - 18px) center, calc(100% - 12px) center; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; padding-right: 36px; }
+
+  .check-row { display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-sans); font-size: var(--fs-body); color: var(--color-text-primary); }
+  .check, .radio {
+    appearance: none;
+    width: 20px; height: 20px;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg-surface);
+    box-shadow: 2px 2px 0 var(--mm-navy);
+    cursor: pointer;
+    margin: 0;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .check { border-radius: var(--radius-sm); }
+  .radio { border-radius: 50%; box-shadow: 2px 2px 0 var(--mm-navy); }
+  .check:checked { background: var(--color-action-primary); border-color: var(--color-border-strong); }
+  .check:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px 4px;
+    border-right: 2px solid var(--mm-chalk);
+    border-bottom: 2px solid var(--mm-chalk);
+    transform: rotate(45deg) translate(-1px, -2px);
+    width: 6px; height: 10px;
+  }
+  .radio:checked::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--color-action-primary);
+  }
+  .check:focus, .radio:focus { outline: 2px solid var(--color-action-primary); outline-offset: 2px; }
+  .check:disabled, .radio:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+  /* Nav header */
+  .nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+  }
+  .nav-left { display: flex; align-items: center; gap: var(--space-4); }
+  .nav-links { display: flex; align-items: center; gap: var(--space-6); }
+  .nav-link {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--fs-mono-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+  .nav-link.is-active { color: var(--color-action-primary); }
+  .nav-link:hover { color: var(--color-action-primary); }
+
+  /* ── APPLICATIONS (section 9) ───────────────────────────── */
+  .app-stack { display: grid; gap: var(--space-8); }
+  .app-frame {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-cut);
+    overflow: hidden;
+  }
+  .app-frame-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border-default);
+    background: var(--color-bg-surface);
+  }
+  .app-frame-name {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-mono-label); letter-spacing: var(--ls-label);
+    text-transform: uppercase; color: var(--color-text-primary);
+  }
+  .app-frame-note {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: var(--ls-label); text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* Home hero */
+  .home-hero {
+    background: var(--color-bg-page);
+    padding: var(--space-12) var(--space-12);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  .home-hero .h-eyebrow {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase; color: var(--color-action-primary);
+    margin: 0 0 var(--space-3) 0;
+  }
+  .home-hero .h-headline {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 56px; line-height: 1.0; letter-spacing: -0.03em;
+    text-transform: none;
+    margin: 0 0 var(--space-4) 0;
+    color: var(--color-text-primary);
+    max-width: 14ch;
+  }
+  .home-hero .h-headline .dot { color: var(--color-action-primary); padding: 0 0.2em; }
+  .home-hero .h-supporting {
+    margin: var(--space-6) 0 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border-default);
+  }
+  .home-hero .h-lede {
+    font-family: var(--font-sans); font-weight: 400;
+    font-size: var(--fs-lede); line-height: var(--lh-snug);
+    color: var(--color-text-primary);
+    max-width: 44ch;
+    margin: 0 0 var(--space-6) 0;
+  }
+  .home-hero .h-actions { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+  .home-hero .h-art { display: flex; justify-content: center; align-items: center; }
+  .home-hero .h-art .polaroid { transform: rotate(-3deg); }
+
+  /* Tutorial grid */
+  .tut-grid {
+    background: var(--color-bg-page);
+    padding: var(--space-8);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .tut-grid .card-stamp { max-width: none; }
+
+  /* Intro / End 16:9 screens */
+  .screen-16x9 {
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-page);
+    position: relative;
+    padding: var(--space-12);
+    display: flex; flex-direction: column;
+  }
+  .screen-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+
+  .screen-intro .top-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
+  .screen-intro .ep-stamp {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-mono-label); letter-spacing: var(--ls-label);
+    text-transform: uppercase; color: var(--color-text-muted);
+  }
+  .screen-intro .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .screen-intro .h-headline {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 56px; line-height: 0.95; letter-spacing: -0.03em;
+    text-transform: uppercase; margin: 0 0 var(--space-3) 0;
+    color: var(--color-text-primary);
+    max-width: 14ch;
+  }
+  .screen-intro .h-lede {
+    font-family: var(--font-sans); font-size: var(--fs-lede); color: var(--color-text-primary);
+    max-width: 38ch; margin: 0;
+  }
+
+  .screen-end .end-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center; }
+  .screen-end .end-art { display: flex; justify-content: center; }
+  .screen-end .end-art .polaroid { transform: rotate(2deg); }
+  .screen-end .end-text { display: flex; flex-direction: column; gap: var(--space-3); }
+  .screen-end .h-headline {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 44px; line-height: 0.95; letter-spacing: -0.03em;
+    text-transform: uppercase; margin: 0; color: var(--color-text-primary);
+  }
+  .screen-end .h-tag {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 14px; letter-spacing: var(--ls-label);
+    text-transform: uppercase; color: var(--color-text-primary);
+  }
+  .screen-end .h-tag .dot { color: var(--color-action-primary); padding: 0 0.3em; }
+
+  /* ── DARK MODE (section 10) ─────────────────────────────── */
+  .dark-stage {
+    --color-bg-page:        var(--mm-navy);
+    --color-bg-surface:     #14253A;
+    --color-text-primary:   var(--mm-chalk);
+    --color-text-muted:     rgba(250, 247, 242, 0.6);
+    --color-border-default: rgba(250, 247, 242, 0.16);
+    --color-border-strong:  var(--mm-chalk);
+
+    background: var(--color-bg-page);
+    color: var(--color-text-primary);
+    padding: var(--space-12);
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+  }
+  .dark-stage .left { display: grid; gap: var(--space-4); align-content: start; }
+  .dark-stage .h-eyebrow {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase; color: var(--color-accent-ai); margin: 0;
+  }
+  .dark-stage .h-headline {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 44px; line-height: 0.95; letter-spacing: -0.03em;
+    text-transform: uppercase; margin: 0; color: var(--color-text-primary);
+  }
+  .dark-stage .h-body {
+    font-family: var(--font-sans); font-size: var(--fs-body);
+    line-height: var(--lh-body); color: var(--color-text-primary);
+    max-width: 48ch;
+    margin: 0;
+  }
+  .dark-stage .actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
+  .dark-stage .btn-primary {
+    background: var(--color-action-primary);
+    color: var(--mm-chalk);
+    border-color: var(--mm-chalk);
+    box-shadow: 4px 4px 0 var(--mm-chalk);
+  }
+  .dark-stage .btn-secondary {
+    background: transparent;
+    color: var(--mm-chalk);
+    border-color: var(--mm-chalk);
+    box-shadow: 4px 4px 0 var(--mm-chalk);
+  }
+  .dark-stage .right { display: grid; gap: var(--space-4); align-content: start; }
+  .dark-stage .card-stamp {
+    background: var(--color-bg-surface);
+    border-color: var(--mm-chalk);
+    box-shadow: 4px 4px 0 var(--mm-chalk);
+    color: var(--color-text-primary);
+    max-width: none;
+  }
+  .dark-stage .card-stamp-title { color: var(--color-text-primary); }
+  .dark-stage .card-stamp-body  { color: var(--color-text-primary); }
+  .dark-stage .pill-topic {
+    border-color: var(--mm-chalk);
+    color: var(--color-text-primary);
+  }
+  .dark-stage pre.code-block {
+    background: var(--color-bg-surface);
+    border-color: var(--mm-chalk);
+    box-shadow: 4px 4px 0 var(--mm-chalk);
+    color: var(--color-text-primary);
+  }
+  .dark-stage .code-block .prompt { color: var(--color-text-muted); }
+
+  /* ── FOOTER (section 11) ────────────────────────────────── */
+  .ds-footer {
+    margin-top: var(--space-16);
+    padding: var(--space-8) 0;
+    border-top: 1px solid var(--color-border-default);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .ds-footer .left { display: flex; align-items: center; gap: var(--space-4); }
+  .ds-footer .tagline-footer { display: inline-block; }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 1 · HEADER                                   -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <header class="ds-header">
+    <div class="ds-header-left">
+      <div class="wordmark-stack">
+        <span>MIKE</span>
+        <span>MURPHY</span>
+      </div>
+      <span class="badge-ai-handyman">AI Handyman</span>
+    </div>
+    <div class="ds-header-right">
+      <span class="version-stamp">Design System · v2026.1</span>
+    </div>
+  </header>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 2 · BRAND PERSONALITY                        -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <p class="section-eyebrow">02 · Brand personality</p>
+    <h2 class="section-heading">The rubric</h2>
+
+    <p class="rubric">
+      Every design decision passes one test: <em>does it feel clean, calm, technical, warm, lightly handmade, and never corporate?</em> If yes, ship it. If no, cut it.
+    </p>
+
+    <div class="voice-grid">
+      <div class="voice-note">
+        <p class="voice-note-label">Voice</p>
+        <p>I speak in first person. The reader is "you". Never "our team", never startup-speak, never guru energy.</p>
+      </div>
+      <div class="voice-note">
+        <p class="voice-note-label">Tone</p>
+        <p>Calm, clear, practical, encouraging. The guy who already wrestled with the confusing part and is showing you the shortcut.</p>
+      </div>
+      <div class="voice-note">
+        <p class="voice-note-label">Texture</p>
+        <p>Short sentences. Contractions. Specific tools and workflows. Honest about friction. Occasionally funny, never loud.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 3 · TAGLINE LOCKUPS                          -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <p class="section-eyebrow">03 · Tagline</p>
+    <h2 class="section-heading">Three scales, one wording</h2>
+
+    <div class="tagline-stack">
+      <div class="tagline-row">
+        <span class="scale-label">Hero</span>
+        <span class="tagline tagline-hero">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</span>
+      </div>
+      <div class="tagline-row">
+        <span class="scale-label">Mid</span>
+        <span class="tagline tagline-mid">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</span>
+      </div>
+      <div class="tagline-row">
+        <span class="scale-label">Footer</span>
+        <span class="tagline tagline-footer">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 4 · COLOR TOKENS                             -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">04 · Color</p>
+        <h2 class="section-heading">Seven tokens. No alternatives.</h2>
+      </div>
+      <span class="section-meta">Brand layer → semantic layer</span>
+    </div>
+
+    <div class="color-grid">
+      <div class="swatch">
+        <div class="swatch-chip chip-cream"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-cream</span>
+          <span class="swatch-hex">#E8E2D9</span>
+          <p class="swatch-role">Page background. Default surface. Never pure white.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-chalk"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-chalk</span>
+          <span class="swatch-hex">#FAF7F2</span>
+          <p class="swatch-role">Brightest surface. Cards, modals, code-block frames.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-navy"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-navy</span>
+          <span class="swatch-hex">#0D1B2A</span>
+          <p class="swatch-role">Body text, borders, the offset shadow stamp. Never black.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-orange"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-orange</span>
+          <span class="swatch-hex">#FF6434</span>
+          <p class="swatch-role">Primary action / CTA accent.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-orange-deep"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-orange-deep</span>
+          <span class="swatch-hex">#E8501C</span>
+          <p class="swatch-role">Hover / pressed state for orange.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-yellow"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-yellow</span>
+          <span class="swatch-hex">#F5C842</span>
+          <p class="swatch-role">"Tape" inside the AI Handyman badge. Reserved for orange surfaces.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip chip-teal"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">--mm-teal</span>
+          <span class="swatch-hex">#1ECEBE</span>
+          <p class="swatch-role">"AI pop." Cursors, code accents, live status. One use per screen.</p>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background: linear-gradient(135deg, var(--mm-cream) 0 50%, var(--mm-navy) 50% 100%); border-bottom-color: var(--color-border-strong);"></div>
+        <div class="swatch-meta">
+          <span class="swatch-token">Pairing rule</span>
+          <span class="swatch-hex">cream + navy ink</span>
+          <p class="swatch-role">Default text/surface relationship across the system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 5 · TYPOGRAPHY                               -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">05 · Typography</p>
+        <h2 class="section-heading">Three families. One job each.</h2>
+      </div>
+      <span class="section-meta">Plex Mono · Plex Sans · Murphydoodle</span>
+    </div>
+
+    <div class="type-table">
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Display Hero</span>
+          <span class="type-key-meta">Plex Mono 700 / 88px / -0.03em / UPPER</span>
+        </div>
+        <div class="type-specimen spec-display">LEARN<span style="color: var(--color-action-primary);">·</span>BUILD</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">H1</span>
+          <span class="type-key-meta">Plex Mono 700 / 56px / -0.02em / UPPER</span>
+        </div>
+        <div class="type-specimen spec-h1">START THE THING</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">H2</span>
+          <span class="type-key-meta">Plex Mono 700 / 36px / -0.02em / UPPER</span>
+        </div>
+        <div class="type-specimen spec-h2">Your first agent, end to end</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Eyebrow</span>
+          <span class="type-key-meta">Plex Mono 700 / 13px / 0.18em / UPPER / orange</span>
+        </div>
+        <div class="type-specimen spec-eyebrow">Tutorial · 04 of 09</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">H3 Sans</span>
+          <span class="type-key-meta">Plex Sans 600 / 22px / sentence case</span>
+        </div>
+        <div class="type-specimen spec-h3-sans">Here's where people get stuck</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Lede</span>
+          <span class="type-key-meta">Plex Sans 400 / 20px / 1.25</span>
+        </div>
+        <div class="type-specimen spec-lede">A short, plain-language opener that sets up what this page actually does.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Body</span>
+          <span class="type-key-meta">Plex Sans 400 / 16px / 1.55</span>
+        </div>
+        <div class="type-specimen spec-body">Most of the time you'll write paragraphs at this size. Short-to-medium sentences, contractions, specific examples. If a sentence reads like a press release, rewrite it.</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Mono Label</span>
+          <span class="type-key-meta">Plex Mono 700 / 12px / 0.14em / UPPER</span>
+        </div>
+        <div class="type-specimen spec-mono-label">STATUS · LIVE</div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-key">
+          <span class="type-key-name">Code</span>
+          <span class="type-key-meta">Plex Mono 400 / 14px / 1.5</span>
+        </div>
+        <div class="type-specimen"><span class="spec-code">npx create-handyman-app .</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 6 · LOGO + MARK                              -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">06 · Logo &amp; mark</p>
+        <h2 class="section-heading">Wordmark, lockup, M-mark, badge</h2>
+      </div>
+      <span class="section-meta">Plex Mono 700 · everywhere</span>
+    </div>
+
+    <div class="logo-grid">
+
+      <!-- Wordmark -->
+      <div class="logo-card col-6">
+        <div class="logo-card-stage">
+          <div class="wordmark-large">
+            <span>MIKE</span>
+            <span>MURPHY</span>
+          </div>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">Wordmark</span>
+          <span class="logo-card-note">Stacked · lh 0.92 · ls -0.03em</span>
+        </div>
+      </div>
+
+      <!-- Horizontal lockup -->
+      <div class="logo-card col-6">
+        <div class="logo-card-stage">
+          <div class="lockup-h">
+            <span class="m-disc m-disc-72" style="width:56px;height:56px;font-size:30px;">M</span>
+            <div class="lockup-h-text">
+              <span class="lockup-h-name">MIKE MURPHY</span>
+              <span class="lockup-h-eyebrow">· AI Handyman</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">Horizontal lockup</span>
+          <span class="logo-card-note">Site nav · doc headers</span>
+        </div>
+      </div>
+
+      <!-- M-mark on cream -->
+      <div class="logo-card col-4">
+        <div class="logo-card-stage">
+          <div class="m-disc-context m-disc-stage-cream" style="width:100%;">
+            <span class="m-disc m-disc-72">M</span>
+          </div>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">M-mark · cream</span>
+          <span class="logo-card-note">Default surface</span>
+        </div>
+      </div>
+
+      <!-- M-mark on navy -->
+      <div class="logo-card col-4">
+        <div class="logo-card-stage">
+          <div class="m-disc-context m-disc-stage-navy" style="width:100%;">
+            <span class="m-disc m-disc-72">M</span>
+          </div>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">M-mark · navy</span>
+          <span class="logo-card-note">Dark surfaces · footers</span>
+        </div>
+      </div>
+
+      <!-- M-mark on orange -->
+      <div class="logo-card col-4">
+        <div class="logo-card-stage">
+          <div class="m-disc-context m-disc-stage-orange" style="width:100%;">
+            <span class="m-disc m-disc-72">M</span>
+          </div>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">M-mark · orange</span>
+          <span class="logo-card-note">CTA / accent surfaces</span>
+        </div>
+      </div>
+
+      <!-- AI Handyman badge -->
+      <div class="logo-card col-12">
+        <div class="logo-card-stage badge-stage">
+          <span class="badge-ai-handyman">AI Handyman</span>
+        </div>
+        <div class="logo-card-meta">
+          <span class="logo-card-name">AI Handyman badge</span>
+          <span class="logo-card-note">Tutorial cards · intro/end · home hero — never on chrome</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 7 · AVATAR LADDER                            -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">07 · Avatar ladder</p>
+        <h2 class="section-heading">Four rungs. System → personal.</h2>
+      </div>
+      <span class="section-meta">Move down as context gets more intimate</span>
+    </div>
+
+    <div class="ladder-grid">
+
+      <!-- Rung 1 · M-mark -->
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <span class="m-disc m-disc-128">M</span>
+        </div>
+        <div class="ladder-meta">
+          <span class="ladder-rung-num">Rung 01 · System</span>
+          <span class="ladder-rung-name">M-mark</span>
+          <span class="ladder-rung-use">Favicon, app icon, footer chrome, ≤32px contexts.</span>
+        </div>
+      </div>
+
+      <!-- Rung 2 · Orange-bg avatar -->
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <div class="avatar-orange">
+            <img src="assets/avatars/avatar-mike-orange-400.png" alt="Mike on orange background" />
+          </div>
+        </div>
+        <div class="ladder-meta">
+          <span class="ladder-rung-num">Rung 02 · Identity</span>
+          <span class="ladder-rung-name">Orange-bg avatar</span>
+          <span class="ladder-rung-use">Social profile pictures, podcast/end-screen badges, tutorial card thumbnails.</span>
+        </div>
+      </div>
+
+      <!-- Rung 3 · Transparent cutout -->
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <div class="avatar-transparent">
+            <img src="assets/avatars/avatar-mike-transparent-400.png" alt="Mike, transparent cutout" />
+          </div>
+        </div>
+        <div class="ladder-meta">
+          <span class="ladder-rung-num">Rung 03 · Editorial</span>
+          <span class="ladder-rung-name">Transparent cutout</span>
+          <span class="ladder-rung-use">Hero comps where the page bg shows through, About page, flexible marketing layouts.</span>
+        </div>
+      </div>
+
+      <!-- Rung 4 · Polaroid -->
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="assets/avatars/avatar-mike-orange-400.png" alt="Mike polaroid" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+        <div class="ladder-meta">
+          <span class="ladder-rung-num">Rung 04 · Personal</span>
+          <span class="ladder-rung-name">Polaroid</span>
+          <span class="ladder-rung-use">Hero feature moments, tutorial end screens, About page, podcast art.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 8 · COMPONENTS                               -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">08 · Components</p>
+        <h2 class="section-heading">One of each. No spares.</h2>
+      </div>
+      <span class="section-meta">Semantic tokens only · no hard-coded brand vars</span>
+    </div>
+
+    <div class="comp-grid">
+
+      <!-- Buttons -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Buttons &amp; text link</span>
+          <span class="comp-card-note">One primary per screen</span>
+        </div>
+        <div class="comp-stage">
+          <button class="btn btn-primary">Start the thing</button>
+          <button class="btn btn-secondary">See the steps</button>
+          <a href="#" class="link-text">Read the write-up</a>
+        </div>
+      </div>
+
+      <!-- Badge ribbon + status + pill -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Badges &amp; pill</span>
+          <span class="comp-card-note">Ribbon · status · topic</span>
+        </div>
+        <div class="comp-stage">
+          <span class="badge-ai-handyman">AI Handyman</span>
+          <span class="badge-status"><span class="live-dot"></span>Live</span>
+          <span class="pill-topic">Agents</span>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div class="comp-card span-6">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Tutorial card</span>
+          <span class="comp-card-note">Cut-shadow stamp · chalk</span>
+        </div>
+        <div class="comp-stage" style="justify-content: center;">
+          <div class="card-stamp">
+            <div class="card-stamp-head">
+              <div class="card-stamp-thumb"><img src="assets/avatars/avatar-mike-orange-400.png" alt="" /></div>
+              <span class="badge-ai-handyman">AI Handyman</span>
+            </div>
+            <p class="card-stamp-eyebrow">Tutorial · 04 of 09</p>
+            <h3 class="card-stamp-title">Your first agent, end to end</h3>
+            <p class="card-stamp-body">A 12-minute walkthrough — the part that always trips people up, and a small workaround that holds up in production.</p>
+            <div class="card-stamp-foot">
+              <span class="pill-topic">Agents</span>
+              <a href="#" class="link-text">Read</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code block -->
+      <div class="comp-card span-6">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Code block &amp; inline code</span>
+          <span class="comp-card-note">Teal cursor · one per screen</span>
+        </div>
+        <div style="display: grid; gap: var(--space-3);">
+<pre class="code-block"><span class="prompt">$ </span>npx create-handyman-app .
+<span class="prompt">$ </span>cd handyman &amp;&amp; pnpm dev<span class="cursor"></span></pre>
+          <p style="margin: 0; font-family: var(--font-sans); font-size: var(--fs-body); color: var(--color-text-primary); line-height: var(--lh-body);">
+            Pass the model with <span class="code-inline">--model claude-sonnet-4-5</span> if you want the bigger one.
+          </p>
+        </div>
+      </div>
+
+      <!-- Callout -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Callout</span>
+          <span class="comp-card-note">One style · used sparingly</span>
+        </div>
+        <div class="comp-stage" style="display: block;">
+          <div class="callout">
+            <span class="callout-mark">→</span>
+            <p class="callout-body"><strong>Heads up.</strong> The first run takes a minute while it pulls models. After that it's instant.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section headings -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Section heading</span>
+          <span class="comp-card-note">Eyebrow + UPPER mono headline</span>
+        </div>
+        <div class="heading-specimen">
+          <p class="section-eyebrow" style="margin: 0;">03 · Tagline</p>
+          <h2 class="section-heading" style="margin: 0;">Three scales, one wording</h2>
+        </div>
+      </div>
+
+      <!-- Form inputs -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Form inputs</span>
+          <span class="comp-card-note">Default · focus · error · disabled</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <span class="field-label">Email · default</span>
+            <input class="input" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <span class="field-label">Email · focus</span>
+            <input class="input" type="email" value="mike@mikemurphy.co" autofocus />
+          </div>
+          <div class="field">
+            <span class="field-label">Email · error</span>
+            <input class="input is-error" type="email" value="not-an-email" />
+            <span class="field-state is-error">Needs an @ in there</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Email · disabled</span>
+            <input class="input" type="email" value="locked@for-now.com" disabled />
+            <span class="field-state">Locked while syncing</span>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Notes · textarea</span>
+            <textarea class="textarea" placeholder="Short notes go here. Be specific."></textarea>
+          </div>
+          <div class="field">
+            <span class="field-label">Topic · select</span>
+            <select class="select">
+              <option>Agents</option>
+              <option>Workflows</option>
+              <option>Prompts</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Checkboxes</span>
+            <label class="check-row"><input class="check" type="checkbox" checked /> Send me the next walkthrough</label>
+            <label class="check-row"><input class="check" type="checkbox" /> Include the optional appendix</label>
+            <label class="check-row"><input class="check" type="checkbox" disabled /> Coming soon</label>
+          </div>
+          <div class="field">
+            <span class="field-label">Radios</span>
+            <label class="check-row"><input class="radio" type="radio" name="r1" checked /> Quick read (5 min)</label>
+            <label class="check-row"><input class="radio" type="radio" name="r1" /> Full walkthrough (20 min)</label>
+            <label class="check-row"><input class="radio" type="radio" name="r1" disabled /> Live workshop · soon</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav header -->
+      <div class="comp-card span-12">
+        <div class="comp-card-head">
+          <span class="comp-card-name">Nav header</span>
+          <span class="comp-card-note">Lockup · links · primary CTA</span>
+        </div>
+        <div class="comp-stage" style="display: block;">
+          <div class="nav-header">
+            <div class="nav-left">
+              <span class="m-disc m-disc-72" style="width:36px;height:36px;font-size:20px;">M</span>
+              <div class="lockup-h-text">
+                <span class="lockup-h-name" style="font-size: 18px;">MIKE MURPHY</span>
+                <span class="lockup-h-eyebrow">· AI Handyman</span>
+              </div>
+            </div>
+            <nav class="nav-links">
+              <a class="nav-link is-active" href="#">Tutorials</a>
+              <a class="nav-link" href="#">Notes</a>
+              <a class="nav-link" href="#">Podcast</a>
+              <a class="nav-link" href="#">About</a>
+            </nav>
+            <button class="btn btn-primary" style="padding: 10px 16px;">Subscribe</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 9 · PAGE TEMPLATES (LIGHT)                   -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">09 · Page templates</p>
+        <h2 class="section-heading">Light surfaces in use</h2>
+      </div>
+      <span class="section-meta">Hero · grid · 16:9 intro/end</span>
+    </div>
+
+    <div class="app-stack">
+
+      <!-- Home hero -->
+      <div class="app-frame">
+        <div class="app-frame-head">
+          <span class="app-frame-name">Home hero</span>
+          <span class="app-frame-note">One primary CTA · badge earns its place</span>
+        </div>
+        <div class="home-hero">
+          <div>
+            <p class="h-eyebrow">Mike Murphy · AI Handyman</p>
+            <h1 class="h-headline">AI tools, explained clearly.</h1>
+            <p class="h-lede">I'm Mike. I make calm, practical tutorials for people who'd rather understand one tool well than skim ten threads about it. No hype, no jargon, no AI-guru voice — just the parts that matter and the parts that trip people up.</p>
+            <div class="h-actions">
+              <button class="btn btn-primary">Browse the tutorials</button>
+              <a href="#" class="link-text">Read the latest</a>
+            </div>
+          </div>
+          <div class="h-art">
+            <div class="polaroid">
+              <div class="polaroid-photo"><img src="assets/avatars/avatar-mike-orange-400.png" alt="Mike polaroid" /></div>
+              <div class="polaroid-caption">Mike</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tutorial card grid -->
+      <div class="app-frame">
+        <div class="app-frame-head">
+          <span class="app-frame-name">Tutorial card grid</span>
+          <span class="app-frame-note">Badge on every content card</span>
+        </div>
+        <div class="tut-grid">
+          <div class="card-stamp">
+            <div class="card-stamp-head">
+              <div class="card-stamp-thumb"><img src="assets/avatars/avatar-mike-orange-400.png" alt="" /></div>
+              <span class="badge-ai-handyman">AI Handyman</span>
+            </div>
+            <p class="card-stamp-eyebrow">Tutorial · 04 of 09</p>
+            <h3 class="card-stamp-title">Your first agent, end to end</h3>
+            <p class="card-stamp-body">A 12-minute walkthrough — the part that always trips people up.</p>
+            <div class="card-stamp-foot">
+              <span class="pill-topic">Agents</span>
+              <a href="#" class="link-text">Read</a>
+            </div>
+          </div>
+          <div class="card-stamp">
+            <div class="card-stamp-head">
+              <div class="card-stamp-thumb"><img src="assets/avatars/avatar-mike-orange-400.png" alt="" /></div>
+              <span class="badge-ai-handyman">AI Handyman</span>
+            </div>
+            <p class="card-stamp-eyebrow">Tutorial · 05 of 09</p>
+            <h3 class="card-stamp-title">Letting tools call other tools</h3>
+            <p class="card-stamp-body">Tool composition without losing the plot. Includes the part that broke the first three times.</p>
+            <div class="card-stamp-foot">
+              <span class="pill-topic">Workflows</span>
+              <a href="#" class="link-text">Read</a>
+            </div>
+          </div>
+          <div class="card-stamp">
+            <div class="card-stamp-head">
+              <div class="card-stamp-thumb"><img src="assets/avatars/avatar-mike-orange-400.png" alt="" /></div>
+              <span class="badge-ai-handyman">AI Handyman</span>
+            </div>
+            <p class="card-stamp-eyebrow">Tutorial · 06 of 09</p>
+            <h3 class="card-stamp-title">Prompts you can actually edit</h3>
+            <p class="card-stamp-body">Stop pasting somebody else's prompt and pretending. Build a small library of your own.</p>
+            <div class="card-stamp-foot">
+              <span class="pill-topic">Prompts</span>
+              <a href="#" class="link-text">Read</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro / End 16:9 -->
+      <div class="screen-pair">
+        <div class="app-frame">
+          <div class="app-frame-head">
+            <span class="app-frame-name">Intro screen · 16:9</span>
+            <span class="app-frame-note">Tutorial open</span>
+          </div>
+          <div class="screen-16x9 screen-intro">
+            <div class="top-row">
+              <span class="badge-ai-handyman">AI Handyman</span>
+              <span class="ep-stamp">Tutorial · 04 of 09</span>
+            </div>
+            <div class="body">
+              <h2 class="h-headline">Your first agent, end to end</h2>
+              <p class="h-lede">The part that trips everyone up — and a small workaround that actually holds.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-frame">
+          <div class="app-frame-head">
+            <span class="app-frame-name">End screen · 16:9</span>
+            <span class="app-frame-note">Tutorial close</span>
+          </div>
+          <div class="screen-16x9 screen-end">
+            <div class="end-grid">
+              <div class="end-art">
+                <div class="polaroid">
+                  <div class="polaroid-photo"><img src="assets/avatars/avatar-mike-orange-400.png" alt="Mike polaroid" /></div>
+                  <div class="polaroid-caption">Mike</div>
+                </div>
+              </div>
+              <div class="end-text">
+                <span class="badge-ai-handyman" style="align-self: flex-start;">AI Handyman</span>
+                <h2 class="h-headline">Thanks for hanging out</h2>
+                <p class="h-tag">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 10 · DARK MODE                               -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-eyebrow">10 · Dark mode</p>
+        <h2 class="section-heading">Navy surface translation</h2>
+      </div>
+      <span class="section-meta">Same components · chalk ink swaps with navy</span>
+    </div>
+
+    <div class="app-frame" style="border-color: var(--color-border-strong);">
+      <div class="app-frame-head">
+        <span class="app-frame-name">Navy surface · single example</span>
+        <span class="app-frame-note">Cut shadow becomes chalk · teal still pops</span>
+      </div>
+      <div class="dark-stage">
+        <div class="left">
+          <p class="h-eyebrow">Mike Murphy · AI Handyman</p>
+          <h2 class="h-headline">Read the docs after you've shipped one.</h2>
+          <p class="h-body">Most of the dark-mode work is just inverting the ink. Cream becomes navy, navy becomes chalk, and the offset shadow flips from navy ink to chalk ink. Orange and teal stay exactly where they are.</p>
+          <div class="actions">
+            <button class="btn btn-primary">Start the thing</button>
+            <button class="btn btn-secondary">See the steps</button>
+          </div>
+        </div>
+        <div class="right">
+          <div class="card-stamp">
+            <div class="card-stamp-head">
+              <div class="card-stamp-thumb"><img src="assets/avatars/avatar-mike-orange-400.png" alt="" /></div>
+              <span class="badge-ai-handyman">AI Handyman</span>
+            </div>
+            <p class="card-stamp-eyebrow">Tutorial · 04 of 09</p>
+            <h3 class="card-stamp-title">Your first agent, end to end</h3>
+            <p class="card-stamp-body">The part that trips everyone up, and a workaround that holds in production.</p>
+            <div class="card-stamp-foot">
+              <span class="pill-topic">Agents</span>
+            </div>
+          </div>
+<pre class="code-block"><span class="prompt">$ </span>npx create-handyman-app .
+<span class="prompt">$ </span>pnpm dev<span class="cursor"></span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────── -->
+  <!-- SECTION 11 · FOOTER                                  -->
+  <!-- ─────────────────────────────────────────────────── -->
+  <footer class="ds-footer">
+    <div class="left">
+      <span class="m-disc m-disc-72" style="width:32px;height:32px;font-size:18px;">M</span>
+      <span class="tagline tagline-footer">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</span>
+    </div>
+    <span class="version-stamp">v2026.1 · 2026</span>
+  </footer>
+
+</main>
+
+</body>
+</html>

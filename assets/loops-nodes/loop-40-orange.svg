@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" role="img">
+  <title>Mike Murphy — Loop mark 40px</title>
+  <desc>Loop mark at compact scale.</desc>
+  <path
+    d="M7 20
+       C7 12 12 5 20 5
+       C28 5 33 12 33 20
+       C33 28 28 34 20 34
+       C13 34 8 29 8 23
+       C8 18 12 14 17 14
+       C22 14 25 18 25 22
+       C25 26 22 29 18 28
+       C15 27 13 23 14 20"
+    fill="none"
+    stroke="#FF6434"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img">
+  <title>Mike Murphy — Node mark, cream disc</title>
+  <desc>System mark. Asymmetric constellation in cream disc. Navy, orange, teal. Use for tutorial cards, AI Handyman contexts.</desc>
+
+  <!-- Cut shadow offset -->
+  <circle cx="68" cy="68" r="58" fill="#0D1B2A" opacity="0.08"/>
+
+  <!-- Disc -->
+  <circle cx="64" cy="64" r="58" fill="#FAF7F2"/>
+
+  <!-- Connectors — draw before nodes so nodes sit on top -->
+  <!-- Central to upper-left -->
+  <line x1="64" y1="51" x2="34" y2="28" stroke="#0D1B2A" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <!-- Central to right -->
+  <line x1="77" y1="58" x2="98" y2="44" stroke="#0D1B2A" stroke-width="2.5" stroke-linecap="round" opacity="0.40"/>
+  <!-- Central to lower-left -->
+  <line x1="58" y1="77" x2="42" y2="96" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" opacity="0.28"/>
+
+  <!-- Central node — orange -->
+  <circle cx="64" cy="64" r="13" fill="#FF6434"/>
+
+  <!-- Upper-left satellite — navy, largest, pushed out (the interesting tension) -->
+  <circle cx="30" cy="25" r="9" fill="#0D1B2A"/>
+
+  <!-- Right satellite — teal, medium -->
+  <circle cx="102" cy="41" r="6.5" fill="#1ECEBE"/>
+
+  <!-- Lower-left satellite — navy ghost, smallest -->
+  <circle cx="39" cy="99" r="4.5" fill="#0D1B2A" opacity="0.35"/>
+</svg>

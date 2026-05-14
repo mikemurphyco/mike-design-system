@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="64" viewBox="0 0 280 64" role="img">
+  <title>Mike Murphy — Loop lockup horizontal</title>
+  <desc>Primary brand lockup. Loop mark with MIKE MURPHY wordmark.</desc>
+
+  <!-- Loop mark at 64px height -->
+  <path
+    d="M12 32
+       C12 19 20 8 32 8
+       C45 8 53 19 53 32
+       C53 44 45 55 32 55
+       C21 55 13 47 13 38
+       C13 29 19 23 27 23
+       C35 23 40 29 40 36
+       C40 42 35 46 29 44
+       C24 43 22 38 23 33"
+    fill="none"
+    stroke="#FF6434"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- 16px gap after 64px mark = x 80 -->
+  <!-- MIKE MURPHY stacked, line-height 0.92, IBM Plex Mono Bold -->
+  <text
+    x="80"
+    y="24"
+    font-family="'IBM Plex Mono', 'Courier New', monospace"
+    font-weight="700"
+    font-size="22"
+    letter-spacing="-0.03em"
+    fill="#0D1B2A"
+  >MIKE</text>
+  <text
+    x="80"
+    y="46"
+    font-family="'IBM Plex Mono', 'Courier New', monospace"
+    font-weight="700"
+    font-size="22"
+    letter-spacing="-0.03em"
+    fill="#0D1B2A"
+  >MURPHY</text>
+</svg>

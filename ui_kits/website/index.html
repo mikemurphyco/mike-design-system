@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mike Murphy · AI Handyman — UI Kit</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<link rel="stylesheet" href="site.css"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="TutorialCard.jsx"></script>
+<script type="text/babel" src="TutorialList.jsx"></script>
+<script type="text/babel" src="TutorialDetail.jsx"></script>
+<script type="text/babel" src="NewsletterCta.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+const TUTORIALS = [
+  { id: 'mcp',     tag: 'Claude · MCP',  title: 'Your first MCP, end to end',           lede: "Model Context Protocol, minus the compiler panic. We'll get one server running in 12 minutes.", time: '12 min', thumbColor: 'var(--mm-orange)', thumbGlyph: 'M', isNew: true },
+  { id: 'claude',  tag: 'Claude',        title: 'Claude for people who don\u2019t code', lede: "How to use Claude as a thought partner, not a chat toy. Real prompts, real workflow.",          time: '9 min',  thumbColor: 'var(--mm-navy)',   thumbGlyph: 'C' },
+  { id: 'codex',   tag: 'Codex',         title: 'Codex without the terminal panic',     lede: "Get Codex installed, signed in, and writing useful code in one afternoon. No CS degree required.",   time: '18 min', thumbColor: 'var(--mm-yellow)', thumbGlyph: 'X', thumbInk: 'var(--mm-navy)' },
+  { id: 'skills',  tag: 'Skills',        title: 'Skills, the bit nobody explains',      lede: "What a Skill actually is, when to make one, and the three-line scaffold I reuse every time.",        time: '7 min',  thumbColor: 'var(--mm-navy)',   thumbGlyph: 'S' },
+  { id: 'vps',     tag: 'VPS',           title: 'Your first $5 VPS, demystified',       lede: "Spin up a Linux box, point a domain at it, deploy something tiny. The whole loop in one sitting.",   time: '22 min', thumbColor: 'var(--mm-orange)', thumbGlyph: '$', isNew: true },
+  { id: 'obsidian',tag: 'MCP · Obsidian',title: 'Plug Claude into your Obsidian vault', lede: "Your notes become searchable context. The first time it cites your own writing back, it's wild.",  time: '15 min', thumbColor: 'var(--mm-navy)',   thumbGlyph: 'O' },
+];
+
+function HomeScreen({ onNav, onOpen }) {
+  const featured = TUTORIALS.slice(0, 3);
+  return (
+    <div className="screen">
+      <Hero onNav={onNav} />
+      <section className="container" style={{ padding: '0 28px var(--space-16)' }}>
+        <div className="list-head" style={{ marginBottom: 'var(--space-8)' }}>
+          <div>
+            <span className="eyebrow">Latest tutorials</span>
+            <h2 className="h-section" style={{ marginTop: 8 }}>Fresh this week</h2>
+          </div>
+          <button className="btn btn-secondary" onClick={() => onNav('tutorials')}>See all →</button>
+        </div>
+        <div className="t-grid">
+          {featured.map(t => <TutorialCard key={t.id} tutorial={t} onOpen={onOpen} />)}
+        </div>
+      </section>
+      <NewsletterCta />
+    </div>
+  );
+}
+
+function AboutScreen() {
+  return (
+    <section className="screen container" style={{ padding: 'var(--space-12) 28px var(--space-16)', maxWidth: 880 }}>
+      <span className="eyebrow">About</span>
+      <h1 className="h-article" style={{ marginTop: 8 }}>Hi, I'm Mike Murphy.</h1>
+      <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 'var(--space-12)', alignItems: 'flex-start', marginTop: 'var(--space-8)' }}>
+        <div className="polaroid">
+          <div className="polaroid-photo">
+            <img src="assets/avatar-mike-transparent.png" alt="Mike" />
+          </div>
+          <div className="polaroid-caption">Mike</div>
+        </div>
+        <div className="prose">
+          <p>I'm a podcaster, creator, and self-appointed AI Handyman. My day job used to be marketing and design — now it's Claude, Cursor, MCP, and the occasional panicked terminal window.</p>
+          <p>I make short tutorials for the people the AI industry forgets: curious humans who want to <em>use</em> the tools, not debate them.</p>
+          <p>If you're just getting started, you're in the right place. The first tutorial is the hardest. After that, it's just a habit.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function App() {
+  const [screen, setScreen] = React.useState(() => localStorage.getItem('mm-screen') || 'home');
+  const [open, setOpen] = React.useState(null);
+
+  React.useEffect(() => { localStorage.setItem('mm-screen', screen); }, [screen]);
+  React.useEffect(() => { window.scrollTo({ top: 0 }); }, [screen, open]);
+
+  const nav = (id) => { setOpen(null); setScreen(id); };
+  const openTutorial = (t) => { setOpen(t); setScreen('detail'); };
+
+  return (
+    <div className="site">
+      <Header current={screen === 'detail' ? 'tutorials' : screen} onNav={nav} />
+      {screen === 'home'       && <HomeScreen onNav={nav} onOpen={openTutorial} />}
+      {screen === 'tutorials'  && <TutorialList tutorials={TUTORIALS} onOpen={openTutorial} />}
+      {screen === 'detail' && open && <TutorialDetail tutorial={open} onBack={() => nav('tutorials')} onNav={nav} />}
+      {screen === 'about'      && <AboutScreen />}
+      {screen === 'newsletter' && <NewsletterCta />}
+      <Footer onNav={nav} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
