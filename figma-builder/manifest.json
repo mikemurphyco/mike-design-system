@@ -1,0 +1,7 @@
+{
+  "name": "MM Design System Builder",
+  "id": "mm-ds-builder-2026-1",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"]
+}
