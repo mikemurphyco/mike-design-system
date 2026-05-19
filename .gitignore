@@ -24,5 +24,9 @@ npm-debug.log*
 .env.local
 .env.*.local
 
-# Claude local settings (keep CLAUDE.md, ignore local overrides)
+# Claude local settings (keep CLAUDE.md, ignore local overrides + worktrees)
 .claude/settings.local.json
+.claude/worktrees/
+
+# Render-script artifacts (regenerable)
+outputs/
