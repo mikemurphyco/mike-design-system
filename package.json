@@ -4,7 +4,8 @@
   "description": "Mike Murphy · AI Handyman — brand identity and design system",
   "type": "module",
   "scripts": {
-    "generate": "node scripts/generate-assets.mjs"
+    "generate": "node scripts/generate-assets.mjs",
+    "check": "node scripts/check-canon.mjs"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
