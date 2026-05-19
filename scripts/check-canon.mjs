@@ -4,14 +4,18 @@
 // Reads canonical token hex values from tokens/colors_and_type.css.
 // Scans every tracked text file in the repo for hex codes.
 // Reports:
-//   • DRIFT — hex codes that match a previously-canonical value that is no
-//     longer current (e.g. the old navy #0D1B2A after the v2026.2 update).
+//   • DRIFT — hex codes that match a previously-canonical value (see STALE
+//     below) that is no longer current. Fails the run.
 //   • WARN  — hex codes that are close to a current canon value but not exact
 //     (within 30 channel-units total, i.e. probably a typo or stale paste).
 //   • OK    — hex codes that match a canon value exactly. Counted per token.
 //
 // Hexes that are far from any canon value are ignored — those are intentional
 // design colors (illustrations, screenshots, third-party logos), not drift.
+//
+// Two ways to suppress a false-positive:
+//   1. Put `check-canon-ignore` anywhere on the same line.
+//   2. Add the file path to the IGNORE_FILES set below.
 //
 // Exit code is 1 if any DRIFT is found, otherwise 0. WARNs don't fail the run.
 //
@@ -38,13 +42,21 @@ for (const m of tokenSrc.matchAll(/--mm-([a-z-]+)\s*:\s*(#[0-9a-fA-F]{6})/g)) {
 const canonHexes = new Set(Object.values(canon));
 
 // ── 2. Previously-canonical values that must NOT appear anywhere ────────────
-// Add to this set when a canon value changes — old navy, old orange, etc.
-const stale = new Set([
-  "#0D1B2A", // pre-v2026.2 navy (replaced by #001E3A)
-  "#E8622A", // pre-v2026.2 orange (corrected to #FF6434 in v2026.2)
-]);
+// Add to this set when a canon value changes. Stored split so this script
+// file itself doesn't contain literal hex codes that would match its own scan.
+const STALE_HEX = [
+  ["0D", "1B", "2A"], // pre-v2026.2 navy (replaced by 001E 3A)
+  ["E8", "62", "2A"], // pre-v2026.2 orange (corrected to FF 6434 in v2026.2)
+];
+const stale = new Set(STALE_HEX.map((parts) => "#" + parts.join("").toUpperCase()));
 // Defensive: if a "stale" hex is actually still canonical, drop it.
 for (const h of canonHexes) stale.delete(h);
+
+// Files that get a free pass (self-references, intentional historical docs
+// where the hex is quoted as documentation of a past value).
+const IGNORE_FILES = new Set([
+  "scripts/check-canon.mjs",
+]);
 
 // ── 3. List tracked text files via git ──────────────────────────────────────
 const TEXT_EXTS = new Set([
@@ -53,7 +65,9 @@ const TEXT_EXTS = new Set([
 ]);
 const tracked = execSync("git ls-files", { cwd: ROOT, encoding: "utf8" })
   .split("\n").filter(Boolean);
-const files = tracked.filter((f) => TEXT_EXTS.has(extname(f).toLowerCase()));
+const files = tracked.filter(
+  (f) => TEXT_EXTS.has(extname(f).toLowerCase()) && !IGNORE_FILES.has(f),
+);
 
 // ── 4. Scan ─────────────────────────────────────────────────────────────────
 const HEX_RE = /#([0-9a-fA-F]{6})\b/g;
@@ -80,6 +94,7 @@ for (const f of files) {
   const content = readFileSync(join(ROOT, f), "utf8");
   const lines = content.split("\n");
   lines.forEach((line, i) => {
+    if (line.includes("check-canon-ignore")) return;
     for (const m of line.matchAll(HEX_RE)) {
       const hex = "#" + m[1].toUpperCase();
       const ctx = line.trim().slice(0, 100);

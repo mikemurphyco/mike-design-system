@@ -84,17 +84,17 @@ const mMarkSizes = [32, 64, 180, 400, 800];
 console.log('\nM-mark');
 emit(
   mMarkSvg({ disc: T.navy,   ink: T.cream,  outline: false }),
-  join(ROOT, 'logos/m-mark/m-mark-navy.svg'),
+  join(ROOT, 'assets/logos/m-mark/m-mark-navy.svg'),
   'm-mark-navy', mMarkSizes
 );
 emit(
   mMarkSvg({ disc: T.orange, ink: T.yellow, outline: false }),
-  join(ROOT, 'logos/m-mark/m-mark-orange.svg'),
+  join(ROOT, 'assets/logos/m-mark/m-mark-orange.svg'),
   'm-mark-orange', mMarkSizes
 );
 emit(
   mMarkSvg({ disc: T.cream,  ink: T.navy,   outline: true }),
-  join(ROOT, 'logos/m-mark/m-mark-cream.svg'),
+  join(ROOT, 'assets/logos/m-mark/m-mark-cream.svg'),
   'm-mark-cream', mMarkSizes
 );
 
@@ -110,9 +110,9 @@ for (const [size, name] of [
   [192, 'icon-192'],
   [512, 'icon-512'],
 ]) {
-  const dest = join(ROOT, `favicon/${name}.png`);
+  const dest = join(ROOT, `assets/favicon/${name}.png`);
   renderPng(faviconSvg, dest, size);
-  console.log(`  png  favicon/${name}.png`);
+  console.log(`  png  assets/favicon/${name}.png`);
 }
 
 // ── 3. Wordmark (stacked) ─────────────────────────────────────────────────────
@@ -132,12 +132,12 @@ function wordmarkSvg(ink) {
 console.log('\nWordmark');
 emit(
   wordmarkSvg(T.navy),
-  join(ROOT, 'logos/wordmark/wordmark-navy.svg'),
+  join(ROOT, 'assets/logos/wordmark/wordmark-navy.svg'),
   'wordmark-navy', [400, 800]
 );
 emit(
   wordmarkSvg(T.cream),
-  join(ROOT, 'logos/wordmark/wordmark-cream.svg'),
+  join(ROOT, 'assets/logos/wordmark/wordmark-cream.svg'),
   'wordmark-cream', [400, 800]
 );
 
@@ -173,12 +173,12 @@ function lockupSvg(scheme) {
 console.log('\nHorizontal lockup');
 emit(
   lockupSvg('navy'),
-  join(ROOT, 'logos/lockup/lockup-horizontal-navy.svg'),
+  join(ROOT, 'assets/logos/lockup/lockup-horizontal-navy.svg'),
   'lockup-horizontal-navy', [600, 1200]
 );
 emit(
   lockupSvg('cream'),
-  join(ROOT, 'logos/lockup/lockup-horizontal-cream.svg'),
+  join(ROOT, 'assets/logos/lockup/lockup-horizontal-cream.svg'),
   'lockup-horizontal-cream', [600, 1200]
 );
 
@@ -204,7 +204,7 @@ function badgeSvg() {
 console.log('\nAI Handyman badge');
 emit(
   badgeSvg(),
-  join(ROOT, 'logos/badge/badge-ai-handyman.svg'),
+  join(ROOT, 'assets/logos/badge/badge-ai-handyman.svg'),
   'badge-ai-handyman', [200, 400]
 );
 
@@ -226,12 +226,12 @@ function taglineSvg(textInk) {
 console.log('\nTagline');
 emit(
   taglineSvg(T.navy),
-  join(ROOT, 'logos/tagline/tagline-navy.svg'),
+  join(ROOT, 'assets/logos/tagline/tagline-navy.svg'),
   'tagline-navy', [400, 800]
 );
 emit(
   taglineSvg(T.cream),
-  join(ROOT, 'logos/tagline/tagline-cream.svg'),
+  join(ROOT, 'assets/logos/tagline/tagline-cream.svg'),
   'tagline-cream', [400, 800]
 );
 

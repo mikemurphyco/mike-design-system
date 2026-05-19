@@ -9,7 +9,8 @@ This is the locked brand. Every decision below has been made. If something on th
 
 ## What changed in v2026.2
 
-Navy ink revised from `#0D1B2A` to `#001E3A`. The previous navy carried a faint green lean (R 13 / G 27 / B 42, G:B ratio 0.64) that read muddy against cream and competed subtly with the teal AI pop. The new navy zeroes the red channel and pulls the G:B ratio down to 0.52 — same ~209° hue, but a cleaner, more ink-like pure blue. Pairs more decisively with `#FF6434` orange on the warm/cool axis, and gives `#1ECEBE` teal more room to read as a distinct accent. All references, tokens, and SVG assets propagated.
+Navy ink revised from `#0D1B2A` to `#001E3A`. The previous navy carried a faint green lean (R 13 / G 27 / B 42, G:B ratio 0.64) that read muddy against cream and competed subtly with the teal AI pop. The new navy zeroes the red channel and pulls the G:B ratio down to 0.52 — same ~209° hue, but a cleaner, more ink-like pure blue. Pairs more decisively with `#FF6434` orange on the warm/cool axis, and gives `#1ECEBE` teal more room to read as a distinct accent. All references, tokens, and SVG assets propagated. <!-- check-canon-ignore -->
+
 
 ---
 

@@ -3,7 +3,7 @@
   <!-- Cut shadow (offset 4,4) -->
   <rect x="4" y="4" width="200" height="42" fill="#001E3A"/>
   <!-- Badge body -->
-  <rect x="0" y="0" width="200" height="42" fill="#E8622A" stroke="#001E3A" stroke-width="1"/>
+  <rect x="0" y="0" width="200" height="42" fill="#FF6434" stroke="#001E3A" stroke-width="1"/>
   <!-- AI HANDYMAN label -->
   <text x="100" y="21" text-anchor="middle" dominant-baseline="central"
     font-family="IBM Plex Mono,monospace" font-weight="700" font-size="14"
