@@ -12,12 +12,12 @@ If it feels like a calm, slightly handmade workbook from someone who actually us
 
 ## Hard rules (do not break)
 
-1. **Read `BRAND-CANON.md` first.** The canon overrides anything in this file or any prior chat.
+1. **Read `BRAND-CANON.md` first, then `SYSTEM.md`.** The canon is the locked brand bible — it overrides anything in this file or any prior chat. `SYSTEM.md` is the operational guide: file map, component decision tree, layout recipes. Together they get you started on any task.
 2. **Consume semantic tokens only.** Never hardcode hex values in components. `var(--color-action-primary)`, not `#FF6434`.
 3. **The tagline is locked:** `LEARN · BUILD · MOVE FORWARD`. Mid-dots, ALL CAPS, IBM Plex Mono Bold. No periods, no commas, no "create," no "ship."
 4. **One AI pop per screen.** Teal `#1ECEBE` shows up on exactly one element — the cursor in a code block, a "live" status dot, the teal satellite in the Node mark. Never on two things at once.
 5. **Cut-shadow stamps go on content, not chrome.** Cards, code blocks, inputs, primary buttons get the 4×4 navy offset shadow. Nav, header, and footer do not.
-6. **Yellow is locked inside the AI Handyman badge.** Yellow ink on orange ground. Don't free yellow into other surfaces.
+6. **Yellow is reserved for success-state chips only** (e.g., `✓ You're in.` newsletter confirmation). It is no longer the badge's primary ink — the badge is navy text on orange ground. Don't free yellow onto hero surfaces, body type, or buttons.
 7. **Murphydoodle is locked to the polaroid caption.** It says "Mike" on the polaroid. It does not say anything else, anywhere else.
 8. **Two marks, two jobs.** Loop mark = primary brand mark (header, social, personal surfaces). Node mark = system/content mark (tutorial cards, technical surfaces). Never swap their roles.
 
@@ -45,10 +45,12 @@ Never bring these back, no matter how nostalgic they look:
 
 When asked to design something new for the brand:
 
-1. **Start from the system, not from scratch.** Open `design-system-v2.html` and `ui_kits/website/index.html` and lift components and patterns. Don't reinvent the card, the badge, the polaroid.
-2. **Pick layouts from the locked vocabulary:** cut-shadow card grid, polaroid + headline + lede, eyebrow + display + body, badge row + headline + meta.
+1. **Start from the system, not from scratch.** Open `design-system.html` and `ui_kits/website/index.html` and lift components and patterns. Don't reinvent the card, the badge, the polaroid. `SYSTEM.md` has the decision tree from "user asked for X" to "here's the component to lift."
+2. **Pick layouts from the locked vocabulary:** cut-shadow card grid, polaroid + headline + lede, eyebrow + display + body, badge row + headline + meta. Full list in `SYSTEM.md`.
 3. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review, delete it now.
 
-## Versioning
+## Stamping & Versioning
 
-Stamp every shipped surface with `v2026.1` in the footer or meta row. When the canon changes, bump the version and update `BRAND-CANON.md` first, then propagate.
+Stamp every shipped surface with `Mike Murphy AI` in the footer or meta row. IBM Plex Mono where the surface supports type choice. The stamp is brand identity, not a version tag — it tells you whose work this is, not which release it's from.
+
+Version tracking still matters, but it lives inside `BRAND-CANON.md`'s own header (currently `v2026.2`), not on shipped surfaces. When the canon changes, bump that header version and update `BRAND-CANON.md` first, then propagate the canon change through every surface.

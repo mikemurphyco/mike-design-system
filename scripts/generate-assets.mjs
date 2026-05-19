@@ -17,13 +17,13 @@ const ROOT = join(__dirname, '..');
 const T = {
   cream:      '#F1ECE2',
   chalk:      '#FCFAF6',
-  navy:       '#0D1B2A',
-  orange:     '#E8622A',
+  navy:       '#001E3A',
+  orange:     '#FF6434',
   yellow:     '#F5C842',
 };
 
 // ── Load fonts ────────────────────────────────────────────────────────────────
-const fontBold    = readFileSync(join(ROOT, 'fonts/IBMPlexMono-Bold.ttf'));
+const fontBold    = readFileSync(join(ROOT, 'assets/fonts/IBMPlexMono-Bold.ttf'));
 const fontBoldB64 = fontBold.toString('base64');
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -149,7 +149,7 @@ function lockupSvg(scheme) {
   const nameInk   = scheme === 'navy' ? T.navy  : T.cream;
   const discInk   = scheme === 'navy' ? T.cream : T.navy;
   const discFill  = scheme === 'navy' ? T.navy  : T.cream;
-  const divider   = scheme === 'navy' ? 'rgba(13,27,42,0.2)' : 'rgba(241,236,226,0.3)';
+  const divider   = scheme === 'navy' ? 'rgba(0,30,58,0.2)' : 'rgba(241,236,226,0.3)';
   const eyebrow   = T.orange;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 72" role="img" aria-label="Mike Murphy horizontal lockup">

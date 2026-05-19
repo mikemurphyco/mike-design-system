@@ -1,9 +1,15 @@
 # BRAND CANON
-**Mike Murphy · AI Handyman · v2026.1**
+**Mike Murphy · AI Handyman · v2026.2**
 
 > Clean, calm, technical, warm, lightly handmade, never corporate.
 
 This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page wins.
+
+---
+
+## What changed in v2026.2
+
+Navy ink revised from `#0D1B2A` to `#001E3A`. The previous navy carried a faint green lean (R 13 / G 27 / B 42, G:B ratio 0.64) that read muddy against cream and competed subtly with the teal AI pop. The new navy zeroes the red channel and pulls the G:B ratio down to 0.52 — same ~209° hue, but a cleaner, more ink-like pure blue. Pairs more decisively with `#FF6434` orange on the warm/cool axis, and gives `#1ECEBE` teal more room to read as a distinct accent. All references, tokens, and SVG assets propagated.
 
 ---
 
@@ -56,6 +62,18 @@ Mid-dot separators, ALL CAPS, IBM Plex Mono Bold. The mid-dots are colored `--mm
 
 ---
 
+## Stamp
+
+Every shipped surface — site footers, deck end-slides, PDF meta rows, tutorial outlines, social templates — carries this stamp:
+
+`Mike Murphy AI`
+
+IBM Plex Mono, navy on light surfaces, cream on dark or orange surfaces. The stamp is brand identity, not a version tag — it signs the work, it doesn't date it.
+
+Version tracking lives in this document's own header (`v2026.2`), not on shipped surfaces. When the canon changes, bump the header version here first, then propagate the change through the system.
+
+---
+
 ## Color palette
 
 Four colors on warm neutral paper. Locked hex values, no alternatives.
@@ -64,10 +82,10 @@ Four colors on warm neutral paper. Locked hex values, no alternatives.
 | ------------------ | --------- | ------------------------------------------------------------ |
 | `--mm-cream`       | `#F1ECE2` | Page background. Default surface. Never pure white.          |
 | `--mm-chalk`       | `#FCFAF6` | Brightest surface. Cards, modals, code-block frames.         |
-| `--mm-navy`        | `#0D1B2A` | All body text, borders, the offset shadow stamp. Never pure black. |
+| `--mm-navy`        | `#001E3A` | All body text, borders, the offset shadow stamp. Never pure black. |
 | `--mm-orange`      | `#FF6434` | Primary action / CTA accent.                                 |
 | `--mm-orange-deep` | `#E8501C` | Hover / pressed state for orange.                            |
-| `--mm-yellow`      | `#F5C842` | Reserved for orange surfaces — the "tape" inside the AI Handyman badge. Almost never sits on cream directly. |
+| `--mm-yellow`      | `#F5C842` | Reserved for success-state chips (e.g., `✓ You're in.` newsletter confirmation). Small surface area, narrow semantic role. Almost never sits on cream directly; never as primary text ink. |
 | `--mm-teal`        | `#1ECEBE` | "AI pop." Reserve for: terminal cursors, code accents, "live/new" status indicators. **One use per screen.** |
 
 ---
@@ -93,7 +111,7 @@ Unplugged Sans is not in the system. Don't add it.
 | Wordmark             | `MIKE MURPHY` set in IBM Plex Mono Bold, stacked two lines, line-height 0.92, letter-spacing -0.03em    | Hero, end screens, primary logo lockups                   |
 | Horizontal lockup    | M-mark + `MIKE MURPHY` + `· AI HANDYMAN` orange eyebrow                                                  | Site navigation, document headers                         |
 | M-mark               | IBM Plex Mono "M" centered in a navy disc                                                                | Favicon, app icon, footer chrome, ≤32px contexts          |
-| AI Handyman badge    | `AI HANDYMAN` in IBM Plex Mono Bold, `--mm-yellow` text on `--mm-orange` ground, 4px navy offset shadow | Tutorial cards, intro/end screens, home hero, sprinkled where it earns its place |
+| AI Handyman badge    | `AI HANDYMAN` in IBM Plex Mono Bold, `--mm-navy` text on `--mm-orange` ground, 1px navy border, 4px navy cut-shadow | Tutorial cards, intro/end screens, home hero, sprinkled where it earns its place |
 
 ---
 
@@ -108,7 +126,7 @@ As the context gets more personal, you move down the ladder. As it gets more sys
 | **Transparent avatar** (Mike, cutout, no bg)                                                       | Hero compositions where the page bg shows through, About page, flexible marketing layouts                                   |
 | **Polaroid** (orange-bg photo, cream paper frame, Murphydoodle "Mike" caption, tilt, cut shadow)   | Hero feature moments, tutorial end screens, About page, podcast art, anywhere the brand gets intimate                      |
 
-The polaroid is the brand's most personal asset. Use it intentionally, not casually. Tilt range -3° to +2°. Drop shadow is a hard navy offset, approx. `6px 12px 0 rgba(13,27,42,0.55)`. Caption is always Murphydoodle, always in `--mm-navy`, always the word "Mike" — no other captions, no other words.
+The polaroid is the brand's most personal asset. Use it intentionally, not casually. Tilt range -3° to +2°. Drop shadow is a hard navy offset, approx. `6px 12px 0 rgba(0,30,58,0.55)`. Caption is always Murphydoodle, always in `--mm-navy`, always the word "Mike" — no other captions, no other words.
 
 ---
 
@@ -138,7 +156,7 @@ The badge identifies a piece of *content* as Mike's. It is not a corporate locku
 
 ## Brand marks — locked (Phase 2)
 
-Two marks are now part of the system. Both are production SVGs in `assets/marks/`.
+Two marks are now part of the system. Both are production SVGs in `assets/loops-nodes/`.
 
 ### The Loop
 A single continuous spiral path. One stroke, uniform weight, no fill, no disc container.
@@ -156,9 +174,9 @@ An asymmetric constellation in a cream disc. Central orange node, three satellit
 
 - **Disc fill:** `#FCFAF6` (chalk) with 4px navy cut-shadow offset
 - **Central node:** `#FF6434` (orange)
-- **Upper-left satellite:** `#0D1B2A` (navy, full opacity — largest, pushed out)
+- **Upper-left satellite:** `#001E3A` (navy, full opacity — largest, pushed out)
 - **Right satellite:** `#1ECEBE` (teal — the one AI pop per screen rule applies)
-- **Lower-left satellite:** `#0D1B2A` at 35% opacity (intentional ghost)
+- **Lower-left satellite:** `#001E3A` at 35% opacity (intentional ghost)
 - Navy disc alternate available for dark surfaces
 - Animates by building outward — center appears, lines draw, satellites pop in
 

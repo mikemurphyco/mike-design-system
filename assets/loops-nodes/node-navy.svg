@@ -3,10 +3,10 @@
   <desc>System mark alternate. Asymmetric constellation in navy disc. Use on cream or light surfaces.</desc>
 
   <!-- Cut shadow offset -->
-  <circle cx="68" cy="68" r="58" fill="#0D1B2A" opacity="0.25"/>
+  <circle cx="68" cy="68" r="58" fill="#001E3A" opacity="0.25"/>
 
   <!-- Disc -->
-  <circle cx="64" cy="64" r="58" fill="#0D1B2A"/>
+  <circle cx="64" cy="64" r="58" fill="#001E3A"/>
 
   <!-- Connectors -->
   <line x1="64" y1="51" x2="34" y2="28" stroke="#FAF7F2" stroke-width="3" stroke-linecap="round" opacity="0.55"/>

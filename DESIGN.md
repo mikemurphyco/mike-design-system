@@ -1,13 +1,13 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.1.
+description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.2.
 
 colors:
   primary:     "#FF6434"
   cream:       "#F1ECE2"
   chalk:       "#FCFAF6"
-  navy:        "#0D1B2A"
+  navy:        "#001E3A"
   orange:      "#FF6434"
   orange-deep: "#E8501C"
   yellow:      "#F5C842"
@@ -185,7 +185,7 @@ The palette is four named values and three functional extensions. All components
 
 - **Cream (`#F1ECE2`):** Page background. The warm neutral that everything sits on. Never pure white.
 - **Chalk (`#FCFAF6`):** Brightest surface. Cards, modals, code-block frames, polaroid paper. Slightly brighter than cream.
-- **Navy (`#0D1B2A`):** All body text, borders, and the offset cut-shadow ink. Never pure black.
+- **Navy (`#001E3A`):** All body text, borders, and the offset cut-shadow ink. Never pure black.
 - **Orange (`#FF6434`):** The only primary action color. CTAs, eyebrows, active states, the AI Handyman badge background. One dominant orange per screen.
 - **Orange-deep (`#E8501C`):** Hover and pressed state for orange. Never used at rest.
 - **Yellow (`#F5C842`):** Locked inside the AI Handyman badge — yellow text on orange ground. Do not release yellow into other surfaces.
@@ -246,9 +246,9 @@ Two shadow styles are in the system. No others.
 
 **Cut-shadow stamp** (`4px 4px 0 {colors.navy}`): The signature aesthetic. Applied to: primary buttons, secondary buttons, tutorial cards, code blocks, callouts, newsletter form, input fields. This shadow does not appear on nav, footer, or any chrome element.
 
-**Polaroid shadow** (`6px 12px 0 rgba(13, 27, 42, 0.55)`): Applied only to the polaroid frame. Combined with a `rotate(-2deg)` tilt (range: -3° to +2°). Never applied to other surfaces.
+**Polaroid shadow** (`6px 12px 0 rgba(0,30,58, 0.55)`): Applied only to the polaroid frame. Combined with a `rotate(-2deg)` tilt (range: -3° to +2°). Never applied to other surfaces.
 
-Soft shadow (`0 4px 12px rgba(13, 27, 42, 0.10)`) is available for elevated modals or overlays only.
+Soft shadow (`0 4px 12px rgba(0,30,58, 0.10)`) is available for elevated modals or overlays only.
 
 On hover, cut-shadow elements translate `−1px, −1px` and the shadow grows to `5px 5px 0`. On active/press, they translate `+2px, +2px` and the shadow shrinks to `2px 2px 0`. Transition: 120ms `cubic-bezier(0.2, 0.7, 0.2, 1)`.
 
@@ -305,7 +305,7 @@ Navy background, 4px radius, cut-shadow. Top bar: filename in muted cream (40% o
 
 ### Callout
 
-Chalk background, 1px navy border, 4px radius, cut-shadow. Two-column layout: 32px left column with bold orange `!` mark, right column with body prose. Used for tips, warnings, "this is where people get stuck" moments.
+Chalk background, 1px navy border, 4px radius, cut-shadow. Two-column layout: 32px left column with bold orange `→` mark, right column with body prose. Used for tips, warnings, "this is where people get stuck" moments.
 
 ### Newsletter Form
 
@@ -315,7 +315,7 @@ On success: yellow "✓ You're in." confirmation chip (yellow bg, navy text, nav
 
 ### Footer
 
-Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.1`). No cut-shadow. No AI Handyman badge.
+Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.2`). No cut-shadow. No AI Handyman badge.
 
 Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7) in `{colors.orange}`.
 
