@@ -98,15 +98,8 @@
   }
 
   .canvas-wrap {
-    /* Shrink to fit the thumbnail + a tight 16px cream halo. The cream
-       halo gives Chrome's "Capture node screenshot" some cream pixels
-       to land on if it overshoots #thumbnail's bounding box at Retina/
-       fractional scaling. margin auto centers the wrap inside the body. */
-    width: fit-content;
-    margin: 0 auto;
-    background: var(--color-bg-page);
-    padding: 16px;
-    border-radius: 4px;
+    display: flex;
+    justify-content: center;
   }
 
   /* ─────────────────────────────────────────────────────────────
