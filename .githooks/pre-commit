@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Mike Murphy · design system pre-commit hook.
+# Refuses any commit that introduces canon drift.
+#
+# Wired up via `git config core.hooksPath .githooks` (run once per clone —
+# see package.json "prepare" script or README for the one-line setup).
+
+set -e
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-commit: node not found on PATH; skipping canon check." >&2
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+node "$REPO_ROOT/scripts/check-canon.mjs" --quiet
+
+# If check-canon exits non-zero, this hook fails and the commit is blocked.
+# To inspect: `npm run check` for the full report (including WARNs).

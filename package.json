@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate-assets.mjs",
-    "check": "node scripts/check-canon.mjs"
+    "check": "node scripts/check-canon.mjs",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
