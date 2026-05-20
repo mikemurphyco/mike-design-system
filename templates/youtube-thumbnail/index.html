@@ -4,18 +4,53 @@
 <meta charset="utf-8" />
 <title>YouTube thumbnail — Mike Murphy · AI Handyman</title>
 
-<!-- Canon: tokens + @font-face. Single source of truth. -->
-<link rel="stylesheet" href="../../tokens/colors_and_type.css" />
-
 <style>
   /* ─────────────────────────────────────────────────────────────
-     Template-specific overrides — additions to canon, not duplicates.
-     Everything else (brand layer, semantic colors, type, spacing,
-     radii, default shadows, font families) is inherited from
-     tokens/colors_and_type.css via the <link> above.
+     @font-face — inlined here (not loaded from external CSS) so that
+     Chrome's "Capture node screenshot" sees fonts as parse-blocking
+     resources and waits for them. External @font-face loads async,
+     which caused muddy/softened text in captures. The font values
+     here must match tokens/colors_and_type.css; npm run check does
+     not yet verify @font-face declarations, so update both together
+     if a font is added/removed.
+     ───────────────────────────────────────────────────────────── */
+  @font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: "IBM Plex Sans"; src: url("../../assets/fonts/IBMPlexSans-VariableFont.ttf") format("truetype-variations"); font-weight: 100 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Murphydoodle"; src: url("../../assets/fonts/Murphydoodle-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+  /* ─────────────────────────────────────────────────────────────
+     Brand + semantic tokens — inlined for the same reason as fonts:
+     external @link to canon CSS made Chrome's node capture render
+     muddy. Mirror of tokens/colors_and_type.css; drift caught by
+     npm run check.
      ───────────────────────────────────────────────────────────── */
   :root {
-    /* Template-only additions */
+    /* Brand layer */
+    --mm-cream:        #F1ECE2;
+    --mm-chalk:        #FCFAF6;
+    --mm-navy:         #001E3A;
+    --mm-orange:       #FF6434;
+    --mm-orange-deep:  #E8501C;
+    --mm-yellow:       #F5C842;
+    --mm-teal:         #1ECEBE;
+
+    /* Semantic */
+    --color-bg-page:        var(--mm-cream);
+    --color-bg-surface:     var(--mm-chalk);
+    --color-text-primary:   var(--mm-navy);
+    --color-text-muted:     rgba(0, 30, 58, 0.62);
+    --color-action-primary: var(--mm-orange);
+    --color-border-strong:  var(--mm-navy);
+    --color-accent-ai:      var(--mm-teal);
+
+    /* Type families */
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-hand: "Murphydoodle", "Caveat", cursive;
+
+    /* Template-only additions / overrides */
     --shadow-cut-lg:    8px 8px 0 var(--mm-navy);
     /* Larger polaroid shadow for the YouTube thumbnail size. Intentional
        override of the canon's --shadow-polaroid (6px 12px). */
