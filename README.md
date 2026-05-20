@@ -1,4 +1,4 @@
-# Mike Murphy · AI Handyman — Design System v2026.2
+# Mike Murphy · AI Handyman — Design System v2026.3
 
 The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI Handyman content brand.
 
@@ -43,4 +43,4 @@ Cartoon Mike. Toolshed metaphors. Washi tape and hand-drawn arrows. Unplugged Sa
 
 ## Versioning
 
-Current: **v2026.2**. Stamped in the design-system footer and on every tutorial detail page.
+Current: **v2026.3**. Stamped in the design-system footer and on every tutorial detail page.

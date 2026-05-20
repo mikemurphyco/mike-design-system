@@ -1,6 +1,6 @@
 # MM Design System Builder
 
-A one-shot local Figma plugin that builds the entire Mike Murphy / AI Handyman v2026.2 design system into your current Figma file — variables, text styles, and all 16 reference frames. No Figma MCP calls, no quota.
+A one-shot local Figma plugin that builds the entire Mike Murphy / AI Handyman v2026.3 design system into your current Figma file — variables, text styles, and all 16 reference frames. No Figma MCP calls, no quota.
 
 ## How to run it (one time, ~2 minutes)
 
@@ -13,7 +13,7 @@ A one-shot local Figma plugin that builds the entire Mike Murphy / AI Handyman v
 
 ## What it does
 
-- Ensures the variable collection `Mike Murphy v2026.2` exists with all primitive colors, semantic aliases, spacing, radii, font-size, line-height, and letter-spacing tokens.
+- Ensures the variable collection `Mike Murphy v2026.3` exists with all primitive colors, semantic aliases, spacing, radii, font-size, line-height, and letter-spacing tokens.
 - Ensures all 11 text styles exist (Display, H1–H3, Lede, Body, Eyebrow, Mono Label, Code, Tagline, Handwritten).
 - Creates (or replaces) the page **Foundations & Components** containing 16 reference frames stacked vertically — cover, palettes, typography specimens, tagline, spacing, radii, shadows, motion, marks, badge, polaroid, components, brand rules, NOT list, footer.
 

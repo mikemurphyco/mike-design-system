@@ -1,10 +1,10 @@
-// MM Design System Builder — v2026.2
+// MM Design System Builder — v2026.3
 // Builds the entire Mike Murphy / AI Handyman design system into the current Figma file.
 // Idempotent: re-running updates / re-creates the "Foundations & Components" page.
 
 (async () => {
   try {
-    figma.notify("Building Mike Murphy DS v2026.1…", { timeout: 2000 });
+    figma.notify("Building Mike Murphy DS v2026.3…", { timeout: 2000 });
 
     // ── PALETTE ─────────────────────────────────────────────
     const HEX = {
@@ -33,9 +33,9 @@
 
     // ── VARIABLE COLLECTION ─────────────────────────────────
     let collection = (await figma.variables.getLocalVariableCollectionsAsync())
-      .find((c) => c.name === "Mike Murphy v2026.1");
+      .find((c) => c.name === "Mike Murphy v2026.3");
     if (!collection) {
-      collection = figma.variables.createVariableCollection("Mike Murphy v2026.1");
+      collection = figma.variables.createVariableCollection("Mike Murphy v2026.3");
       collection.renameMode(collection.modes[0].modeId, "Default");
     }
     const modeId = collection.modes[0].modeId;
@@ -254,7 +254,7 @@
       addToOuter(cover);
       cover.appendChild(txt("Eyebrow", "MIKE MURPHY · AI HANDYMAN", "color/semantic/text-muted", HEX.navy, 0.62));
       cover.appendChild(txt("Display", "Design System", "color/semantic/text-primary", HEX.navy));
-      const lede = txt("Lede", "Tokens, type, marks, and the component vocabulary for the v2026.1 brand. Consume semantic tokens only — never hardcode hex.", "color/semantic/text-muted", HEX.navy, 0.62);
+      const lede = txt("Lede", "Tokens, type, marks, and the component vocabulary for the v2026.3 brand. Consume semantic tokens only — never hardcode hex.", "color/semantic/text-muted", HEX.navy, 0.62);
       cover.appendChild(lede);
       try { lede.layoutSizingHorizontal = "FILL"; } catch (e) {}
 
@@ -276,7 +276,7 @@
       pill.cornerRadius = 2;
       pill.fills = [fillWith("color/semantic/text-primary", HEX.navy)];
       meta.appendChild(pill);
-      pill.appendChild(txt("Mono Label", "v2026.2", "color/brand/mm-cream", HEX.cream));
+      pill.appendChild(txt("Mono Label", "v2026.3", "color/brand/mm-cream", HEX.cream));
 
       meta.appendChild(txt("Mono Label", "Updated 2026-05-19", "color/semantic/text-muted", HEX.navy, 0.62));
     }
@@ -920,7 +920,7 @@
       spacer.resize(1, 1);
       f.appendChild(spacer);
       try { spacer.layoutSizingHorizontal = "FILL"; } catch (e) {}
-      f.appendChild(txt("Mono Label", "v2026.2", "color/semantic/text-muted", HEX.navy, 0.62));
+      f.appendChild(txt("Mono Label", "v2026.3", "color/semantic/text-muted", HEX.navy, 0.62));
     }
 
     figma.viewport.scrollAndZoomIntoView([outer]);

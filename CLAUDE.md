@@ -53,4 +53,4 @@ When asked to design something new for the brand:
 
 Stamp every shipped surface with `Mike Murphy AI` in the footer or meta row. IBM Plex Mono where the surface supports type choice. The stamp is brand identity, not a version tag — it tells you whose work this is, not which release it's from.
 
-Version tracking still matters, but it lives inside `BRAND-CANON.md`'s own header (currently `v2026.2`), not on shipped surfaces. When the canon changes, bump that header version and update `BRAND-CANON.md` first, then propagate the canon change through every surface.
+Version tracking still matters, but it lives inside `BRAND-CANON.md`'s own header (currently `v2026.3`), not on shipped surfaces. When the canon changes, bump that header version and update `BRAND-CANON.md` first, then propagate the canon change through every surface.

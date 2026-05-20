@@ -1,11 +1,25 @@
 # BRAND CANON
-**Mike Murphy · AI Handyman · v2026.2**
+**Mike Murphy · AI Handyman · v2026.3**
 
 > Clean, calm, technical, warm, lightly handmade, never corporate.
 
 This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page wins.
 
 ---
+
+## What changed in v2026.3
+
+System consolidation pass. No visual changes to the brand itself — every commit in this version is about making the canon impossible to drift from in the future.
+
+- One source of truth for token hex values: `tokens/colors_and_type.css`. Every HTML page now links it. The duplicate `ui_kits/website/colors_and_type.css` was deleted. Inline `:root { --mm-* }` blocks in `design-system.html`, `ui_kits/website/index.html`, and `templates/youtube-thumbnail/index.html` were removed in favor of the link.
+- `scripts/generate-assets.mjs` no longer hand-types brand color constants — it parses them from the canon CSS at runtime.
+- `scripts/check-canon.mjs` reports any hex in the repo that doesn't match the canon. Wired up as `npm run check`.
+- Pre-commit hook at `.githooks/pre-commit` runs `npm run check`; commits that introduce drift are rejected.
+- `scripts/sync-figma-builder.mjs` propagates canon hex values into the Figma plugin's `HEX = {...}` object. Wired up as `npm run sync-figma`.
+- `assets/loops-nodes/png/` is now regenerated alongside the rest of the assets when `npm run generate` runs.
+- `#FAF7F2` (the unnamed dark-surface chalk variant) was eliminated and collapsed into canonical `#FCFAF6` chalk. <!-- check-canon-ignore — historical reference to a retired value -->
+
+- Stale `yellow on orange` badge styling in `templates/youtube-thumbnail/` corrected to canonical navy on orange.
 
 ## What changed in v2026.2
 
@@ -71,7 +85,7 @@ Every shipped surface — site footers, deck end-slides, PDF meta rows, tutorial
 
 IBM Plex Mono, navy on light surfaces, cream on dark or orange surfaces. The stamp is brand identity, not a version tag — it signs the work, it doesn't date it.
 
-Version tracking lives in this document's own header (`v2026.2`), not on shipped surfaces. When the canon changes, bump the header version here first, then propagate the change through the system.
+Version tracking lives in this document's own header (`v2026.3`), not on shipped surfaces. When the canon changes, bump the header version here first, then propagate the change through the system.
 
 ---
 

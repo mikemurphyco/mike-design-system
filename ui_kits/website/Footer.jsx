@@ -14,7 +14,7 @@ function Footer({ onNav }) {
           <button className="nav-link" onClick={() => onNav('about')}>About</button>
           <button className="nav-link" onClick={() => onNav('newsletter')}>Newsletter</button>
         </div>
-        <div className="foot-copy">© 2026 · v2026.2</div>
+        <div className="foot-copy">© 2026 · v2026.3</div>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.2.
+description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.3.
 
 colors:
   primary:     "#FF6434"
@@ -315,7 +315,7 @@ On success: yellow "✓ You're in." confirmation chip (yellow bg, navy text, nav
 
 ### Footer
 
-Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.2`). No cut-shadow. No AI Handyman badge.
+Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.3`). No cut-shadow. No AI Handyman badge.
 
 Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7) in `{colors.orange}`.
 

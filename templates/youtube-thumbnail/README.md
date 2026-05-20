@@ -2,7 +2,7 @@
 
 A working 1280×720 thumbnail template that consumes the AI Handyman brand system. Edit the fields, screenshot the canvas, ship the PNG.
 
-`v2026.2`
+`v2026.3`
 
 ## Workflow
 
@@ -15,13 +15,13 @@ The export is exactly 1280×720 (or 2560×1440 on Retina — both fine for YouTu
 
 ## What's in the template
 
-- **AI Handyman badge** — top-left. Locked yellow on orange, navy cut-shadow. Required on every thumbnail.
+- **AI Handyman badge** — top-left. Locked navy text on orange ground, 1px navy border, navy cut-shadow. Required on every thumbnail.
 - **Eyebrow** — orange mono caps. Use for "Tutorial · 04 of 09" or similar content marker.
 - **Headline** — large mono bold, navy. Up to two lines. Sentence case reads warmer than ALL CAPS at this size.
 - **Lede** — sans-serif, navy at 70%. One short line. The "what you'll actually get" promise.
 - **Tagline** — `LEARN · BUILD · MOVE FORWARD` at the bottom-left. Locked.
 - **Mike polaroid** — right side, tilted, cut-shadow. The personal anchor.
-- **Version stamp** — `v2026.2` bottom-right. Easy to delete if it crowds the duration badge.
+- **Version stamp** — `v2026.3` bottom-right. Easy to delete if it crowds the duration badge.
 
 ## Customizing
 
@@ -32,7 +32,7 @@ The export is exactly 1280×720 (or 2560×1440 on Retina — both fine for YouTu
 ## What not to change
 
 - The 1280×720 canvas size (YouTube standard).
-- The badge colors (locked: yellow on orange).
+- The badge colors (locked: navy text on orange ground).
 - The tagline wording or mid-dot separators.
 - The polaroid orange photo background or Murphydoodle "Mike" caption.
 
