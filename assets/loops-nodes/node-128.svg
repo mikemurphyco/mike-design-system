@@ -6,7 +6,7 @@
   <circle cx="68" cy="68" r="58" fill="#001E3A" opacity="0.08"/>
 
   <!-- Disc -->
-  <circle cx="64" cy="64" r="58" fill="#FAF7F2"/>
+  <circle cx="64" cy="64" r="58" fill="#FCFAF6"/>
 
   <!-- Connectors — draw before nodes so nodes sit on top -->
   <!-- Central to upper-left -->

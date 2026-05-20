@@ -163,8 +163,7 @@ Two marks are now part of the system. Both are production SVGs in `assets/loops-
 A single continuous spiral path. One stroke, uniform weight, no fill, no disc container.
 The Loop is the **primary mark** — the face of the brand. Warm, human, a drawn gesture.
 
-- **On light surfaces (cream/chalk):** stroke `#FF6434`
-- **On dark surfaces (navy/orange):** stroke `#FAF7F2`
+- **Stroke:** `#FF6434` (orange) on light surfaces, `#FCFAF6` (chalk) on dark surfaces — same chalk token, no separate variant
 - Transparent background — works on any surface
 - Animates by drawing the path (stroke-dashoffset)
 
