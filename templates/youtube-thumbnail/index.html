@@ -98,13 +98,12 @@
   }
 
   .canvas-wrap {
-    display: flex;
-    justify-content: center;
-    /* Match #thumbnail's bg so any pixels Chrome includes outside the
-       thumbnail's bounding box during "Capture node screenshot" are
-       cream, not the body's dark editor color. This is the actual fix
-       for the navy/dark left-edge bleed that was appearing on exported
-       PNGs at Retina/fractional scaling. */
+    /* Shrink to fit the thumbnail + a tight 16px cream halo. The cream
+       halo gives Chrome's "Capture node screenshot" some cream pixels
+       to land on if it overshoots #thumbnail's bounding box at Retina/
+       fractional scaling. margin auto centers the wrap inside the body. */
+    width: fit-content;
+    margin: 0 auto;
     background: var(--color-bg-page);
     padding: 16px;
     border-radius: 4px;
