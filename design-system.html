@@ -1370,7 +1370,7 @@
         <div class="swatch-chip chip-cream"></div>
         <div class="swatch-meta">
           <span class="swatch-token">--mm-cream</span>
-          <span class="swatch-hex">#E8E2D9</span>
+          <span class="swatch-hex">#F1ECE2</span>
           <p class="swatch-role">Page background. Default surface. Never pure white.</p>
         </div>
       </div>
@@ -1378,7 +1378,7 @@
         <div class="swatch-chip chip-chalk"></div>
         <div class="swatch-meta">
           <span class="swatch-token">--mm-chalk</span>
-          <span class="swatch-hex">#FAF7F2</span>
+          <span class="swatch-hex">#FCFAF6</span>
           <p class="swatch-role">Brightest surface. Cards, modals, code-block frames.</p>
         </div>
       </div>
@@ -2074,6 +2074,25 @@
   </footer>
 
 </main>
+
+<script>
+  // Self-syncing swatch labels.
+  // Reads each swatch's --mm-* CSS variable at render time and writes the
+  // resolved hex into the .swatch-hex label, so the displayed value can
+  // never drift from the chip it sits under. Single source of truth lives
+  // in tokens/colors_and_type.css (mirrored into the :root above).
+  document.querySelectorAll('.swatch').forEach((s) => {
+    const tokenEl = s.querySelector('.swatch-token');
+    const hexEl = s.querySelector('.swatch-hex');
+    if (!tokenEl || !hexEl) return;
+    const varName = tokenEl.textContent.trim();
+    if (!varName.startsWith('--')) return;
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue(varName)
+      .trim();
+    if (value) hexEl.textContent = value.toUpperCase();
+  });
+</script>
 
 </body>
 </html>
