@@ -88,6 +88,7 @@ mike-design-system/
 | You changed a token in `tokens/colors_and_type.css` | `npm run generate && npm run sync-figma && npm run check` |
 | You're bumping the brand version | `npm run bump v2026.N` |
 | You want to verify nothing has drifted (also runs on commit) | `npm run check` |
+| You're exporting a YouTube thumbnail PNG | `npm run thumbnail` — interactive prompt, full docs in `templates/youtube-thumbnail/README.md` |
 
 ---
 
