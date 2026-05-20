@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate-assets.mjs",
-    "check": "node scripts/check-canon.mjs",
+    "check": "node scripts/check-canon.mjs && node scripts/check-version.mjs",
+    "check-version": "node scripts/check-version.mjs",
     "sync-figma": "node scripts/sync-figma-builder.mjs",
+    "bump": "node scripts/bump-version.mjs",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {

@@ -14,6 +14,10 @@ fi
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 node "$REPO_ROOT/scripts/check-canon.mjs" --quiet
+node "$REPO_ROOT/scripts/check-version.mjs"
 
-# If check-canon exits non-zero, this hook fails and the commit is blocked.
-# To inspect: `npm run check` for the full report (including WARNs).
+# If either check exits non-zero, this hook fails and the commit is blocked.
+# To inspect:
+#   `npm run check`         — full canon + version report
+#   `npm run check-version` — version sync only
+#   `npm run bump v2026.N`  — atomic version bump across all files
