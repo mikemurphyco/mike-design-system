@@ -9,9 +9,13 @@
     "check-version": "node scripts/check-version.mjs",
     "sync-figma": "node scripts/sync-figma-builder.mjs",
     "bump": "node scripts/bump-version.mjs",
+    "thumbnail": "node scripts/render-thumbnail.mjs",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
   }
 }
