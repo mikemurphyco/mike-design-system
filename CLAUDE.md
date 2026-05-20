@@ -49,6 +49,10 @@ When asked to design something new for the brand:
 2. **Pick layouts from the locked vocabulary:** cut-shadow card grid, polaroid + headline + lede, eyebrow + display + body, badge row + headline + meta. Full list in `SYSTEM.md`.
 3. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review, delete it now.
 
+## Factory vs. warehouse — where outputs live
+
+This repo is the **factory**, not the warehouse. The canon, the reusable templates, and the canonical brand artifacts (logos, marks, favicons, fonts) live here. **One-off rendered outputs do not** — render an X banner / LinkedIn cover / campaign graphic from a template here, save the file outside the repo (or in `outputs/`, which is gitignored), distribute from there. If you can regenerate it from `tokens/colors_and_type.css` plus a template, it doesn't need git history. Full rule in `SYSTEM.md` ("The factory model").
+
 ## Stamping & Versioning
 
 Stamp every shipped surface with `Mike Murphy AI` in the footer or meta row. IBM Plex Mono where the surface supports type choice. The stamp is brand identity, not a version tag — it tells you whose work this is, not which release it's from.

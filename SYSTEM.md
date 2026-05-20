@@ -8,6 +8,89 @@ It does not duplicate the canon or the spec. It points at them and tells you whi
 
 ---
 
+## The factory model — what lives in this repo, what doesn't
+
+This repo is a **factory**, not a **warehouse**. Think of it as the place where the brand is defined and where reusable machines that produce brand-aligned output live. It is not the place where every rendered output ever made gets stored.
+
+### Belongs in this repo
+
+- **The canon** — `BRAND-CANON.md`, `CLAUDE.md`, `SYSTEM.md`, `DESIGN.md`, `README.md`, `tokens/colors_and_type.css`. The rules and the source of truth.
+- **Canonical brand artifacts** — the things that *are* the brand: official logos, marks, favicons, fonts, avatars. These live under `assets/`. They are generated from canon and committed because they are referenced by everything downstream.
+- **Reusable templates** — scaffolding that *can produce* an output but isn't itself the output. The current example is `templates/youtube-thumbnail/`. Any new recurring format (X header, LinkedIn cover, webinar banner, podcast art) becomes a new directory under `templates/`. Each template links the canon CSS so it always renders with current tokens.
+- **Reference implementations** — `ui_kits/website/` shows how the brand looks applied in real product code. Reference, not deliverable.
+- **The Figma plugin** — `figma-builder/` mirrors the canon into Figma. It carries an inline copy of the canon hex values that is kept in sync via `npm run sync-figma`.
+- **Tools** — `scripts/` and `.githooks/`: the things that maintain the factory itself (generate assets, check for drift, bump version, enforce on commit).
+
+### Does NOT belong in this repo
+
+- **One-off rendered outputs.** An X banner for this week's launch. A LinkedIn cover for a specific webinar. A campaign graphic with custom copy. Render it from a template in this repo, save the file outside (in `outputs/` which is gitignored, or in cloud storage), and distribute from there. The factory builds it; the warehouse stores it.
+- **Anything regenerable from canon + template.** If `npm run generate` plus a template can recreate it, it doesn't need git history.
+- **Personal-workspace files** — IDE settings, scratch notes, exploratory scripts that aren't reusable. These either get gitignored or moved to `scripts/experiments/` if they might be useful again.
+
+### When in doubt — three questions
+
+1. **Is it the brand itself, or made with the brand?** (Logo: itself. Banner with this week's copy: made with.)
+2. **Will Claude / a teammate / future-you need to regenerate it from canon?** (Yes → it's an output, not canon. No → it's part of the brand.)
+3. **Does it change on the same cadence as the canon?** (Tokens change yearly; outputs change weekly. Different cadence = different home.)
+
+---
+
+## Folder map
+
+```
+mike-design-system/
+├── BRAND-CANON.md            # the locked brand bible
+├── CLAUDE.md                 # working rules for Claude sessions
+├── SYSTEM.md                 # this file — operational guide
+├── DESIGN.md                 # full spec (tokens, components in detail)
+├── README.md                 # project readme
+│
+├── tokens/                   # SOURCE OF TRUTH for token values
+│   └── colors_and_type.css   # every hex/font/space declared here, once
+│
+├── assets/                   # canonical brand artifacts (the brand itself)
+│   ├── avatars/              # Mike avatars (orange-bg, transparent)
+│   ├── favicon/              # browser/app icons
+│   ├── fonts/                # IBM Plex Mono/Sans, Murphydoodle
+│   ├── logos/                # wordmark, lockup, m-mark, badge, tagline
+│   └── loops-nodes/          # Loop and Node marks (primary + system)
+│
+├── design-system.html        # living canon reference (the index page)
+│
+├── templates/                # reusable factory machines
+│   └── youtube-thumbnail/    # one template per recurring format
+│
+├── ui_kits/                  # reference UI implementations
+│   └── website/              # the brand applied to a real product
+│
+├── figma-builder/            # Figma plugin (mirrors canon into Figma)
+│
+├── scripts/                  # tools that maintain the factory
+│   ├── generate-assets.mjs   # regenerate canonical SVGs + PNGs
+│   ├── check-canon.mjs       # detect hex drift
+│   ├── check-version.mjs     # detect version drift
+│   ├── bump-version.mjs      # atomic version bump
+│   ├── sync-figma-builder.mjs# propagate canon to Figma plugin
+│   └── experiments/          # one-off / scratch renderers (may be useful again)
+│
+├── .githooks/                # pre-commit enforcement
+│
+├── outputs/                  # (gitignored) local rendered outputs
+│
+├── package.json              # version is mirrored from BRAND-CANON.md
+└── package-lock.json
+```
+
+### Commands
+
+| Run when | Command |
+|---|---|
+| You changed a token in `tokens/colors_and_type.css` | `npm run generate && npm run sync-figma && npm run check` |
+| You're bumping the brand version | `npm run bump v2026.N` |
+| You want to verify nothing has drifted (also runs on commit) | `npm run check` |
+
+---
+
 ## Read order
 
 When a task touches the Mike Murphy / AI Handyman brand, read in this order:

@@ -19,7 +19,7 @@ function Hero({ onNav }) {
         <div className="art">
           <div className="polaroid">
             <div className="polaroid-photo">
-              <img src="assets/avatar-mike-transparent.png" alt="Mike Murphy" />
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike Murphy" />
             </div>
             <div className="polaroid-caption">Mike</div>
           </div>
