@@ -55,6 +55,10 @@ This repo is the **factory**, not the warehouse. The canon, the reusable templat
 
 ## Stamping & Versioning
 
-Stamp every shipped surface with `Mike Murphy AI` in the footer or meta row. IBM Plex Mono where the surface supports type choice. The stamp is brand identity, not a version tag — it tells you whose work this is, not which release it's from.
+Stamp only when there's a reason to. Don't stamp by default.
 
-Version tracking still matters, but it lives inside `BRAND-CANON.md`'s own header (currently `v2026.3`), not on shipped surfaces. When the canon changes, bump that header version and update `BRAND-CANON.md` first, then propagate the canon change through every surface.
+**Version stamps (`v2026.N`)** — canon docs only. Header of `BRAND-CANON.md`, `SYSTEM.md`, `DESIGN.md`, `README.md`; footer of `design-system.html`. Never on shipped outputs.
+
+**`Mike Murphy AI` identity stamp** — optional. Use where attribution earns its place (about page, formal deck, end screen, podcast cover, sign-off slide). Skip where the AI Handyman badge or Mike's face is already doing the identity work (YouTube thumbnails, social posts, channel art). When used: IBM Plex Mono, navy on light surfaces, cream on dark or orange.
+
+When the canon changes, bump the version in `BRAND-CANON.md`'s header, then `npm run bump v2026.N` propagates everywhere. Full rule: `BRAND-CANON.md` ("Stamp" section).

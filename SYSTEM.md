@@ -190,7 +190,7 @@ The pattern, every time:
 2. **Consume semantic tokens only.** `var(--color-action-primary)`, never `#FF6434`. Tokens live in `tokens/colors_and_type.css` and the `:root` block of `design-system.html`.
 3. **Pick a layout from the locked vocabulary.** If your draft requires a new layout, that's the signal to back up.
 4. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review — cartoon Mike, washi tape, toolshed copy, the old tagline, free yellow, two teals — delete it now.
-5. **Stamp the version.** `v2026.3` in the footer or meta row. When the canon changes, the canon updates first, then this file, then everything downstream.
+5. **Stamp only when there's a reason to.** Version stamps (`v2026.3`) belong on canon docs (this file, `BRAND-CANON.md`, `design-system.html` footer), never on shipped outputs. The `Mike Murphy AI` identity stamp is optional — use it where attribution earns its place (about, formal decks, end screens), skip it where the AI Handyman badge or Mike's face is already identifying the work (YouTube thumbnails, social posts, channel art). Full rule: `BRAND-CANON.md` ("Stamp" section).
 
 ---
 

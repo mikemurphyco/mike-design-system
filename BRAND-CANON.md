@@ -79,13 +79,23 @@ Mid-dot separators, ALL CAPS, IBM Plex Mono Bold. The mid-dots are colored `--mm
 
 ## Stamp
 
-Every shipped surface — site footers, deck end-slides, PDF meta rows, tutorial outlines, social templates — carries this stamp:
+Stamp only when there's a reason to. Don't stamp by default.
 
-`Mike Murphy AI`
+**Version stamps (`v2026.N`)** — canon docs only. The header of this file, `SYSTEM.md`, `DESIGN.md`, `README.md`, and the footer of `design-system.html`. These are the surfaces where "which version of the canon is this" is the load-bearing question. Never on shipped outputs (thumbnails, banners, social posts, decks, marketing graphics).
 
-IBM Plex Mono, navy on light surfaces, cream on dark or orange surfaces. The stamp is brand identity, not a version tag — it signs the work, it doesn't date it.
+**`Mike Murphy AI` identity stamp** — optional, context-dependent. Use where attribution earns a place:
 
-Version tracking lives in this document's own header (`v2026.3`), not on shipped surfaces. When the canon changes, bump the header version here first, then propagate the change through the system.
+- About page
+- Formal client or partner deck
+- Podcast cover or end screen
+- Sign-off slide on a long-form presentation
+- PDF meta row when there's no other identifier
+
+Skip where the AI Handyman badge or Mike's face is already doing the identity work — YouTube thumbnails, social posts, channel art, anywhere the brand is already legible. Double-stamping just adds noise.
+
+When the stamp is used, it's `Mike Murphy AI`, IBM Plex Mono, navy on light surfaces, cream on dark or orange surfaces. Brand identity, not a version tag — it signs the work, it doesn't date it.
+
+When the canon changes, bump the version in this file's header first, then run `npm run bump v2026.N` to propagate.
 
 ---
 

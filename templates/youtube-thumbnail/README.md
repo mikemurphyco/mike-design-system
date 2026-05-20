@@ -21,7 +21,7 @@ The export is exactly 1280×720 (or 2560×1440 on Retina — both fine for YouTu
 - **Lede** — sans-serif, navy at 70%. One short line. The "what you'll actually get" promise.
 - **Tagline** — `LEARN · BUILD · MOVE FORWARD` at the bottom-left. Locked.
 - **Mike polaroid** — right side, tilted, cut-shadow. The personal anchor.
-- **Version stamp** — `v2026.3` bottom-right. Easy to delete if it crowds the duration badge.
+- **No version stamp.** YouTube thumbnails are shipped outputs, not canon docs. Per `BRAND-CANON.md` ("Stamp"), version stamps live on canon docs only. The AI Handyman badge and Mike's face already identify the work.
 
 ## Customizing
 
