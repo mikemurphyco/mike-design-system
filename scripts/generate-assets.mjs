@@ -13,14 +13,22 @@ import { Resvg } from '@resvg/resvg-js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
-// ── Brand tokens ──────────────────────────────────────────────────────────────
-const T = {
-  cream:      '#F1ECE2',
-  chalk:      '#FCFAF6',
-  navy:       '#001E3A',
-  orange:     '#FF6434',
-  yellow:     '#F5C842',
-};
+// ── Brand tokens (parsed from canon at runtime — single source of truth) ─────
+// Reads tokens/colors_and_type.css and pulls out every --mm-* hex declaration.
+// No hex literals live in this file. Update the canon CSS, re-run generate.
+const CANON_CSS = readFileSync(join(ROOT, 'tokens/colors_and_type.css'), 'utf8');
+const T = (() => {
+  const out = {};
+  for (const m of CANON_CSS.matchAll(/--mm-([a-z-]+)\s*:\s*(#[0-9a-fA-F]{6})/g)) {
+    // Convert kebab-case key to camelCase: "orange-deep" → "orangeDeep"
+    const key = m[1].replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+    out[key] = m[2].toUpperCase();
+  }
+  const required = ['cream', 'chalk', 'navy', 'orange', 'orangeDeep', 'yellow', 'teal'];
+  const missing = required.filter((k) => !out[k]);
+  if (missing.length) throw new Error(`Canon missing tokens: ${missing.join(', ')}`);
+  return out;
+})();
 
 // ── Load fonts ────────────────────────────────────────────────────────────────
 const fontBold    = readFileSync(join(ROOT, 'assets/fonts/IBMPlexMono-Bold.ttf'));
