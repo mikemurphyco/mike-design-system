@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>BeeHiiv Newsletter Banner — AI Unplugged</title>
+<link rel="stylesheet" href="../../tokens/colors_and_type.css"/>
+<style>
+  * { box-sizing: border-box; }
+
+  /* ─── Editor chrome (screen only, not part of the export) ───────── */
+  body {
+    margin: 0;
+    background: #1a1a1a;
+    color: #e5e5e5;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .editor {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 18px 22px;
+    background: #222;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 180px;
+    gap: 14px 22px;
+    align-items: end;
+  }
+  .editor h1 {
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+  }
+  .editor label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+    color: #999;
+  }
+  .editor input {
+    background: #111;
+    border: 1px solid #333;
+    color: #e5e5e5;
+    padding: 7px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .editor input:focus { outline: none; border-color: var(--color-action-primary); }
+  .editor .hint {
+    grid-column: 1 / -1;
+    margin: 6px 0 0;
+    font-size: 11px;
+    color: #777;
+    line-height: 1.55;
+  }
+  .editor .hint code {
+    background: #111;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    color: #ccc;
+  }
+  .canvas-wrap { display: flex; justify-content: center; }
+
+  /* ─── THE BANNER ────────────────────────────────────────────────
+     #banner is the export target. 1200×630 — matches BeeHiiv's
+     header image slot and Open Graph share size, so the same PNG
+     works as the in-email header AND the social card.
+     ─────────────────────────────────────────────────────────────── */
+  #banner {
+    width: 1200px;
+    height: 630px;
+    flex-shrink: 0;
+    background: var(--mm-chalk);
+    color: var(--mm-navy);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 56px 80px;
+    font-family: var(--font-mono);
+  }
+
+  /* The Loop — navy stroke, inline so the color is overridable. */
+  .loop {
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+  }
+  .loop path {
+    stroke: var(--mm-navy);
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  .title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 88px;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--mm-navy);
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 0.32em;
+    color: var(--mm-navy);
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    /* Trailing letter-spacing pushes the visual center off-axis; nudge left. */
+    text-indent: 0.32em;
+  }
+</style>
+</head>
+<body>
+
+<div class="editor">
+  <h1>BeeHiiv newsletter banner — edit and screenshot the canvas below (1200×630)</h1>
+
+  <label>Title (ALL CAPS)
+    <input id="in-title" type="text" value="AI UNPLUGGED"/>
+  </label>
+
+  <label>Subtitle (ALL CAPS)
+    <input id="in-subtitle" type="text" value="NEWSLETTER"/>
+  </label>
+
+  <label>Loop size (px)
+    <input id="in-loop" type="number" min="120" max="380" step="10" value="260"/>
+  </label>
+
+  <p class="hint">
+    Right-click the canvas → <code>Save image as…</code>, or use your tool's screenshot/export to capture the <code>#banner</code> element at 1200×630.
+    All colors come from <code>tokens/colors_and_type.css</code> — swap navy for any semantic token to reskin.
+  </p>
+</div>
+
+<div class="canvas-wrap">
+  <!-- ─────────────────────────────────────────────────────────
+       #banner — export target. 1200×630.
+       ───────────────────────────────────────────────────────── -->
+  <div id="banner">
+
+    <!-- The Loop mark, navy. Path lifted from assets/loops-nodes/loop-orange.svg. -->
+    <svg class="loop" id="loop" viewBox="0 0 128 128" role="img" aria-label="The Loop">
+      <title>Mike Murphy — Loop mark, navy</title>
+      <path d="M24 64
+               C24 38 40 16 64 16
+               C90 16 106 38 106 64
+               C106 89 90 110 64 110
+               C42 110 26 95 26 76
+               C26 59 39 47 54 47
+               C69 47 80 58 80 72
+               C80 85 71 93 59 90
+               C49 87 44 77 47 67"/>
+    </svg>
+
+    <h1 class="title" id="title">AI UNPLUGGED</h1>
+    <p class="subtitle" id="subtitle">NEWSLETTER</p>
+
+  </div>
+</div>
+
+<script>
+  // Live binding — title / subtitle / loop size.
+  const titleIn = document.getElementById('in-title');
+  const subIn   = document.getElementById('in-subtitle');
+  const loopIn  = document.getElementById('in-loop');
+  const titleEl = document.getElementById('title');
+  const subEl   = document.getElementById('subtitle');
+  const loopEl  = document.getElementById('loop');
+
+  titleIn.addEventListener('input', () => { titleEl.textContent = titleIn.value; });
+  subIn.addEventListener('input',   () => { subEl.textContent   = subIn.value;   });
+  loopIn.addEventListener('input',  () => {
+    const v = Math.max(120, Math.min(380, parseInt(loopIn.value, 10) || 260));
+    loopEl.style.width  = v + 'px';
+    loopEl.style.height = v + 'px';
+  });
+</script>
+
+</body>
+</html>
