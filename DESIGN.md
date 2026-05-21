@@ -112,7 +112,7 @@ components:
 
   badge-ai-handyman:
     backgroundColor: "{colors.orange}"
-    textColor:       "{colors.yellow}"
+    textColor:       "{colors.navy}"
     typography:      "{typography.mono-label}"
     rounded:         "{rounded.md}"
     padding:         8px 14px
@@ -188,7 +188,7 @@ The palette is four named values and three functional extensions. All components
 - **Navy (`#001E3A`):** All body text, borders, and the offset cut-shadow ink. Never pure black.
 - **Orange (`#FF6434`):** The only primary action color. CTAs, eyebrows, active states, the AI Handyman badge background. One dominant orange per screen.
 - **Orange-deep (`#E8501C`):** Hover and pressed state for orange. Never used at rest.
-- **Yellow (`#F5C842`):** Locked inside the AI Handyman badge — yellow text on orange ground. Do not release yellow into other surfaces.
+- **Yellow (`#F5C842`):** Reserved for success-state chips such as `✓ You're in.`. Do not use as badge ink, hero color, body type, or button color.
 - **Teal (`#1ECEBE`):** The "AI pop." Rationed to exactly one element per screen: a terminal cursor, a `live` status dot, a teal-ring on the M-mark. Never on two things at once.
 
 Semantic mapping consumed by components:
@@ -289,7 +289,7 @@ The photo background is always `{colors.orange}`. The avatar image is always `av
 
 ### AI Handyman Badge
 
-Yellow text on orange ground. IBM Plex Mono Bold, 12px, 0.14em tracking, ALL CAPS. 8px/14px padding. 4px radius. 1px navy border. Cut-shadow stamp. Text: "AI HANDYMAN" — no other text.
+Navy text on orange ground. IBM Plex Mono Bold, 12px, 0.14em tracking, ALL CAPS. 8px/14px padding. 4px radius. 1px navy border. Cut-shadow stamp. Text: "AI HANDYMAN" — no other text.
 
 Use on: tutorial cards, tutorial detail header, intro/end screens, home hero (inline in hero area, not as a nav element). Do not use on: header nav, footer, About page, generic content pages.
 
@@ -321,7 +321,7 @@ Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7)
 
 ## Do's and Don'ts
 
-**Contrast note:** Chalk-on-orange (buttons) and yellow-on-orange (AI Handyman badge) do not reach WCAG AA 4.5:1 for normal text. These are deliberate brand decisions — the button text is 14px bold (reads at large-text scale in context), and the badge is a decorative label with additional visual redundancy. If accessibility compliance is required, swap button text to `{colors.navy}` (4.4:1 on orange — near AA) and maintain the badge as decorative/aria-hidden.
+**Contrast note:** Chalk-on-orange button text does not reach WCAG AA 4.5:1 for normal text. This is a deliberate brand decision — the button text is 14px bold and reads at large-text scale in context. The AI Handyman badge uses navy text on orange ground.
 
 **Do:**
 - Use `{colors.cream}` as the page background — never pure white.
@@ -330,7 +330,7 @@ Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7)
 - Apply the cut-shadow to cards, buttons, code blocks, and form inputs.
 - Use Murphydoodle only for the polaroid caption.
 - Apply teal to exactly one element per screen.
-- Use `{colors.yellow}` only inside the AI Handyman badge on an orange ground.
+- Use `{colors.yellow}` only for success-state chips such as `✓ You're in.`.
 - Use mid-dots (·) in the tagline, not bullets, periods, or slashes.
 
 **Don't:**

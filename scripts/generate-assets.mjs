@@ -191,7 +191,7 @@ emit(
 );
 
 // ── 5. AI Handyman badge ──────────────────────────────────────────────────────
-// Orange rect + yellow text + navy border + cut-shadow rect
+// Orange rect + navy text + navy border + cut-shadow rect
 
 function badgeSvg() {
   // Sized to content: padding 10px/18px, font 14px mono-label
@@ -205,7 +205,7 @@ function badgeSvg() {
   <!-- AI HANDYMAN label -->
   <text x="100" y="21" text-anchor="middle" dominant-baseline="central"
     font-family="IBM Plex Mono,monospace" font-weight="700" font-size="14"
-    letter-spacing="0.14em" fill="${T.yellow}">AI HANDYMAN</text>
+    letter-spacing="0.14em" fill="${T.navy}">AI HANDYMAN</text>
 </svg>`;
 }
 

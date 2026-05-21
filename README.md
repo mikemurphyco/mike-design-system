@@ -30,7 +30,7 @@ The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI H
 
 ## Locked decisions (canon)
 
-- **Cream** `#F1ECE2` · **Chalk** `#FCFAF6` · **Navy** `#001E3A` · **Orange** `#FF6434` · **Orange-deep** `#E8501C` (hover only) · **Yellow** `#F5C842` (badge only) · **Teal** `#1ECEBE` (AI accent only)
+- **Cream** `#F1ECE2` · **Chalk** `#FCFAF6` · **Navy** `#001E3A` · **Orange** `#FF6434` · **Orange-deep** `#E8501C` (hover only) · **Yellow** `#F5C842` (success chips only) · **Teal** `#1ECEBE` (AI accent only)
 - **Type:** IBM Plex Mono Bold (display, UI, code) · IBM Plex Sans (body) · Murphydoodle (polaroid caption only)
 - **Tagline:** `LEARN · BUILD · MOVE FORWARD` — mid-dots in orange on light, navy on orange. No periods. No alternative wording.
 - **AI Handyman badge** tags content (cards, intro/end screens, hero), never chrome (nav, footer).

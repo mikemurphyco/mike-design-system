@@ -120,7 +120,7 @@ a { color: inherit; }
   font-family: var(--font-mono); font-weight: 700;
   font-size: var(--fs-mono-label); letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  color: var(--mm-yellow);
+  color: var(--mm-navy);
   background: var(--mm-orange);
   padding: 8px 14px;
   border-radius: var(--radius-md);

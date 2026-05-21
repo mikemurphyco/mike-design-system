@@ -6,6 +6,8 @@
 // Reports:
 //   • DRIFT — hex codes that match a previously-canonical value (see STALE
 //     below) that is no longer current. Fails the run.
+//   • RULE  — brand-rule text/code drift, such as resurrecting yellow badge ink.
+//     Fails the run.
 //   • WARN  — hex codes that are close to a current canon value but not exact
 //     (within 30 channel-units total, i.e. probably a typo or stale paste).
 //   • OK    — hex codes that match a canon value exactly. Counted per token.
@@ -73,8 +75,16 @@ const files = tracked.filter(
 const HEX_RE = /#([0-9a-fA-F]{6})\b/g;
 
 const drift = [];       // {file, line, hex, ctx}
+const ruleDrift = [];   // {file, line, rule, ctx}
 const warn = [];        // {file, line, hex, ctx, near}
 const perCanon = Object.fromEntries(Object.keys(canon).map((k) => [k, 0]));
+
+const SEMANTIC_RULES = [
+  {
+    rule: "AI Handyman badge must be navy text on orange ground; yellow is success chips only.",
+    re: /yellow-on-orange|yellow text on orange|Locked inside the AI Handyman badge|Use `\{colors\.yellow\}` only inside the AI Handyman badge|textColor:\s*"\{colors\.yellow\}"|fill="\$\{T\.yellow\}"/i,
+  },
+];
 
 const channelDistance = (a, b) => {
   const pa = a.slice(1).match(/.{2}/g).map((x) => parseInt(x, 16));
@@ -95,6 +105,11 @@ for (const f of files) {
   const lines = content.split("\n");
   lines.forEach((line, i) => {
     if (line.includes("check-canon-ignore")) return;
+    for (const rule of SEMANTIC_RULES) {
+      if (rule.re.test(line)) {
+        ruleDrift.push({ file: f, line: i + 1, rule: rule.rule, ctx: line.trim().slice(0, 100) });
+      }
+    }
     for (const m of line.matchAll(HEX_RE)) {
       const hex = "#" + m[1].toUpperCase();
       const ctx = line.trim().slice(0, 100);
@@ -137,6 +152,13 @@ if (drift.length) {
   }
 }
 
+if (ruleDrift.length) {
+  console.log(`\n${red}${bold}RULE — brand-rule drift found:${reset}`);
+  for (const d of ruleDrift) {
+    console.log(`  ${d.file}:${d.line}  ${red}${d.rule}${reset}  ${dim}${d.ctx}${reset}`);
+  }
+}
+
 if (warn.length && !QUIET) {
   console.log(`\n${yellow}${bold}WARN — hexes close to canon but not exact:${reset}`);
   for (const w of warn) {
@@ -147,12 +169,12 @@ if (warn.length && !QUIET) {
   }
 }
 
-if (!drift.length && !warn.length) {
+if (!drift.length && !ruleDrift.length && !warn.length) {
   console.log(`\n${green}✓ Canon clean.${reset}\n`);
-} else if (!drift.length) {
+} else if (!drift.length && !ruleDrift.length) {
   console.log(`\n${green}✓ No drift.${reset} ${dim}${warn.length} warning(s).${reset}\n`);
 } else {
-  console.log(`\n${red}✗ ${drift.length} drift, ${warn.length} warning(s).${reset}\n`);
+  console.log(`\n${red}✗ ${drift.length} stale value drift, ${ruleDrift.length} rule drift, ${warn.length} warning(s).${reset}\n`);
 }
 
-process.exit(drift.length ? 1 : 0);
+process.exit(drift.length || ruleDrift.length ? 1 : 0);

@@ -42,7 +42,9 @@
 
     const allVars = await figma.variables.getLocalVariablesAsync();
     const V = {};
-    for (const v of allVars) V[v.name] = v;
+    for (const v of allVars) {
+      if (v.variableCollectionId === collection.id) V[v.name] = v;
+    }
 
     // Idempotent: create if missing, always update scopes + value on every run.
     const ensureColorVar = (name, hex, scopes, opacity) => {
@@ -50,13 +52,14 @@
       if (!v) { v = figma.variables.createVariable(name, collection, "COLOR"); V[name] = v; }
       v.scopes = scopes;
       const rgb = hexToRgb(hex);
-      v.setValueForMode(modeId, opacity != null ? { ...rgb, a: opacity } : rgb);
+      v.setValueForMode(modeId, opacity != null ? { r: rgb.r, g: rgb.g, b: rgb.b, a: opacity } : rgb);
       return v;
     };
     const ensureAliasVar = (name, targetName, scopes) => {
       let v = V[name];
       if (!v) { v = figma.variables.createVariable(name, collection, "COLOR"); V[name] = v; }
       v.scopes = scopes;
+      if (!V[targetName]) throw new Error("Missing alias target variable: " + targetName);
       v.setValueForMode(modeId, { type: "VARIABLE_ALIAS", id: V[targetName].id });
       return v;
     };
@@ -100,22 +103,30 @@
     for (const g of numberGroups) for (const [label, n] of g.vals) ensureNumberVar(`${g.prefix}/${label}`, n, g.scopes);
 
     // ── FONTS ──────────────────────────────────────────────
-    const FAMILY_SANS = "IBM Plex Sans";
-    const FAMILY_MONO = "IBM Plex Mono";
-    // Murphydoodle fallback chain: try Murphydoodle, then Caveat, then Inter Italic
     const availFonts = await figma.listAvailableFontsAsync();
     const has = (fam, sty) => availFonts.some(f => f.fontName.family === fam && f.fontName.style === sty);
+    const firstFont = (candidates) => {
+      for (const f of candidates) if (has(f.family, f.style)) return f;
+      return { family: "Inter", style: "Regular" };
+    };
+    const SANS_REGULAR = firstFont([{ family: "IBM Plex Sans", style: "Regular" }, { family: "Inter", style: "Regular" }]);
+    const SANS_SEMIBOLD = firstFont([{ family: "IBM Plex Sans", style: "SemiBold" }, { family: "Inter", style: "Semi Bold" }, { family: "Inter", style: "Medium" }, SANS_REGULAR]);
+    const SANS_BOLD = firstFont([{ family: "IBM Plex Sans", style: "Bold" }, { family: "Inter", style: "Bold" }, SANS_SEMIBOLD]);
+    const MONO_REGULAR = firstFont([{ family: "IBM Plex Mono", style: "Regular" }, { family: "Roboto Mono", style: "Regular" }, SANS_REGULAR]);
+    const MONO_MEDIUM = firstFont([{ family: "IBM Plex Mono", style: "Medium" }, { family: "Roboto Mono", style: "Medium" }, MONO_REGULAR]);
+    const MONO_BOLD = firstFont([{ family: "IBM Plex Mono", style: "Bold" }, { family: "Roboto Mono", style: "Bold" }, MONO_MEDIUM]);
     const HAND_FONT = has("Murphydoodle", "Regular") ? { family: "Murphydoodle", style: "Regular" }
                     : has("Caveat", "Regular")       ? { family: "Caveat", style: "Regular" }
-                    :                                  { family: "Inter",  style: "Italic" };
+                    : has("Inter", "Italic")          ? { family: "Inter",  style: "Italic" }
+                    :                                    SANS_REGULAR;
 
     const fontsToLoad = [
-      { family: FAMILY_SANS, style: "Bold" },
-      { family: FAMILY_SANS, style: "SemiBold" },
-      { family: FAMILY_SANS, style: "Regular" },
-      { family: FAMILY_MONO, style: "Bold" },
-      { family: FAMILY_MONO, style: "Medium" },
-      { family: FAMILY_MONO, style: "Regular" },
+      SANS_BOLD,
+      SANS_SEMIBOLD,
+      SANS_REGULAR,
+      MONO_BOLD,
+      MONO_MEDIUM,
+      MONO_REGULAR,
       HAND_FONT,
     ];
     for (const f of fontsToLoad) {
@@ -126,6 +137,7 @@
     const existingStyles = await figma.getLocalTextStylesAsync();
     const S = {};
     for (const s of existingStyles) S[s.name] = s;
+    const textSpecs = {};
 
     const ensureTextStyle = (name, opts) => {
       let s = S[name];
@@ -135,63 +147,82 @@
       s.lineHeight = { unit: "PERCENT", value: opts.lh };
       s.letterSpacing = { unit: "PERCENT", value: opts.ls };
       if (opts.upper) s.textCase = "UPPER"; else s.textCase = "ORIGINAL";
+      textSpecs[name] = opts;
       return s;
     };
 
-    ensureTextStyle("Display",     { font:{family:FAMILY_SANS,style:"Bold"},     size:88, lh:92,  ls:-3 });
-    ensureTextStyle("H1",          { font:{family:FAMILY_SANS,style:"Bold"},     size:56, lh:110, ls:-2 });
-    ensureTextStyle("H2",          { font:{family:FAMILY_SANS,style:"Bold"},     size:36, lh:110, ls:-2 });
-    ensureTextStyle("H3",          { font:{family:FAMILY_SANS,style:"SemiBold"}, size:22, lh:125, ls:-1 });
-    ensureTextStyle("Lede",        { font:{family:FAMILY_SANS,style:"Regular"},  size:20, lh:155, ls:0  });
-    ensureTextStyle("Body",        { font:{family:FAMILY_SANS,style:"Regular"},  size:16, lh:155, ls:0  });
-    ensureTextStyle("Eyebrow",     { font:{family:FAMILY_MONO,style:"Bold"},     size:13, lh:110, ls:18, upper:true });
-    ensureTextStyle("Mono Label",  { font:{family:FAMILY_MONO,style:"Medium"},   size:12, lh:110, ls:14, upper:true });
-    ensureTextStyle("Code",        { font:{family:FAMILY_MONO,style:"Regular"},  size:14, lh:150, ls:0  });
-    ensureTextStyle("Tagline",     { font:{family:FAMILY_MONO,style:"Bold"},     size:24, lh:110, ls:18, upper:true });
+    ensureTextStyle("Display",     { font:SANS_BOLD,     size:88, lh:92,  ls:-3 });
+    ensureTextStyle("H1",          { font:SANS_BOLD,     size:56, lh:110, ls:-2 });
+    ensureTextStyle("H2",          { font:SANS_BOLD,     size:36, lh:110, ls:-2 });
+    ensureTextStyle("H3",          { font:SANS_SEMIBOLD, size:22, lh:125, ls:-1 });
+    ensureTextStyle("Lede",        { font:SANS_REGULAR,  size:20, lh:155, ls:0  });
+    ensureTextStyle("Body",        { font:SANS_REGULAR,  size:16, lh:155, ls:0  });
+    ensureTextStyle("Eyebrow",     { font:MONO_BOLD,     size:13, lh:110, ls:18, upper:true });
+    ensureTextStyle("Mono Label",  { font:MONO_MEDIUM,   size:12, lh:110, ls:14, upper:true });
+    ensureTextStyle("Code",        { font:MONO_REGULAR,  size:14, lh:150, ls:0  });
+    ensureTextStyle("Tagline",     { font:MONO_BOLD,     size:24, lh:110, ls:18, upper:true });
     ensureTextStyle("Handwritten", { font:HAND_FONT, size:32, lh:110, ls:0 });
 
     // ── PAINT HELPERS ──────────────────────────────────────
     const fillWith = (varName, fallbackHex, opacity) => {
-      const paint = solid(fallbackHex, opacity);
-      const v = V[varName];
-      if (v) return figma.variables.setBoundVariableForPaint(paint, "color", v);
-      return paint;
+      return solid(fallbackHex, opacity);
     };
+    const OUTER_WIDTH = 1632;
+    const OUTER_HEIGHT = 12000;
+    const OUTER_PADDING_X = 96;
+    const SECTION_WIDTH = OUTER_WIDTH - (OUTER_PADDING_X * 2);
+    const SECTION_PADDING_X = 48;
+    const SECTION_INNER_WIDTH = SECTION_WIDTH - (SECTION_PADDING_X * 2);
+    const SWATCH_CARD_W = 248;
+    const BRAND_SWATCH_H = 152;
+    const BRAND_SWATCH_BODY_H = 132;
+    const SEMANTIC_SWATCH_H = 96;
+    const SEMANTIC_SWATCH_BODY_H = 72;
 
     // ── PAGE SETUP ─────────────────────────────────────────
     let page = figma.root.children.find(p => p.name === "Foundations & Components");
     if (!page) { page = figma.createPage(); page.name = "Foundations & Components"; }
     await figma.setCurrentPageAsync(page);
-    page.backgrounds = [fillWith("color/semantic/bg-page", HEX.cream)];
+    page.backgrounds = [solid(HEX.cream)];
 
     // Clear previous build (idempotent)
     const existing = page.children.find(c => c.name === "DS · Foundations & Components");
     if (existing) existing.remove();
+    const existingCanary = page.children.find(c => c.name === "00 · Standalone Render Check");
+    if (existingCanary) existingCanary.remove();
 
     // ── HELPERS ────────────────────────────────────────────
     // navy rgb(0, 30, 58) → r:0 g:0.1176 b:0.2275
     const NAVY_RGB = { r: 0, g: 0.1176, b: 0.2275 };
     const cutShadow = {
       type: "DROP_SHADOW",
-      color: { ...NAVY_RGB, a: 1 },
+      color: { r: NAVY_RGB.r, g: NAVY_RGB.g, b: NAVY_RGB.b, a: 1 },
       offset: { x: 4, y: 4 }, radius: 0, spread: 0,
       visible: true, blendMode: "NORMAL",
     };
     const softShadow = {
       type: "DROP_SHADOW",
-      color: { ...NAVY_RGB, a: 0.10 },
+      color: { r: NAVY_RGB.r, g: NAVY_RGB.g, b: NAVY_RGB.b, a: 0.10 },
       offset: { x: 0, y: 4 }, radius: 12, spread: 0,
       visible: true, blendMode: "NORMAL",
     };
     const polaroidShadow = {
       type: "DROP_SHADOW",
-      color: { ...NAVY_RGB, a: 0.55 },
+      color: { r: NAVY_RGB.r, g: NAVY_RGB.g, b: NAVY_RGB.b, a: 0.55 },
       offset: { x: 6, y: 12 }, radius: 0, spread: 0,
       visible: true, blendMode: "NORMAL",
     };
 
     const txt = (styleName, content, fillVar, fillHex, fillOpacity) => {
       const t = figma.createText();
+      const spec = textSpecs[styleName];
+      if (spec) {
+        t.fontName = spec.font;
+        t.fontSize = spec.size;
+        t.lineHeight = { unit: "PERCENT", value: spec.lh };
+        t.letterSpacing = { unit: "PERCENT", value: spec.ls };
+        if (spec.upper) t.textCase = "UPPER"; else t.textCase = "ORIGINAL";
+      }
       t.textStyleId = S[styleName].id;
       t.characters = content;
       t.fills = [fillWith(fillVar, fillHex, fillOpacity)];
@@ -211,6 +242,7 @@
       f.strokeWeight = 2;
       f.cornerRadius = 4;
       f.effects = [cutShadow];
+      f.resizeWithoutConstraints(SECTION_WIDTH, 1);
       return f;
     };
 
@@ -234,10 +266,10 @@
     outer.itemSpacing = 64;
     outer.paddingTop = 96; outer.paddingBottom = 128;
     outer.paddingLeft = 96; outer.paddingRight = 96;
-    outer.primaryAxisSizingMode = "AUTO";
+    outer.primaryAxisSizingMode = "FIXED";
     outer.counterAxisSizingMode = "FIXED";
     outer.fills = [fillWith("color/semantic/bg-page", HEX.cream)];
-    outer.resize(1632, 1);
+    outer.resizeWithoutConstraints(OUTER_WIDTH, OUTER_HEIGHT);
     page.appendChild(outer);
     outer.x = 0; outer.y = 0;
 
@@ -296,6 +328,7 @@
       grid.itemSpacing = 16;
       grid.counterAxisSpacing = 16;
       grid.fills = [];
+      grid.resizeWithoutConstraints(SECTION_INNER_WIDTH, 316);
       sec.appendChild(grid);
       try { grid.layoutSizingHorizontal = "FILL"; } catch (e) {}
 
@@ -311,27 +344,28 @@
       for (const sw of swatches) {
         const card = figma.createFrame();
         card.layoutMode = "VERTICAL";
-        card.primaryAxisSizingMode = "AUTO";
+        card.primaryAxisSizingMode = "FIXED";
         card.counterAxisSizingMode = "FIXED";
         card.itemSpacing = 0;
         card.fills = [];
-        card.resize(248, 1);
+        card.resizeWithoutConstraints(SWATCH_CARD_W, BRAND_SWATCH_H + BRAND_SWATCH_BODY_H);
 
         const chip = figma.createFrame();
         chip.fills = [fillWith(sw.varName, sw.hex)];
         chip.strokes = [fillWith("color/semantic/border-strong", HEX.navy)];
         chip.strokeWeight = 2;
-        chip.resize(248, 152);
+        chip.resizeWithoutConstraints(SWATCH_CARD_W, BRAND_SWATCH_H);
         chip.cornerRadius = 4;
         card.appendChild(chip);
 
         const body = figma.createFrame();
         body.layoutMode = "VERTICAL";
-        body.primaryAxisSizingMode = "AUTO";
+        body.primaryAxisSizingMode = "FIXED";
         body.counterAxisSizingMode = "FIXED";
         body.itemSpacing = 4;
         body.paddingTop = 12; body.paddingBottom = 12; body.paddingLeft = 12; body.paddingRight = 12;
         body.fills = [];
+        body.resizeWithoutConstraints(SWATCH_CARD_W, BRAND_SWATCH_BODY_H);
         card.appendChild(body);
         try { body.layoutSizingHorizontal = "FILL"; } catch (e) {}
         body.appendChild(txt("Mono Label", sw.varName.replace("color/brand/", ""), "color/semantic/text-primary", HEX.navy));
@@ -357,6 +391,7 @@
       grid.counterAxisSizingMode = "AUTO";
       grid.itemSpacing = 16; grid.counterAxisSpacing = 16;
       grid.fills = [];
+      grid.resizeWithoutConstraints(SECTION_INNER_WIDTH, 206);
       sec.appendChild(grid);
       try { grid.layoutSizingHorizontal = "FILL"; } catch (e) {}
 
@@ -374,27 +409,28 @@
       for (const a of aliases) {
         const card = figma.createFrame();
         card.layoutMode = "VERTICAL";
-        card.primaryAxisSizingMode = "AUTO";
+        card.primaryAxisSizingMode = "FIXED";
         card.counterAxisSizingMode = "FIXED";
         card.fills = [];
         card.itemSpacing = 0;
-        card.resize(248, 1);
+        card.resizeWithoutConstraints(SWATCH_CARD_W, SEMANTIC_SWATCH_H + SEMANTIC_SWATCH_BODY_H);
 
         const chip = figma.createFrame();
         chip.fills = [fillWith(a.alias, a.hex, a.opacity)];
         chip.strokes = [fillWith("color/semantic/border-strong", HEX.navy)];
         chip.strokeWeight = 2;
         chip.cornerRadius = 4;
-        chip.resize(248, 96);
+        chip.resizeWithoutConstraints(SWATCH_CARD_W, SEMANTIC_SWATCH_H);
         card.appendChild(chip);
 
         const body = figma.createFrame();
         body.layoutMode = "VERTICAL";
-        body.primaryAxisSizingMode = "AUTO";
+        body.primaryAxisSizingMode = "FIXED";
         body.counterAxisSizingMode = "FIXED";
         body.itemSpacing = 4;
         body.paddingTop = 12; body.paddingBottom = 12; body.paddingLeft = 12; body.paddingRight = 12;
         body.fills = [];
+        body.resizeWithoutConstraints(SWATCH_CARD_W, SEMANTIC_SWATCH_BODY_H);
         card.appendChild(body);
         try { body.layoutSizingHorizontal = "FILL"; } catch (e) {}
         body.appendChild(txt("Mono Label", a.name, "color/semantic/text-primary", HEX.navy));
@@ -632,7 +668,7 @@
     {
       const sec = sectionFrame("11 · AI Handyman Badge");
       addToOuter(sec);
-      sec.appendChild(sectionHeader("10", "Locked yellow-on-orange stamp"));
+      sec.appendChild(sectionHeader("10", "Locked navy-on-orange stamp"));
 
       const tile = figma.createFrame();
       tile.layoutMode = "HORIZONTAL";
@@ -860,7 +896,8 @@
         const row = figma.createFrame();
         row.layoutMode = "HORIZONTAL";
         row.primaryAxisSizingMode = "AUTO";
-        row.counterAxisSizingMode = "FIXED";
+        row.counterAxisSizingMode = "AUTO";
+        row.counterAxisAlignItems = "MIN";
         row.itemSpacing = 12;
         row.fills = [];
         sec.appendChild(row);
@@ -890,7 +927,8 @@
         const row = figma.createFrame();
         row.layoutMode = "HORIZONTAL";
         row.primaryAxisSizingMode = "AUTO";
-        row.counterAxisSizingMode = "FIXED";
+        row.counterAxisSizingMode = "AUTO";
+        row.counterAxisAlignItems = "MIN";
         row.itemSpacing = 12;
         row.fills = [];
         sec.appendChild(row);

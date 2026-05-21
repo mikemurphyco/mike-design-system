@@ -15,13 +15,13 @@ A one-shot local Figma plugin that builds the entire Mike Murphy / AI Handyman v
 
 - Ensures the variable collection `Mike Murphy v2026.3` exists with all primitive colors, semantic aliases, spacing, radii, font-size, line-height, and letter-spacing tokens.
 - Ensures all 11 text styles exist (Display, H1–H3, Lede, Body, Eyebrow, Mono Label, Code, Tagline, Handwritten).
-- Creates (or replaces) the page **Foundations & Components** containing 16 reference frames stacked vertically — cover, palettes, typography specimens, tagline, spacing, radii, shadows, motion, marks, badge, polaroid, components, brand rules, NOT list, footer.
+- Creates (or replaces) the page **Foundations & Components** containing 16 reference frames stacked vertically — cover, palettes, typography specimens, tagline, spacing, radii, shadows, motion, marks, badge, polaroid, components, brand rules, NOT list, footer. The reference frames use resolved paint values so they render visibly even if Figma variable binding acts up in a local file.
 
 It's idempotent. Run it again and it'll wipe just the outer frame and rebuild — variables and text styles are reused.
 
 ## Fonts
 
-Plex Mono and Plex Sans are needed (free on Google Fonts — install once, restart Figma). Murphydoodle is custom — if Figma can't find it, the builder falls back to Caveat, then to Inter Italic. The "Handwritten" text style will use whichever fallback was used.
+Plex Mono and Plex Sans are preferred (free on Google Fonts — install once, restart Figma). If Figma can't render them, the builder falls back to available fonts such as Inter/Roboto Mono so the reference frames are still visible. Murphydoodle is custom — if Figma can't find it, the builder falls back to Caveat, then Inter.
 
 ## After it runs
 

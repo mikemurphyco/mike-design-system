@@ -104,7 +104,7 @@
 
   /* ─────────────────────────────────────────────────────────────
      THE THUMBNAIL — this is the part that gets exported.
-     Right-click this node in DevTools → "Capture node screenshot".
+     Production export uses npm run thumbnail; browser preview is visual only.
      Dimensions are 1280×720 (YouTube standard).
      ───────────────────────────────────────────────────────────── */
   #thumbnail {
@@ -264,7 +264,7 @@
   </label>
 
   <p class="hint">
-    To export: open DevTools (<code>Cmd-Opt-I</code>), find the <code>#thumbnail</code> node in the Elements panel, right-click it, choose <code>Capture node screenshot</code>. The export will be exactly 1280×720 (or 2560×1440 on a Retina display — both work for YouTube).
+    Browser preview is for layout checks only. For the production PNG, run <code>npm run thumbnail</code> from the repo root; Chrome's node screenshot export can make this template look soft or muddy.
     <br/><br/>
     Swap the Mike asset by editing the <code>&lt;img&gt;</code> inside <code>.polaroid-photo</code>. Default points at <code>../../assets/avatars/avatar-mike-transparent-1200.png</code>.
   </p>
@@ -273,7 +273,7 @@
 <div class="canvas-wrap">
   <!-- ─────────────────────────────────────────────────────────
        #thumbnail — this is the export target.
-       1280×720, YouTube standard. Right-click → Capture node screenshot.
+       1280×720, YouTube standard. Render with npm run thumbnail.
        ───────────────────────────────────────────────────────── -->
   <div id="thumbnail">
 
