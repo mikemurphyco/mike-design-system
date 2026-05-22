@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice — Mike Murphy</title>
+  <link rel="stylesheet" href="../../tokens/colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg-page);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      padding: var(--space-12) var(--space-8);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ── LETTERHEAD ─────────────────────────────────────────── */
+    .letterhead {
+      background: var(--mm-navy);
+      padding: var(--space-8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .lh-name {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: var(--fs-h2);
+      letter-spacing: var(--ls-tight);
+      color: var(--mm-chalk);
+      line-height: 1;
+    }
+
+    .lh-contact {
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: rgba(252,250,246,0.55);
+      line-height: var(--lh-body);
+      text-align: right;
+    }
+
+    /* ── META ROW ───────────────────────────────────────────── */
+    .invoice-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-eyebrow);
+      font-weight: 700;
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .bill-to__company {
+      font-weight: 700;
+      font-size: var(--fs-h3);
+    }
+
+    .bill-to__detail {
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+      line-height: var(--lh-body);
+    }
+
+    .inv-id { text-align: right; }
+
+    .inv-id__number {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 40px;
+      color: var(--color-action-primary);
+      letter-spacing: var(--ls-tight);
+      line-height: 1;
+      margin-bottom: var(--space-3);
+    }
+
+    .inv-id__dates {
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    .inv-id__dates strong { color: var(--color-text-primary); }
+
+    /* ── TABLE ──────────────────────────────────────────────── */
+    .table-wrap {
+      background: var(--color-bg-surface);
+      border: 1.5px solid var(--color-border-strong);
+      box-shadow: var(--shadow-cut);
+      margin-bottom: var(--space-8);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead th {
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      font-weight: 700;
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      color: var(--mm-chalk);
+      background: var(--mm-navy);
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    thead th.r { text-align: right; }
+
+    tr.wk-head td {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      background: var(--mm-cream);
+      color: var(--color-text-muted);
+      padding: var(--space-2) var(--space-4);
+      border-top: 1.5px solid var(--color-border-default);
+    }
+
+    tr.entry td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--color-border-default);
+      vertical-align: top;
+    }
+
+    .td-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      width: 72px;
+    }
+
+    .td-desc { font-weight: 500; }
+
+    .td-phase {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .td-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .rate-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--mm-orange);
+      display: block;
+      margin-top: 2px;
+    }
+
+    tr.wk-sub td {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+      background: rgba(0,30,58,0.04);
+      border-top: 1.5px solid var(--color-border-default);
+      padding: var(--space-2) var(--space-4);
+      color: var(--color-text-muted);
+      text-align: right;
+    }
+
+    tr.wk-sub .sub-label { text-align: left; }
+
+    /* ── TOTALS ─────────────────────────────────────────────── */
+    .totals-row-outer {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: var(--space-12);
+    }
+
+    .totals-box {
+      background: var(--mm-navy);
+      border: 1.5px solid var(--mm-navy);
+      box-shadow: var(--shadow-cut);
+      padding: var(--space-6) var(--space-8);
+      min-width: 320px;
+    }
+
+    .tot-line {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-12);
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: rgba(252,250,246,0.55);
+      padding-bottom: var(--space-2);
+    }
+
+    .tot-line__val { text-align: right; }
+
+    .tot-line--grand {
+      font-size: var(--fs-h3);
+      font-weight: 700;
+      color: var(--mm-chalk);
+      border-top: 1px solid rgba(252,250,246,0.2);
+      padding-top: var(--space-3);
+      margin-top: var(--space-2);
+      padding-bottom: 0;
+    }
+
+    .tot-line--grand .tot-line__val { color: var(--mm-orange); }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    .inv-footer {
+      border-top: 1.5px solid var(--color-border-default);
+      padding-top: var(--space-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .inv-footer__note {
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: var(--color-text-muted);
+      line-height: var(--lh-body);
+    }
+
+    .inv-footer__tagline {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: var(--fs-mono-label);
+      letter-spacing: var(--ls-eyebrow);
+      color: var(--color-text-muted);
+    }
+
+    .inv-footer__tagline .dot { color: var(--mm-orange); }
+
+    /* ── PRINT ──────────────────────────────────────────────── */
+    @media print {
+      body { background: white; padding: 0.5in 0.75in; max-width: none; font-size: 13px; }
+      .letterhead, thead th, tr.wk-head td, .totals-box {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .table-wrap, .totals-box { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="letterhead">
+    <div class="lh-name">Mike Murphy</div>
+    <div class="lh-contact">
+      mike@mikemurphy.co<br>
+      mikemurphy.co
+    </div>
+  </header>
+
+  <div class="invoice-meta">
+    <div class="bill-to">
+      <div class="eyebrow">Bill To</div>
+      <div class="bill-to__company" id="inv-client"></div>
+      <div class="bill-to__detail" id="inv-client-detail"></div>
+    </div>
+    <div class="inv-id">
+      <div class="eyebrow">Invoice</div>
+      <div class="inv-id__number" id="inv-number"></div>
+      <div class="inv-id__dates">
+        <strong>Period:</strong> <span id="inv-period"></span><br>
+        <strong>Issued:</strong> <span id="inv-issued"></span><br>
+        <strong>Due:</strong> <span id="inv-due"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Phase</th>
+          <th class="r">Hours</th>
+          <th class="r">Rate</th>
+          <th class="r">Amount</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="totals-row-outer">
+    <div class="totals-box" id="totals-box"></div>
+  </div>
+
+  <footer class="inv-footer">
+    <div class="inv-footer__note">
+      <span id="footer-hours"></span> total hours · <span id="footer-period"></span><br>
+      Payment: <span id="footer-payment"></span>
+    </div>
+    <div class="inv-footer__tagline">
+      LEARN <span class="dot">·</span> BUILD <span class="dot">·</span> MOVE FORWARD
+    </div>
+  </footer>
+
+  <script>
+  // ════════════════════════════════════════════════════════════
+  // EDIT THIS SECTION EACH BILLING PERIOD
+  // ════════════════════════════════════════════════════════════
+
+  const INVOICE = {
+    number:       "#2026-001",
+    period:       "Apr 28 – May 21, 2026",
+    issued:       "May 22, 2026",
+    due:          "Upon Receipt",
+    client:       "Inception Point AI",
+    clientDetail: "AI Workflow Automation Consulting",
+    payment:      "[Zelle / ACH / Check]",
+  };
+
+  // date:  ISO format  YYYY-MM-DD
+  // hours: decimal     (copy from time log)
+  // rate:  hourly rate in dollars
+  // note:  optional    small orange line under description
+  const entries = [
+    { date: "2026-04-28", desc: "On-Boarding / Phase 2",                                          phase: "Phase 2", hours: 0.9833, rate: 25 },
+    { date: "2026-04-28", desc: "ADX_Promo0",                                                     phase: "Phase 2", hours: 2.1407, rate: 25 },
+    { date: "2026-04-28", desc: "Creative Call: Ann, Katie & Justin",                             phase: "Phase 2", hours: 1.6667, rate: 25 },
+    { date: "2026-04-28", desc: "ADX Promo Removals",                                             phase: "Phase 2", hours: 2.0500, rate: 25 },
+    { date: "2026-04-29", desc: "1:1 Morning Meeting (Ann)",                                      phase: "Phase 1", hours: 3.9811, rate: 25 },
+    { date: "2026-04-29", desc: "Arc Training",                                                   phase: "Phase 2", hours: 3.1878, rate: 25 },
+    { date: "2026-04-30", desc: "Arc Training: Ann",                                              phase: "Phase 2", hours: 5.0575, rate: 25 },
+    { date: "2026-04-30", desc: "Arc Training: Ann (cont.)",                                      phase: "Phase 2", hours: 2.0711, rate: 25 },
+    { date: "2026-05-01", desc: "1:1 Arc Training",                                               phase: "Phase 1", hours: 2.0611, rate: 25 },
+    { date: "2026-05-01", desc: "Darkr",                                                          phase: "Phase 2", hours: 0.9575, rate: 25 },
+    { date: "2026-05-04", desc: "Standup",                                                        phase: "Phase 2", hours: 2.5394, rate: 25 },
+    { date: "2026-05-05", desc: "1:1 Ann",                                                        phase: "Phase 2", hours: 2.4633, rate: 25 },
+    { date: "2026-05-05", desc: "Standup",                                                        phase: "Phase 2", hours: 0.0606, rate: 25 },
+    { date: "2026-05-06", desc: "Fact Checker & Megaphone",                                       phase: "Phase 2", hours: 7.9375, rate: 25 },
+    { date: "2026-05-07", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.2533, rate: 25 },
+    { date: "2026-05-08", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.1694, rate: 25 },
+    { date: "2026-05-09", desc: "Recurring: Spreaker to Megaphone",                               phase: "Phase 2", hours: 1.1675, rate: 25 },
+    { date: "2026-05-11", desc: "Spreaker to Megaphone Cleanup",                                  phase: "Phase 2", hours: 8.2869, rate: 25 },
+    { date: "2026-05-12", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.1686, rate: 25 },
+    { date: "2026-05-13", desc: "Spreaker to Megaphone + Artomators",                             phase: "Phase 2", hours: 7.1753, rate: 25 },
+    { date: "2026-05-13", desc: "Artomators",                                                     phase: "Phase 2", hours: 1.0172, rate: 25 },
+    { date: "2026-05-14", desc: "Artomators, Standup, Migration",                                 phase: "Phase 2", hours: 8.0622, rate: 30, note: "Rate increase effective May 14" },
+    { date: "2026-05-15", desc: "Arc Review",                                                     phase: "Phase 2", hours: 2.2089, rate: 30 },
+    { date: "2026-05-15", desc: "Arc Work",                                                       phase: "Phase 2", hours: 0.7878, rate: 30 },
+    { date: "2026-05-15", desc: "Arc CLI Self-Training",                                          phase: "Phase 2", hours: 0.5800, rate: 30 },
+    { date: "2026-05-16", desc: "OmniBot + SKILL",                                                phase: "Phase 2", hours: 1.5375, rate: 30 },
+    { date: "2026-05-18", desc: "Creative-Console",                                               phase: "Phase 2", hours: 8.1900, rate: 30 },
+    { date: "2026-05-19", desc: "Creative Console Cleanup for Migration",                         phase: "Phase 2", hours: 7.9192, rate: 30 },
+    { date: "2026-05-20", desc: "TTS Quality Score Cleanup",                                      phase: "Phase 2", hours: 1.0000, rate: 30 },
+    { date: "2026-05-20", desc: "Standup + Arc Cleanup (Make, Quality Scores, Spreaker Remnants)",phase: "Phase 2", hours: 7.3481, rate: 30 },
+    { date: "2026-05-21", desc: "Creative Console QC",                                            phase: "Phase 2", hours: 8.1125, rate: 30 },
+  ];
+
+  // ════════════════════════════════════════════════════════════
+  // RENDERING — no need to edit below this line
+  // ════════════════════════════════════════════════════════════
+
+  function weekSunday(iso) {
+    const d = new Date(iso + 'T12:00:00');
+    d.setDate(d.getDate() - d.getDay());
+    return d;
+  }
+
+  function fmtDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function fmtWeekLabel(d) {
+    return 'Week of ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function fmtMoney(cents) {
+    return '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function render() {
+    document.getElementById('inv-client').textContent        = INVOICE.client;
+    document.getElementById('inv-client-detail').textContent = INVOICE.clientDetail;
+    document.getElementById('inv-number').textContent        = INVOICE.number;
+    document.getElementById('inv-period').textContent        = INVOICE.period;
+    document.getElementById('inv-issued').textContent        = INVOICE.issued;
+    document.getElementById('inv-due').textContent           = INVOICE.due;
+    document.getElementById('footer-period').textContent     = INVOICE.period;
+    document.getElementById('footer-payment').textContent    = INVOICE.payment;
+    document.title = `Invoice ${INVOICE.number} — Mike Murphy · ${INVOICE.client}`;
+
+    // Group entries by week (Map preserves insertion order)
+    const weekMap = new Map();
+    for (const e of entries) {
+      const ws  = weekSunday(e.date);
+      const key = ws.toISOString().split('T')[0];
+      if (!weekMap.has(key)) weekMap.set(key, { label: fmtWeekLabel(ws), rows: [] });
+      weekMap.get(key).rows.push(e);
+    }
+
+    let tbody       = '';
+    let grandHours  = 0;
+    let grandCents  = 0;
+    const summaries = [];
+
+    for (const week of weekMap.values()) {
+      let wHours = 0, wCents = 0;
+      tbody += `<tr class="wk-head"><td colspan="6">${week.label}</td></tr>`;
+
+      for (const e of week.rows) {
+        const cents = Math.round(e.hours * e.rate * 100);
+        wHours += e.hours;
+        wCents += cents;
+        tbody += `
+          <tr class="entry">
+            <td class="td-date">${fmtDate(e.date)}</td>
+            <td class="td-desc">${e.desc}${e.note ? `<span class="rate-note">${e.note}</span>` : ''}</td>
+            <td class="td-phase">${e.phase}</td>
+            <td class="td-num">${e.hours.toFixed(2)}</td>
+            <td class="td-num">$${e.rate.toFixed(2)}</td>
+            <td class="td-num">${fmtMoney(cents)}</td>
+          </tr>`;
+      }
+
+      grandHours += wHours;
+      grandCents += wCents;
+      summaries.push({ label: week.label, hours: wHours, cents: wCents });
+
+      tbody += `
+        <tr class="wk-sub">
+          <td class="sub-label" colspan="3">Week Subtotal</td>
+          <td>${wHours.toFixed(2)} hrs</td>
+          <td>—</td>
+          <td>${fmtMoney(wCents)}</td>
+        </tr>`;
+    }
+
+    document.getElementById('tbody').innerHTML = tbody;
+
+    // Totals box
+    const totHtml = summaries.map(s => `
+      <div class="tot-line">
+        <span>${s.label}</span>
+        <span class="tot-line__val">${s.hours.toFixed(2)} hrs · ${fmtMoney(s.cents)}</span>
+      </div>`).join('')
+      + `<div class="tot-line tot-line--grand">
+           <span>Total Due</span>
+           <span class="tot-line__val">${fmtMoney(grandCents)}</span>
+         </div>`;
+
+    document.getElementById('totals-box').innerHTML = totHtml;
+    document.getElementById('footer-hours').textContent = grandHours.toFixed(2);
+  }
+
+  render();
+  </script>
+</body>
+</html>
