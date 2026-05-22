@@ -1,0 +1,13 @@
+{
+  "//": "Drop these into the existing 'scripts' object in your package.json. The first one stays compatible with your old `npm run thumbnail` muscle memory; the other six are the new variants.",
+
+  "scripts": {
+    "thumbnail":          "node scripts/render-thumbnail.mjs --template youtube-thumbnail",
+    "thumbnail:dark":     "node scripts/render-thumbnail.mjs --template youtube-thumbnail-dark",
+    "thumbnail:split":    "node scripts/render-thumbnail.mjs --template youtube-thumbnail-split",
+    "thumbnail:cutout":   "node scripts/render-thumbnail.mjs --template youtube-thumbnail-cutout",
+    "thumbnail:orange":   "node scripts/render-thumbnail.mjs --template youtube-thumbnail-orange",
+    "thumbnail:tile":     "node scripts/render-thumbnail.mjs --template youtube-thumbnail-tile",
+    "thumbnail:terminal": "node scripts/render-thumbnail.mjs --template youtube-thumbnail-terminal"
+  }
+}

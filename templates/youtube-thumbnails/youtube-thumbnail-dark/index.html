@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>YouTube thumbnail — Classic Dark — Mike Murphy · AI Handyman</title>
+
+<!-- Canon: tokens + @font-face. Single source of truth. -->
+<link rel="stylesheet" href="../../tokens/colors_and_type.css" />
+
+<style>
+  /* Template-specific overrides — additions to canon, not duplicates. */
+  :root {
+    --shadow-cut-lg:    8px 8px 0 var(--mm-navy);
+    --shadow-cut-lg-cream: 8px 8px 0 var(--mm-cream);
+    --shadow-cut-lg-orange: 8px 8px 0 var(--mm-orange);
+    --shadow-polaroid:  8px 14px 0 rgba(0, 30, 58, 0.55);
+    --shadow-polaroid-light: 8px 14px 0 rgba(0, 0, 0, 0.28);
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Editor chrome — only on screen, not part of the export.
+     ───────────────────────────────────────────────────────────── */
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #1a1a1a;
+    color: #e5e5e5; /* check-canon-ignore — editor chrome, not brand */
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .editor {
+    max-width: 1280px;
+    margin: 0 auto 24px;
+    padding: 20px 24px;
+    background: #222;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    align-items: end;
+  }
+
+  .editor h1 {
+    grid-column: 1 / -1;
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .editor label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .editor input {
+    background: #111;
+    border: 1px solid #333;
+    color: #e5e5e5; /* check-canon-ignore — editor chrome, not brand */
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+
+  .editor input:focus {
+    outline: none;
+    border-color: var(--color-action-primary);
+  }
+
+  .editor .hint {
+    grid-column: 1 / -1;
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .editor .hint code {
+    background: #111;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    color: #ccc;
+  }
+
+  .canvas-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────
+     THE THUMBNAIL — this is the part that gets exported.
+     Production export uses npm run thumbnail:dark.
+     Dimensions are 1280×720 (YouTube standard).
+     ───────────────────────────────────────────────────────────── */
+
+  #thumbnail {
+    width: 1280px;
+    height: 720px;
+    background: var(--mm-navy);
+    color: var(--mm-cream);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-mono);
+  }
+  .badge {
+    position: absolute; top: 64px; left: 72px;
+    background: var(--mm-orange);
+    color: var(--mm-navy);
+    border: 2px solid var(--mm-navy);
+    box-shadow: var(--shadow-cut-lg-cream);
+    border-radius: 6px;
+    padding: 12px 22px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+  }
+  .text-zone {
+    position: absolute; left: 72px; top: 230px; width: 640px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 22px; letter-spacing: 0.2em;
+    color: var(--mm-orange);
+    margin: 0 0 20px; text-transform: uppercase;
+  }
+  .headline {
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 84px; letter-spacing: -0.03em; line-height: 0.95;
+    color: var(--mm-cream); margin: 0 0 24px;
+  }
+  .lede {
+    font-family: var(--font-sans); font-weight: 400;
+    font-size: 28px; line-height: 1.3;
+    color: rgba(241,236,226, 0.74);
+    margin: 0; max-width: 640px;
+  }
+  .tagline {
+    position: absolute; left: 72px; bottom: 56px;
+    font-family: var(--font-mono); font-weight: 700;
+    font-size: 18px; letter-spacing: 0.28em;
+    color: var(--mm-cream);
+  }
+  .tagline .dot { color: var(--mm-orange); margin: 0 6px; }
+  .mike-zone {
+    position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+  }
+  .polaroid {
+    width: 380px;
+    background: var(--mm-chalk);
+    padding: 18px 18px 36px;
+    border-radius: 4px;
+    transform: rotate(-2deg);
+    box-shadow: var(--shadow-polaroid-light);
+  }
+  .polaroid-photo {
+    width: 100%; aspect-ratio: 1 / 1;
+    background: var(--mm-orange);
+    border-radius: 2px; overflow: hidden;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .polaroid-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+  }
+  .polaroid-caption {
+    font-family: var(--font-hand);
+    font-size: 56px; line-height: 1;
+    color: var(--mm-navy);
+    text-align: center; margin-top: 14px;
+  }
+
+</style>
+</head>
+<body>
+
+
+<div class="editor">
+  <h1>Thumbnail editor — V2 · Classic Dark</h1>
+
+  <label>Eyebrow (uppercase)
+    <input id="in-eyebrow" type="text" value="CLAUDE SKILLS" />
+  </label>
+
+  <label>Headline line 1
+    <input id="in-headline-1" type="text" value="Build your own" />
+  </label>
+
+  <label>Headline line 2 (optional)
+    <input id="in-headline-2" type="text" value="superpowers." />
+  </label>
+
+  <label>Lede
+    <input id="in-lede" type="text" value="One folder. A SKILL.md. Real automation." />
+  </label>
+
+  
+
+  <p class="hint" style="grid-column: 1 / -1;">
+    Browser preview is for layout checks only. For the production PNG, run <code>npm run thumbnail:dark</code> from the repo root.
+    <br/><br/>
+    Swap the Mike asset by editing the <code>&lt;img&gt;</code> referenced in the layout. Default points at <code>../../assets/avatars/avatar-mike-transparent-1200.png</code>.
+  </p>
+</div>
+
+
+<div class="canvas-wrap">
+  <!-- ─────────────────────────────────────────────────────────
+       #thumbnail — this is the export target.
+       1280×720, YouTube standard. Render with npm run thumbnail:dark.
+       ───────────────────────────────────────────────────────── -->
+  <div id="thumbnail">
+
+    <span class="badge">AI HANDYMAN</span>
+    <div class="text-zone">
+      <p class="eyebrow" id="eyebrow">CLAUDE SKILLS</p>
+      <h1 class="headline">
+        <span id="headline-1">Build your own</span><br/>
+        <span id="headline-2">superpowers.</span>
+      </h1>
+      <p class="lede" id="lede">One folder. A SKILL.md. Real automation.</p>
+    </div>
+    <p class="tagline">
+      LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD
+    </p>
+    <div class="mike-zone">
+      <div class="polaroid">
+        <div class="polaroid-photo">
+          <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+        </div>
+        <div class="polaroid-caption">Mike</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  // Bind editor inputs to live preview. No frameworks — just DOM.
+  const bindings = [
+    ["in-eyebrow",   "eyebrow"],
+    ["in-headline-1","headline-1"],
+    ["in-headline-2","headline-2"],
+    ["in-lede",      "lede"],
+  ];
+
+  for (const [inputId, targetId] of bindings) {
+    const input = document.getElementById(inputId);
+    const target = document.getElementById(targetId);
+    if (!input || !target) continue;
+    input.addEventListener("input", () => { target.textContent = input.value; });
+  }
+</script>
+
+
+</body>
+</html>

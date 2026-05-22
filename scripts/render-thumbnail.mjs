@@ -26,7 +26,7 @@ import { stdin, stdout } from "node:process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const TEMPLATE = join(ROOT, "templates/youtube-thumbnail/index.html");
+const TEMPLATE = join(ROOT, "templates/youtube-thumbnails/youtube-thumbnail/index.html");
 const OUT_DIR = join(ROOT, "outputs");
 
 // ── 1. Parse CLI flags (one-shot mode) ──────────────────────────────────────
