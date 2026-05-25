@@ -1,0 +1,759 @@
+<!doctype html>
+<!-- Mike Murphy · AI Handyman — Design System v2026.3 -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>YouTube Thumbnails — Mike Murphy · AI Handyman</title>
+
+<style>
+/* ── Font faces — paths relative to this file (templates/youtube-thumbnails/) ── */
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Thin.ttf") format("truetype"); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-ThinItalic.ttf") format("truetype"); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-ExtraLight.ttf") format("truetype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-ExtraLightItalic.ttf") format("truetype"); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Light.ttf") format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-LightItalic.ttf") format("truetype"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-MediumItalic.ttf") format("truetype"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-SemiBoldItalic.ttf") format("truetype"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("../../assets/fonts/IBMPlexMono-BoldItalic.ttf") format("truetype"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans"; src: url("../../assets/fonts/IBMPlexSans-VariableFont.ttf") format("truetype-variations"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Murphydoodle"; src: url("../../assets/fonts/Murphydoodle-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* ── Design tokens (inlined from tokens/colors_and_type.css) ── */
+:root {
+  --mm-cream:        #F1ECE2;
+  --mm-chalk:        #FCFAF6;
+  --mm-navy:         #001E3A;
+  --mm-orange:       #FF6434;
+  --mm-orange-deep:  #E8501C;
+  --mm-yellow:       #F5C842;
+  --mm-teal:         #1ECEBE;
+
+  --color-bg-page:              var(--mm-cream);
+  --color-bg-surface:           var(--mm-chalk);
+  --color-text-primary:         var(--mm-navy);
+  --color-text-muted:           rgba(0,30,58, 0.62);
+  --color-action-primary:       var(--mm-orange);
+  --color-action-primary-hover: var(--mm-orange-deep);
+  --color-border-default:       rgba(0,30,58, 0.18);
+  --color-border-strong:        var(--mm-navy);
+  --color-accent-ai:            var(--mm-teal);
+
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-hand: "Murphydoodle", "Caveat", cursive;
+
+  --shadow-cut:      4px 4px 0 var(--mm-navy);
+  --shadow-cut-lg:   8px 8px 0 var(--mm-navy);
+  --shadow-cut-lg-cream: 8px 8px 0 var(--mm-cream);
+  --shadow-polaroid: 8px 14px 0 rgba(0,30,58, 0.55);
+  --shadow-polaroid-light: 8px 14px 0 rgba(0,0,0, 0.28);
+}
+
+/* ── Shell ── */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #111;
+  color: #e5e5e5;
+  font-family: var(--font-mono);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.shell-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.shell-wordmark {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--mm-orange);
+}
+
+.shell-title {
+  font-size: 12px;
+  color: #555;
+  letter-spacing: 0.1em;
+}
+
+.shell-export-btn {
+  margin-left: auto;
+  background: var(--mm-orange);
+  color: var(--mm-navy);
+  border: 2px solid var(--mm-navy);
+  box-shadow: 3px 3px 0 var(--mm-navy);
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: transform 80ms, box-shadow 80ms;
+}
+.shell-export-btn:hover { transform: translate(1px,1px); box-shadow: 2px 2px 0 var(--mm-navy); }
+.shell-export-btn:active { transform: translate(3px,3px); box-shadow: none; }
+
+/* ── Tab strip ── */
+.tab-strip {
+  display: flex;
+  gap: 2px;
+  padding: 12px 24px 0;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 8px 16px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #555;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 120ms, border-color 120ms;
+}
+.tab:hover { color: #999; }
+.tab.active { color: var(--mm-orange); border-bottom-color: var(--mm-orange); }
+
+/* ── Main area ── */
+.main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 95px);
+}
+
+/* ── Editor sidebar ── */
+.editor-panel {
+  padding: 20px;
+  background: #1a1a1a;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editor-panel h2 {
+  margin: 0 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #444;
+  text-transform: uppercase;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-group label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.field-group input {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  color: #e5e5e5;
+  padding: 7px 10px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  width: 100%;
+  transition: border-color 120ms;
+}
+.field-group input:focus {
+  outline: none;
+  border-color: var(--mm-orange);
+}
+
+.export-note {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 10px;
+  color: #444;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+.export-note code {
+  background: #111;
+  padding: 1px 5px;
+  border-radius: 2px;
+  color: #777;
+}
+
+/* ── Canvas area ── */
+.canvas-area {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: auto;
+  background: #111;
+}
+
+.canvas-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #333;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* ── Template panels (only active one is shown) ── */
+.template-panel { display: none; }
+.template-panel.active { display: contents; }
+
+/* ══════════════════════════════════════════════════════════════
+   THUMBNAIL STYLES — one #thumbnail per panel, scoped by variant
+   ══════════════════════════════════════════════════════════════ */
+
+/* Shared thumbnail base */
+[id^="thumb-"] {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+/* ── V1 Classic Light ── */
+#thumb-classic {
+  background: var(--mm-cream);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 32px;
+  row-gap: 24px;
+  padding: 64px 72px;
+}
+#thumb-classic .badge { grid-column:1; grid-row:1; justify-self:start; align-self:start; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-classic .text-zone { grid-column:1; grid-row:2; align-self:end; }
+#thumb-classic .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-classic .headline { font-weight:700; font-size:88px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-classic .lede { font-family:var(--font-sans); font-weight:400; font-size:28px; line-height:1.3; color:var(--color-text-muted); margin:0; max-width:700px; }
+#thumb-classic .tagline { grid-column:1; grid-row:3; align-self:end; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
+#thumb-classic .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+#thumb-classic .mike-zone { grid-column:2; grid-row:1/span 3; align-self:center; justify-self:center; }
+#thumb-classic .polaroid { width:380px; background:var(--mm-chalk); padding:18px 18px 36px; border-radius:4px; transform:rotate(-2deg); box-shadow:var(--shadow-polaroid); }
+#thumb-classic .polaroid-photo { width:100%; aspect-ratio:1/1; background:var(--mm-orange); border-radius:2px; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-classic .polaroid-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-classic .polaroid-caption { font-family:var(--font-hand); font-size:56px; line-height:1; color:var(--mm-navy); text-align:center; margin-top:14px; }
+
+/* ── V2 Classic Dark ── */
+#thumb-dark { background: var(--mm-navy); }
+#thumb-dark .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg-cream); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-dark .text-zone { position:absolute; left:72px; top:230px; width:640px; }
+#thumb-dark .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-dark .headline { font-weight:700; font-size:84px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-cream); margin:0 0 24px; }
+#thumb-dark .lede { font-family:var(--font-sans); font-weight:400; font-size:28px; line-height:1.3; color:rgba(241,236,226,.74); margin:0; max-width:640px; }
+#thumb-dark .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-cream); }
+#thumb-dark .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+#thumb-dark .mike-zone { position:absolute; right:80px; top:50%; transform:translateY(-50%); }
+#thumb-dark .polaroid { width:380px; background:var(--mm-chalk); padding:18px 18px 36px; border-radius:4px; transform:rotate(-2deg); box-shadow:var(--shadow-polaroid-light); }
+#thumb-dark .polaroid-photo { width:100%; aspect-ratio:1/1; background:var(--mm-orange); border-radius:2px; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-dark .polaroid-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-dark .polaroid-caption { font-family:var(--font-hand); font-size:56px; line-height:1; color:var(--mm-navy); text-align:center; margin-top:14px; }
+
+/* ── V3 Vertical Split ── */
+#thumb-split { background: var(--mm-cream); }
+#thumb-split .panel-navy { position:absolute; inset:0; width:740px; background:var(--mm-navy); }
+#thumb-split .seam { position:absolute; top:0; bottom:0; left:734px; width:6px; background:var(--mm-orange); }
+#thumb-split .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg-cream); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-split .text-zone { position:absolute; left:72px; top:240px; width:596px; }
+#thumb-split .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-split .headline { font-weight:700; font-size:84px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-cream); margin:0 0 22px; }
+#thumb-split .lede { font-family:var(--font-sans); font-weight:400; font-size:26px; line-height:1.3; color:rgba(241,236,226,.74); margin:0; max-width:580px; }
+#thumb-split .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-cream); }
+#thumb-split .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+#thumb-split .mike-zone { position:absolute; left:1010px; top:50%; transform:translate(-50%,-50%); }
+#thumb-split .polaroid { width:400px; background:var(--mm-chalk); padding:18px 18px 36px; border-radius:4px; transform:rotate(3deg); box-shadow:var(--shadow-polaroid); }
+#thumb-split .polaroid-photo { width:100%; aspect-ratio:1/1; background:var(--mm-orange); border-radius:2px; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-split .polaroid-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-split .polaroid-caption { font-family:var(--font-hand); font-size:56px; line-height:1; color:var(--mm-navy); text-align:center; margin-top:14px; }
+
+/* ── V4 Mike Cutout ── */
+#thumb-cutout { background: var(--mm-cream); }
+#thumb-cutout .ghost-wordmark { position:absolute; right:-40px; top:380px; font-weight:700; font-size:280px; letter-spacing:-0.04em; line-height:0.9; color:var(--mm-navy); opacity:0.06; pointer-events:none; white-space:nowrap; }
+#thumb-cutout .orange-slab { position:absolute; right:110px; top:60px; width:520px; height:600px; background:var(--mm-orange); border-radius:6px; border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); }
+#thumb-cutout .mike-cutout { position:absolute; right:60px; bottom:0; height:720px; width:auto; object-fit:contain; object-position:bottom right; pointer-events:none; }
+#thumb-cutout .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-cutout .text-zone { position:absolute; left:72px; top:232px; width:600px; }
+#thumb-cutout .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-cutout .headline { font-weight:700; font-size:88px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-cutout .lede { font-family:var(--font-sans); font-weight:400; font-size:26px; line-height:1.3; color:rgba(0,30,58,.62); margin:0; max-width:560px; }
+#thumb-cutout .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
+#thumb-cutout .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+
+/* ── V5 Orange Full-Bleed ── */
+#thumb-orange { background: var(--mm-orange); }
+#thumb-orange .badge { position:absolute; top:64px; left:72px; background:var(--mm-chalk); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-orange .text-zone { position:absolute; left:72px; top:232px; width:720px; }
+#thumb-orange .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-navy); margin:0 0 20px; text-transform:uppercase; }
+#thumb-orange .headline { font-weight:700; font-size:96px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-orange .lede { font-family:var(--font-sans); font-weight:400; font-size:28px; line-height:1.3; color:rgba(0,30,58,.72); margin:0; max-width:680px; }
+#thumb-orange .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
+#thumb-orange .tagline .dot { color:var(--mm-navy); margin:0 6px; }
+#thumb-orange .mike-zone { position:absolute; right:80px; top:50%; transform:translateY(-50%); }
+#thumb-orange .polaroid { width:380px; background:var(--mm-chalk); padding:18px 18px 36px; border-radius:4px; transform:rotate(-2deg); box-shadow:8px 14px 0 rgba(0,0,0,.38); }
+#thumb-orange .polaroid-photo { width:100%; aspect-ratio:1/1; background:var(--mm-navy); border-radius:2px; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-orange .polaroid-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-orange .polaroid-caption { font-family:var(--font-hand); font-size:56px; line-height:1; color:var(--mm-navy); text-align:center; margin-top:14px; }
+
+/* ── V6 Topic Tile ── */
+#thumb-tile { background: var(--mm-cream); }
+#thumb-tile .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-tile .text-zone { position:absolute; left:72px; top:232px; width:620px; }
+#thumb-tile .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-tile .headline { font-weight:700; font-size:92px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-tile .lede { font-family:var(--font-sans); font-weight:400; font-size:28px; line-height:1.3; color:rgba(0,30,58,.62); margin:0; max-width:580px; }
+#thumb-tile .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
+#thumb-tile .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+#thumb-tile .topic-tile { position:absolute; right:152px; top:92px; width:360px; height:360px; background:var(--mm-orange); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:320px; color:var(--mm-navy); line-height:1; letter-spacing:-0.04em; }
+#thumb-tile .mini-mike { position:absolute; right:92px; bottom:76px; }
+#thumb-tile .mini-mike .polaroid { width:210px; background:var(--mm-chalk); padding:12px 12px 24px; border-radius:4px; transform:rotate(4deg); box-shadow:var(--shadow-polaroid); }
+#thumb-tile .mini-mike .polaroid-photo { width:100%; aspect-ratio:1/1; background:var(--mm-navy); border-radius:2px; overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-tile .mini-mike .polaroid-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-tile .mini-mike .polaroid-caption { font-family:var(--font-hand); font-size:34px; line-height:1; color:var(--mm-navy); text-align:center; margin-top:8px; }
+
+/* ── V7 Terminal ── */
+#thumb-terminal { background: var(--mm-cream); }
+#thumb-terminal .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
+#thumb-terminal .text-zone { position:absolute; left:72px; top:232px; width:560px; }
+#thumb-terminal .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
+#thumb-terminal .headline { font-weight:700; font-size:76px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-terminal .lede { font-family:var(--font-sans); font-weight:400; font-size:26px; line-height:1.3; color:rgba(0,30,58,.62); margin:0; max-width:540px; }
+#thumb-terminal .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
+#thumb-terminal .tagline .dot { color:var(--mm-orange); margin:0 6px; }
+#thumb-terminal .code-block { position:absolute; right:80px; top:116px; width:480px; min-height:320px; background:var(--mm-chalk); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:4px; padding:24px 28px; font-size:22px; line-height:1.55; color:var(--mm-navy); }
+#thumb-terminal .code-window-row { display:flex; gap:8px; margin-bottom:18px; align-items:center; }
+#thumb-terminal .code-dot { width:12px; height:12px; border-radius:50%; border:1.5px solid var(--mm-navy); }
+#thumb-terminal .code-dot.orange { background:var(--mm-orange); }
+#thumb-terminal .code-dot.yellow { background:var(--mm-yellow); }
+#thumb-terminal .code-dot.teal   { background:var(--mm-teal); }
+#thumb-terminal .code-path { margin-left:auto; font-size:12px; letter-spacing:0.18em; color:rgba(0,30,58,.62); }
+#thumb-terminal .prompt { color:var(--mm-orange); font-weight:700; }
+#thumb-terminal .output { color:rgba(0,30,58,.62); }
+#thumb-terminal .cursor { display:inline-block; width:0.6em; height:1em; background:var(--mm-teal); vertical-align:-0.15em; }
+#thumb-terminal .identity { position:absolute; right:80px; bottom:56px; display:flex; align-items:center; gap:14px; }
+#thumb-terminal .identity-avatar { width:64px; height:64px; border-radius:50%; background:var(--mm-orange); border:2px solid var(--mm-navy); box-shadow:4px 4px 0 var(--mm-navy); overflow:hidden; display:flex; align-items:flex-end; justify-content:center; }
+#thumb-terminal .identity-avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+#thumb-terminal .identity-name { font-family:var(--font-hand); font-size:44px; line-height:1; color:var(--mm-navy); }
+
+/* ── Scale wrapper so 1280px canvas fits the viewport ── */
+.canvas-scale-wrap {
+  transform-origin: top left;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="shell-header">
+  <span class="shell-wordmark">AI HANDYMAN</span>
+  <span class="shell-title">/ YOUTUBE THUMBNAILS</span>
+  <button class="shell-export-btn" id="btn-export">⬇ Export PNG</button>
+</div>
+
+<!-- ── Tab strip ── -->
+<div class="tab-strip" id="tab-strip">
+  <div class="tab active" data-variant="classic">V1 · Classic Light</div>
+  <div class="tab" data-variant="dark">V2 · Classic Dark</div>
+  <div class="tab" data-variant="split">V3 · Vertical Split</div>
+  <div class="tab" data-variant="cutout">V4 · Mike Cutout</div>
+  <div class="tab" data-variant="orange">V5 · Orange Full-Bleed</div>
+  <div class="tab" data-variant="tile">V6 · Topic Tile</div>
+  <div class="tab" data-variant="terminal">V7 · Terminal</div>
+</div>
+
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- ── Sidebar editors ── -->
+  <div class="editor-panel">
+
+    <!-- V1 Classic Light -->
+    <div class="template-panel active" data-variant="classic">
+      <h2>V1 · Classic Light</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="TUTORIAL · 04 OF 09" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Your first MCP," /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="made simple." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="12 minutes. One file. A working server." /></div>
+    </div>
+
+    <!-- V2 Classic Dark -->
+    <div class="template-panel" data-variant="dark">
+      <h2>V2 · Classic Dark</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="CLAUDE SKILLS" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Build your own" /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="superpowers." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="One folder. A SKILL.md. Real automation." /></div>
+    </div>
+
+    <!-- V3 Vertical Split -->
+    <div class="template-panel" data-variant="split">
+      <h2>V3 · Vertical Split</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="MCP TUTORIAL" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Your first MCP," /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="made simple." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="12 minutes. One file. A working server." /></div>
+    </div>
+
+    <!-- V4 Mike Cutout -->
+    <div class="template-panel" data-variant="cutout">
+      <h2>V4 · Mike Cutout</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="CODEX CLI" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Agents in" /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="your terminal." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="10 minutes. Real automation, zero plumbing." /></div>
+    </div>
+
+    <!-- V5 Orange Full-Bleed -->
+    <div class="template-panel" data-variant="orange">
+      <h2>V5 · Orange Full-Bleed</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="OBSIDIAN" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Notes that" /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="think back." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="One vault. Local AI baked in." /></div>
+    </div>
+
+    <!-- V6 Topic Tile -->
+    <div class="template-panel" data-variant="tile">
+      <h2>V6 · Topic Tile</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="VPS HOSTING" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="$5 servers," /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="fully yours." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="One command. Your own private cloud." /></div>
+      <div class="field-group"><label>Topic letter (1 char)</label><input class="ed-topic" type="text" maxlength="2" value="$" /></div>
+    </div>
+
+    <!-- V7 Terminal -->
+    <div class="template-panel" data-variant="terminal">
+      <h2>V7 · Terminal</h2>
+      <div class="field-group"><label>Eyebrow</label><input class="ed-eyebrow" type="text" value="CLAUDE CODE" /></div>
+      <div class="field-group"><label>Headline line 1</label><input class="ed-hl1" type="text" value="Pair-program" /></div>
+      <div class="field-group"><label>Headline line 2</label><input class="ed-hl2" type="text" value="with Claude." /></div>
+      <div class="field-group"><label>Lede</label><input class="ed-lede" type="text" value="12 minutes to your first commit." /></div>
+    </div>
+
+    <div class="export-note">
+      <strong style="color:#666;">Export PNG</strong> — click the button above for a browser-rendered PNG at 1280×720.<br><br>
+      For a crisp production render:<br>
+      <code>npm run thumbnail:&lt;variant&gt;</code>
+    </div>
+  </div>
+
+  <!-- ── Canvas ── -->
+  <div class="canvas-area" id="canvas-area">
+    <div class="canvas-label" id="canvas-label">1280 × 720 — V1 · CLASSIC LIGHT</div>
+    <div class="canvas-scale-wrap" id="canvas-scale-wrap">
+
+      <!-- V1 Classic Light -->
+      <div id="thumb-classic" class="thumb-target">
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="cl-eyebrow">TUTORIAL · 04 OF 09</p>
+          <h1 class="headline">
+            <span id="cl-hl1">Your first MCP,</span><br/>
+            <span id="cl-hl2">made simple.</span>
+          </h1>
+          <p class="lede" id="cl-lede">12 minutes. One file. A working server.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="mike-zone">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- V2 Classic Dark -->
+      <div id="thumb-dark" class="thumb-target" style="display:none;">
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="dk-eyebrow">CLAUDE SKILLS</p>
+          <h1 class="headline">
+            <span id="dk-hl1">Build your own</span><br/>
+            <span id="dk-hl2">superpowers.</span>
+          </h1>
+          <p class="lede" id="dk-lede">One folder. A SKILL.md. Real automation.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="mike-zone">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- V3 Vertical Split -->
+      <div id="thumb-split" class="thumb-target" style="display:none;">
+        <div class="panel-navy"></div>
+        <div class="seam"></div>
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="sp-eyebrow">MCP TUTORIAL</p>
+          <h1 class="headline">
+            <span id="sp-hl1">Your first MCP,</span><br/>
+            <span id="sp-hl2">made simple.</span>
+          </h1>
+          <p class="lede" id="sp-lede">12 minutes. One file. A working server.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="mike-zone">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- V4 Mike Cutout -->
+      <div id="thumb-cutout" class="thumb-target" style="display:none;">
+        <div class="ghost-wordmark">HANDYMAN</div>
+        <div class="orange-slab"></div>
+        <img class="mike-cutout" src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="co-eyebrow">CODEX CLI</p>
+          <h1 class="headline">
+            <span id="co-hl1">Agents in</span><br/>
+            <span id="co-hl2">your terminal.</span>
+          </h1>
+          <p class="lede" id="co-lede">10 minutes. Real automation, zero plumbing.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+      </div>
+
+      <!-- V5 Orange Full-Bleed -->
+      <div id="thumb-orange" class="thumb-target" style="display:none;">
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="or-eyebrow">OBSIDIAN</p>
+          <h1 class="headline">
+            <span id="or-hl1">Notes that</span><br/>
+            <span id="or-hl2">think back.</span>
+          </h1>
+          <p class="lede" id="or-lede">One vault. Local AI baked in.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="mike-zone">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- V6 Topic Tile -->
+      <div id="thumb-tile" class="thumb-target" style="display:none;">
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="ti-eyebrow">VPS HOSTING</p>
+          <h1 class="headline">
+            <span id="ti-hl1">$5 servers,</span><br/>
+            <span id="ti-hl2">fully yours.</span>
+          </h1>
+          <p class="lede" id="ti-lede">One command. Your own private cloud.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="topic-tile" id="ti-topic">$</div>
+        <div class="mini-mike">
+          <div class="polaroid">
+            <div class="polaroid-photo">
+              <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+            </div>
+            <div class="polaroid-caption">Mike</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- V7 Terminal -->
+      <div id="thumb-terminal" class="thumb-target" style="display:none;">
+        <span class="badge">AI HANDYMAN</span>
+        <div class="text-zone">
+          <p class="eyebrow" id="tm-eyebrow">CLAUDE CODE</p>
+          <h1 class="headline">
+            <span id="tm-hl1">Pair-program</span><br/>
+            <span id="tm-hl2">with Claude.</span>
+          </h1>
+          <p class="lede" id="tm-lede">12 minutes to your first commit.</p>
+        </div>
+        <p class="tagline">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</p>
+        <div class="code-block">
+          <div class="code-window-row">
+            <span class="code-dot orange"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot teal"></span>
+            <span class="code-path">~/code/yours</span>
+          </div>
+          <div><span class="prompt">$</span> claude --new</div>
+          <div class="output">&gt; building working tree...</div>
+          <div class="output">&gt; reading SKILL.md ✓</div>
+          <div><span class="prompt">$</span> <span class="cursor"></span></div>
+        </div>
+        <div class="identity">
+          <div class="identity-avatar">
+            <img src="../../assets/avatars/avatar-mike-transparent-1200.png" alt="Mike" />
+          </div>
+          <span class="identity-name">Mike</span>
+        </div>
+      </div>
+
+    </div><!-- /canvas-scale-wrap -->
+  </div><!-- /canvas-area -->
+
+</div><!-- /main -->
+
+<script>
+  const VARIANTS = {
+    classic:  { label: 'V1 · CLASSIC LIGHT',   prefix: 'cl', thumbId: 'thumb-classic'  },
+    dark:     { label: 'V2 · CLASSIC DARK',     prefix: 'dk', thumbId: 'thumb-dark'     },
+    split:    { label: 'V3 · VERTICAL SPLIT',   prefix: 'sp', thumbId: 'thumb-split'    },
+    cutout:   { label: 'V4 · MIKE CUTOUT',      prefix: 'co', thumbId: 'thumb-cutout'   },
+    orange:   { label: 'V5 · ORANGE FULL-BLEED',prefix: 'or', thumbId: 'thumb-orange'   },
+    tile:     { label: 'V6 · TOPIC TILE',       prefix: 'ti', thumbId: 'thumb-tile'     },
+    terminal: { label: 'V7 · TERMINAL',         prefix: 'tm', thumbId: 'thumb-terminal' },
+  };
+
+  let activeVariant = 'classic';
+
+  // ── Tab switching ──
+  document.getElementById('tab-strip').addEventListener('click', e => {
+    const tab = e.target.closest('.tab');
+    if (!tab) return;
+    const variant = tab.dataset.variant;
+    if (variant === activeVariant) return;
+
+    // Deactivate old
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.template-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.thumb-target').forEach(t => t.style.display = 'none');
+
+    // Activate new
+    tab.classList.add('active');
+    document.querySelector(`.template-panel[data-variant="${variant}"]`).classList.add('active');
+    document.getElementById(VARIANTS[variant].thumbId).style.display = '';
+    document.getElementById('canvas-label').textContent = `1280 × 720 — ${VARIANTS[variant].label}`;
+
+    activeVariant = variant;
+    rescale();
+  });
+
+  // ── Live field binding ──
+  // Each editor panel wires its inputs to the thumbnail on input events.
+  function wireVariant(variant) {
+    const panel = document.querySelector(`.template-panel[data-variant="${variant}"]`);
+    if (!panel) return;
+    const p = VARIANTS[variant].prefix;
+
+    const bind = (cls, targetId) => {
+      const input = panel.querySelector(cls);
+      const target = document.getElementById(targetId);
+      if (!input || !target) return;
+      input.addEventListener('input', () => { target.textContent = input.value; });
+    };
+
+    bind('.ed-eyebrow', `${p}-eyebrow`);
+    bind('.ed-hl1',     `${p}-hl1`);
+    bind('.ed-hl2',     `${p}-hl2`);
+    bind('.ed-lede',    `${p}-lede`);
+    bind('.ed-topic',   `${p}-topic`);
+  }
+
+  Object.keys(VARIANTS).forEach(wireVariant);
+
+  // ── Responsive scale ──
+  // The thumbnail is 1280px wide. Scale it to fit the canvas-area width.
+  function rescale() {
+    const area = document.getElementById('canvas-area');
+    const wrap = document.getElementById('canvas-scale-wrap');
+    const availW = area.clientWidth - 64; // 32px padding each side
+    const scale = Math.min(1, availW / 1280);
+    wrap.style.transform = `scale(${scale})`;
+    wrap.style.marginBottom = `${(720 * scale) - 720}px`;
+  }
+
+  rescale();
+  window.addEventListener('resize', rescale);
+
+  // ── PNG Export ──
+  // Uses html2canvas (loaded from CDN). Falls back with instructions if blocked.
+  document.getElementById('btn-export').addEventListener('click', async () => {
+    const { thumbId, label } = VARIANTS[activeVariant];
+    const thumb = document.getElementById(thumbId);
+
+    const btn = document.getElementById('btn-export');
+    btn.textContent = 'Rendering…';
+    btn.disabled = true;
+
+    try {
+      if (typeof html2canvas === 'undefined') {
+        throw new Error('html2canvas not loaded');
+      }
+      const canvas = await html2canvas(thumb, {
+        width: 1280,
+        height: 720,
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: null,
+      });
+      const link = document.createElement('a');
+      link.download = `thumbnail-${activeVariant}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (err) {
+      alert(
+        'In-browser export requires a local server (Live Server or npm run serve).\n\n' +
+        'For a production PNG right now:\n' +
+        `  npm run thumbnail:${activeVariant}\n\n` +
+        'Or open this file via Live Server and try again.'
+      );
+      console.error(err);
+    } finally {
+      btn.textContent = '⬇ Export PNG';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+<!-- html2canvas for in-browser PNG export -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+</body>
+</html>

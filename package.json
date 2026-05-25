@@ -9,7 +9,14 @@
     "check-version": "node scripts/check-version.mjs",
     "sync-figma": "node scripts/sync-figma-builder.mjs",
     "bump": "node scripts/bump-version.mjs",
-    "thumbnail": "node scripts/render-thumbnail.mjs",
+    "serve": "npx http-server . -p 3131 -o /templates/youtube-thumbnails/index.html -c-1",
+    "thumbnail":          "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail",
+    "thumbnail:dark":     "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-dark",
+    "thumbnail:split":    "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-split",
+    "thumbnail:cutout":   "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-cutout",
+    "thumbnail:orange":   "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-orange",
+    "thumbnail:tile":     "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-tile",
+    "thumbnail:terminal": "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-terminal",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
