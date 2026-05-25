@@ -19,6 +19,95 @@
       margin: 0 auto;
     }
 
+    /* ── IMPORT BAR ─────────────────────────────────────────── */
+    .import-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      background: var(--mm-navy);
+      padding: var(--space-3) var(--space-6);
+      margin-bottom: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      color: rgba(252,250,246,0.6);
+    }
+
+    .import-bar label {
+      cursor: pointer;
+      background: var(--mm-orange);
+      color: var(--mm-navy);
+      font-weight: 700;
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      padding: var(--space-2) var(--space-4);
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .import-bar label:hover { opacity: 0.85; }
+    .import-bar input[type="file"] { display: none; }
+
+    .import-bar__status { flex: 1; }
+
+    .import-bar__reset {
+      background: none;
+      border: 1px solid rgba(252,250,246,0.25);
+      color: rgba(252,250,246,0.5);
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      letter-spacing: var(--ls-eyebrow);
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      cursor: pointer;
+      display: none;
+    }
+    .import-bar__reset:hover { border-color: rgba(252,250,246,0.5); color: var(--mm-chalk); }
+
+    /* ── DROP OVERLAY ───────────────────────────────────────── */
+    .drop-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,30,58,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      color: var(--mm-chalk);
+      font-size: var(--fs-h2);
+      font-weight: 700;
+      letter-spacing: var(--ls-tight);
+      pointer-events: none;
+    }
+    .drop-overlay.active { display: flex; }
+
+    /* ── EMPTY STATE ────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-12) var(--space-8);
+      border: 2px dashed var(--color-border-strong);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-mono-label);
+      margin-bottom: var(--space-8);
+    }
+    .empty-state__arrow {
+      font-size: var(--fs-h1);
+      margin-bottom: var(--space-4);
+      color: var(--mm-orange);
+    }
+
+    /* ── EDITABLE META FIELDS ───────────────────────────────── */
+    [contenteditable] {
+      outline: none;
+      border-bottom: 1.5px dashed transparent;
+      transition: border-color 0.15s;
+      cursor: text;
+    }
+    [contenteditable]:hover,
+    [contenteditable]:focus {
+      border-bottom-color: var(--mm-orange);
+    }
+
     /* ── LETTERHEAD ─────────────────────────────────────────── */
     .letterhead {
       background: var(--mm-navy);
@@ -257,16 +346,29 @@
 
     /* ── PRINT ──────────────────────────────────────────────── */
     @media print {
+      .import-bar, .drop-overlay { display: none !important; }
       body { background: white; padding: 0.5in 0.75in; max-width: none; font-size: 13px; }
       .letterhead, thead th, tr.wk-head td, .totals-box {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
       .table-wrap, .totals-box { box-shadow: none; }
+      [contenteditable] { border-bottom-color: transparent !important; }
     }
   </style>
 </head>
 <body>
+
+  <!-- drag-over overlay -->
+  <div class="drop-overlay" id="drop-overlay">Drop CSV to load</div>
+
+  <!-- import toolbar -->
+  <div class="import-bar" id="import-bar">
+    <label for="csv-file">Import CSV</label>
+    <input type="file" id="csv-file" accept=".csv">
+    <span class="import-bar__status" id="import-status">Drop an Airtable CSV export anywhere on the page, or click Import CSV.</span>
+    <button class="import-bar__reset" id="import-reset">Clear</button>
+  </div>
 
   <header class="letterhead">
     <div class="lh-name">Mike Murphy</div>
@@ -279,44 +381,32 @@
   <div class="invoice-meta">
     <div class="bill-to">
       <div class="eyebrow">Bill To</div>
-      <div class="bill-to__company" id="inv-client"></div>
-      <div class="bill-to__detail" id="inv-client-detail"></div>
+      <div class="bill-to__company" id="inv-client" contenteditable="true">Client Name</div>
+      <div class="bill-to__detail" id="inv-client-detail" contenteditable="true">Description</div>
     </div>
     <div class="inv-id">
       <div class="eyebrow">Invoice</div>
-      <div class="inv-id__number" id="inv-number"></div>
+      <div class="inv-id__number" id="inv-number" contenteditable="true">#2026-002</div>
       <div class="inv-id__dates">
-        <strong>Period:</strong> <span id="inv-period"></span><br>
-        <strong>Issued:</strong> <span id="inv-issued"></span><br>
-        <strong>Due:</strong> <span id="inv-due"></span>
+        <strong>Period:</strong> <span id="inv-period" contenteditable="true">—</span><br>
+        <strong>Issued:</strong> <span id="inv-issued" contenteditable="true">—</span><br>
+        <strong>Due:</strong> <span id="inv-due" contenteditable="true">Upon Receipt</span>
       </div>
     </div>
   </div>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Phase</th>
-          <th class="r">Hours</th>
-          <th class="r">Rate</th>
-          <th class="r">Amount</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-
-  <div class="totals-row-outer">
-    <div class="totals-box" id="totals-box"></div>
+  <div id="invoice-body">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-state__arrow">↑</div>
+      Import your Airtable CSV to populate the invoice.<br>
+      Only the "Unsubmitted Time" view export is needed.
+    </div>
   </div>
 
   <footer class="inv-footer">
     <div class="inv-footer__note">
-      <span id="footer-hours"></span> total hours · <span id="footer-period"></span><br>
-      Payment: <span id="footer-payment"></span>
+      <span id="footer-hours">—</span> total hours · <span id="footer-period">—</span><br>
+      Payment: <span id="footer-payment" contenteditable="true">ACH</span>
     </div>
     <div class="inv-footer__tagline">
       LEARN <span class="dot">·</span> BUILD <span class="dot">·</span> MOVE FORWARD
@@ -325,59 +415,85 @@
 
   <script>
   // ════════════════════════════════════════════════════════════
-  // EDIT THIS SECTION EACH BILLING PERIOD
+  // CSV PARSING
+  // Airtable columns used: Description, Phase, Date,
+  //   Duration Hours, Hourly Rate
   // ════════════════════════════════════════════════════════════
 
-  const INVOICE = {
-    number:       "#2026-001",
-    period:       "Apr 28 – May 21, 2026",
-    issued:       "May 22, 2026",
-    due:          "Upon Receipt",
-    client:       "Inception Point AI",
-    clientDetail: "AI Workflow Automation Consulting",
-    payment:      "[Zelle / ACH / Check]",
-  };
+  function parseCSV(text) {
+    // Strip BOM
+    text = text.replace(/^﻿/, '');
+    const rows = [];
+    let cur = '', inQ = false;
+    const chars = text.split('');
+    const lines = [];
+    let line = [];
 
-  // date:  ISO format  YYYY-MM-DD
-  // hours: decimal     (copy from time log)
-  // rate:  hourly rate in dollars
-  // note:  optional    small orange line under description
-  const entries = [
-    { date: "2026-04-28", desc: "On-Boarding / Phase 2",                                          phase: "Phase 2", hours: 0.9833, rate: 25 },
-    { date: "2026-04-28", desc: "ADX_Promo0",                                                     phase: "Phase 2", hours: 2.1407, rate: 25 },
-    { date: "2026-04-28", desc: "Creative Call: Ann, Katie & Justin",                             phase: "Phase 2", hours: 1.6667, rate: 25 },
-    { date: "2026-04-28", desc: "ADX Promo Removals",                                             phase: "Phase 2", hours: 2.0500, rate: 25 },
-    { date: "2026-04-29", desc: "1:1 Morning Meeting (Ann)",                                      phase: "Phase 1", hours: 3.9811, rate: 25 },
-    { date: "2026-04-29", desc: "Arc Training",                                                   phase: "Phase 2", hours: 3.1878, rate: 25 },
-    { date: "2026-04-30", desc: "Arc Training: Ann",                                              phase: "Phase 2", hours: 5.0575, rate: 25 },
-    { date: "2026-04-30", desc: "Arc Training: Ann (cont.)",                                      phase: "Phase 2", hours: 2.0711, rate: 25 },
-    { date: "2026-05-01", desc: "1:1 Arc Training",                                               phase: "Phase 1", hours: 2.0611, rate: 25 },
-    { date: "2026-05-01", desc: "Darkr",                                                          phase: "Phase 2", hours: 0.9575, rate: 25 },
-    { date: "2026-05-04", desc: "Standup",                                                        phase: "Phase 2", hours: 2.5394, rate: 25 },
-    { date: "2026-05-05", desc: "1:1 Ann",                                                        phase: "Phase 2", hours: 2.4633, rate: 25 },
-    { date: "2026-05-05", desc: "Standup",                                                        phase: "Phase 2", hours: 0.0606, rate: 25 },
-    { date: "2026-05-06", desc: "Fact Checker & Megaphone",                                       phase: "Phase 2", hours: 7.9375, rate: 25 },
-    { date: "2026-05-07", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.2533, rate: 25 },
-    { date: "2026-05-08", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.1694, rate: 25 },
-    { date: "2026-05-09", desc: "Recurring: Spreaker to Megaphone",                               phase: "Phase 2", hours: 1.1675, rate: 25 },
-    { date: "2026-05-11", desc: "Spreaker to Megaphone Cleanup",                                  phase: "Phase 2", hours: 8.2869, rate: 25 },
-    { date: "2026-05-12", desc: "Spreaker to Megaphone",                                          phase: "Phase 2", hours: 8.1686, rate: 25 },
-    { date: "2026-05-13", desc: "Spreaker to Megaphone + Artomators",                             phase: "Phase 2", hours: 7.1753, rate: 25 },
-    { date: "2026-05-13", desc: "Artomators",                                                     phase: "Phase 2", hours: 1.0172, rate: 25 },
-    { date: "2026-05-14", desc: "Artomators, Standup, Migration",                                 phase: "Phase 2", hours: 8.0622, rate: 30, note: "Rate increase effective May 14" },
-    { date: "2026-05-15", desc: "Arc Review",                                                     phase: "Phase 2", hours: 2.2089, rate: 30 },
-    { date: "2026-05-15", desc: "Arc Work",                                                       phase: "Phase 2", hours: 0.7878, rate: 30 },
-    { date: "2026-05-15", desc: "Arc CLI Self-Training",                                          phase: "Phase 2", hours: 0.5800, rate: 30 },
-    { date: "2026-05-16", desc: "OmniBot + SKILL",                                                phase: "Phase 2", hours: 1.5375, rate: 30 },
-    { date: "2026-05-18", desc: "Creative-Console",                                               phase: "Phase 2", hours: 8.1900, rate: 30 },
-    { date: "2026-05-19", desc: "Creative Console Cleanup for Migration",                         phase: "Phase 2", hours: 7.9192, rate: 30 },
-    { date: "2026-05-20", desc: "TTS Quality Score Cleanup",                                      phase: "Phase 2", hours: 1.0000, rate: 30 },
-    { date: "2026-05-20", desc: "Standup + Arc Cleanup (Make, Quality Scores, Spreaker Remnants)",phase: "Phase 2", hours: 7.3481, rate: 30 },
-    { date: "2026-05-21", desc: "Creative Console QC",                                            phase: "Phase 2", hours: 8.1125, rate: 30 },
-  ];
+    for (let i = 0; i < chars.length; i++) {
+      const c = chars[i];
+      if (c === '"') {
+        if (inQ && chars[i + 1] === '"') { cur += '"'; i++; }
+        else inQ = !inQ;
+      } else if (c === ',' && !inQ) {
+        line.push(cur.trim()); cur = '';
+      } else if ((c === '\n' || c === '\r') && !inQ) {
+        if (c === '\r' && chars[i + 1] === '\n') i++;
+        line.push(cur.trim()); cur = '';
+        lines.push(line); line = [];
+      } else {
+        cur += c;
+      }
+    }
+    if (cur || line.length) { line.push(cur.trim()); lines.push(line); }
+
+    const headers = lines[0].map(h => h.toLowerCase());
+    const col = name => headers.indexOf(name);
+
+    const iDesc  = col('description');
+    const iPhase = col('phase');
+    const iDate  = col('date');
+    const iHours = col('duration hours');
+    const iRate  = col('hourly rate');
+
+    for (let i = 1; i < lines.length; i++) {
+      const r = lines[i];
+      if (!r || r.length < 5 || !r[iDate]) continue;
+
+      // Convert M/D/YYYY → YYYY-MM-DD
+      const [m, d, y] = r[iDate].split('/');
+      const iso = `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+
+      const rate = parseFloat((r[iRate] || '0').replace(/[$,]/g, ''));
+      const hours = parseFloat(r[iHours] || '0');
+      if (!hours) continue;
+
+      rows.push({ date: iso, desc: r[iDesc], phase: r[iPhase], hours, rate });
+    }
+
+    return rows;
+  }
 
   // ════════════════════════════════════════════════════════════
-  // RENDERING — no need to edit below this line
+  // AUTO-DETECT PERIOD + ISSUED FROM ENTRIES
+  // ════════════════════════════════════════════════════════════
+
+  function fmtShortDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function deriveMeta(entries) {
+    const dates = entries.map(e => e.date).sort();
+    const first = dates[0], last = dates[dates.length - 1];
+    const fFirst = new Date(first + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const fLast  = fmtShortDate(last);
+    return {
+      period: `${fFirst} – ${fLast}`,
+      issued: fLast,
+    };
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // RENDERING
   // ════════════════════════════════════════════════════════════
 
   function weekSunday(iso) {
@@ -398,18 +514,8 @@
     return '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  function render() {
-    document.getElementById('inv-client').textContent        = INVOICE.client;
-    document.getElementById('inv-client-detail').textContent = INVOICE.clientDetail;
-    document.getElementById('inv-number').textContent        = INVOICE.number;
-    document.getElementById('inv-period').textContent        = INVOICE.period;
-    document.getElementById('inv-issued').textContent        = INVOICE.issued;
-    document.getElementById('inv-due').textContent           = INVOICE.due;
-    document.getElementById('footer-period').textContent     = INVOICE.period;
-    document.getElementById('footer-payment').textContent    = INVOICE.payment;
-    document.title = `Invoice ${INVOICE.number} — Mike Murphy · ${INVOICE.client}`;
-
-    // Group entries by week (Map preserves insertion order)
+  // Track previous rate to auto-annotate rate changes
+  function renderEntries(entries) {
     const weekMap = new Map();
     for (const e of entries) {
       const ws  = weekSunday(e.date);
@@ -418,10 +524,11 @@
       weekMap.get(key).rows.push(e);
     }
 
-    let tbody       = '';
-    let grandHours  = 0;
-    let grandCents  = 0;
+    let tbody      = '';
+    let grandHours = 0;
+    let grandCents = 0;
     const summaries = [];
+    let prevRate = null;
 
     for (const week of weekMap.values()) {
       let wHours = 0, wCents = 0;
@@ -431,10 +538,14 @@
         const cents = Math.round(e.hours * e.rate * 100);
         wHours += e.hours;
         wCents += cents;
+        const rateNote = (prevRate !== null && e.rate !== prevRate)
+          ? `<span class="rate-note">Rate change: $${prevRate} → $${e.rate}/hr</span>`
+          : '';
+        prevRate = e.rate;
         tbody += `
           <tr class="entry">
             <td class="td-date">${fmtDate(e.date)}</td>
-            <td class="td-desc">${e.desc}${e.note ? `<span class="rate-note">${e.note}</span>` : ''}</td>
+            <td class="td-desc">${e.desc}${rateNote}</td>
             <td class="td-phase">${e.phase}</td>
             <td class="td-num">${e.hours.toFixed(2)}</td>
             <td class="td-num">$${e.rate.toFixed(2)}</td>
@@ -455,9 +566,6 @@
         </tr>`;
     }
 
-    document.getElementById('tbody').innerHTML = tbody;
-
-    // Totals box
     const totHtml = summaries.map(s => `
       <div class="tot-line">
         <span>${s.label}</span>
@@ -468,11 +576,112 @@
            <span class="tot-line__val">${fmtMoney(grandCents)}</span>
          </div>`;
 
-    document.getElementById('totals-box').innerHTML = totHtml;
+    document.getElementById('invoice-body').innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Phase</th>
+              <th class="r">Hours</th>
+              <th class="r">Rate</th>
+              <th class="r">Amount</th>
+            </tr>
+          </thead>
+          <tbody>${tbody}</tbody>
+        </table>
+      </div>
+      <div class="totals-row-outer">
+        <div class="totals-box">${totHtml}</div>
+      </div>`;
+
     document.getElementById('footer-hours').textContent = grandHours.toFixed(2);
+
+    return { grandHours, grandCents, summaries };
   }
 
-  render();
+  // ════════════════════════════════════════════════════════════
+  // LOAD CSV
+  // ════════════════════════════════════════════════════════════
+
+  function loadCSV(text, filename) {
+    const entries = parseCSV(text);
+    if (!entries.length) {
+      document.getElementById('import-status').textContent = 'No rows found — check the CSV has the right columns.';
+      return;
+    }
+
+    const meta = deriveMeta(entries);
+    document.getElementById('inv-period').textContent  = meta.period;
+    document.getElementById('inv-issued').textContent  = meta.issued;
+    document.getElementById('footer-period').textContent = meta.period;
+
+    renderEntries(entries);
+
+    document.getElementById('import-status').textContent =
+      `${entries.length} entries loaded from ${filename}. Edit the invoice fields above as needed, then print.`;
+    document.getElementById('import-reset').style.display = 'inline';
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // FILE INPUT + DRAG & DROP
+  // ════════════════════════════════════════════════════════════
+
+  document.getElementById('csv-file').addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => loadCSV(e.target.result, file.name);
+    reader.readAsText(file);
+    this.value = '';
+  });
+
+  document.getElementById('import-reset').addEventListener('click', () => {
+    document.getElementById('invoice-body').innerHTML = `
+      <div class="empty-state" id="empty-state">
+        <div class="empty-state__arrow">↑</div>
+        Import your Airtable CSV to populate the invoice.<br>
+        Only the "Unsubmitted Time" view export is needed.
+      </div>`;
+    document.getElementById('inv-period').textContent  = '—';
+    document.getElementById('inv-issued').textContent  = '—';
+    document.getElementById('footer-hours').textContent = '—';
+    document.getElementById('footer-period').textContent = '—';
+    document.getElementById('import-status').textContent =
+      'Drop an Airtable CSV export anywhere on the page, or click Import CSV.';
+    document.getElementById('import-reset').style.display = 'none';
+  });
+
+  // Drag & drop on the whole page
+  let dragCounter = 0;
+  document.addEventListener('dragenter', e => {
+    if ([...e.dataTransfer.items].some(i => i.kind === 'file')) {
+      dragCounter++;
+      document.getElementById('drop-overlay').classList.add('active');
+    }
+  });
+  document.addEventListener('dragleave', () => {
+    dragCounter--;
+    if (dragCounter <= 0) {
+      dragCounter = 0;
+      document.getElementById('drop-overlay').classList.remove('active');
+    }
+  });
+  document.addEventListener('dragover', e => e.preventDefault());
+  document.addEventListener('drop', e => {
+    e.preventDefault();
+    dragCounter = 0;
+    document.getElementById('drop-overlay').classList.remove('active');
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.name.endsWith('.csv')) {
+      document.getElementById('import-status').textContent = 'Please drop a .csv file.';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = ev => loadCSV(ev.target.result, file.name);
+    reader.readAsText(file);
+  });
   </script>
 </body>
 </html>

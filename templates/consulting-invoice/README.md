@@ -1,49 +1,61 @@
 # Consulting Invoice Template
 
-A data-driven HTML invoice using the Mike Murphy design system tokens. Open in a browser, print to PDF.
+A data-driven HTML invoice using the Mike Murphy design system tokens. Import an Airtable CSV, fill in a few fields, print to PDF.
+
+> **Bookmark this file in your browser** — `file:///Users/mikemurphy/Code/Projects/mike-design-system/templates/consulting-invoice/index.html`
 
 ---
 
-## How to use it each billing period
+## Each billing period workflow
 
-Open `index.html` and scroll to the `<script>` block. Everything above the `// RENDERING` comment is yours to edit. Everything below it is hands-off.
+### 1. Export from Airtable
 
-### 1. Update the `INVOICE` object
+Open your **Unsubmitted Time** view → Download CSV. No other view or configuration needed.
 
-```js
-const INVOICE = {
-  number:       "#2026-002",          // increment each invoice
-  period:       "May 25 – Jun 20, 2026",
-  issued:       "Jun 21, 2026",
-  due:          "Upon Receipt",
-  client:       "Inception Point AI",
-  clientDetail: "AI Workflow Automation Consulting",
-  payment:      "Zelle / ACH / Check",
-};
-```
+### 2. Drop the CSV
 
-### 2. Swap out the `entries` array
+Open `index.html` in a browser. Drag the CSV file onto the page (or click **Import CSV**).
 
-Each row in your time log becomes one object:
+The template auto-populates:
+- All line items, grouped by week with subtotals
+- **Period** and **Issued** dates (derived from the first and last entry dates)
+- Rate changes are detected automatically and annotated inline
 
-```js
-{ date: "2026-05-28", desc: "Standup", phase: "Phase 2", hours: 1.25, rate: 30 },
-```
+### 3. Edit the header fields
 
-| Field   | Format                        | Required |
-|---------|-------------------------------|----------|
-| `date`  | `YYYY-MM-DD`                  | Yes      |
-| `desc`  | Plain text                    | Yes      |
-| `phase` | e.g. `"Phase 2"`              | Yes      |
-| `hours` | Decimal (copy from time log)  | Yes      |
-| `rate`  | Hourly rate as a number       | Yes      |
-| `note`  | Short string                  | No       |
+Click any field to edit it in place — no code required:
 
-The `note` field renders as a small orange line under the description — use it for things like rate change callouts.
+| Field | Default | Notes |
+|---|---|---|
+| Invoice number | `#2026-002` | Increment each period |
+| Client name | placeholder | Inception Point AI |
+| Description | placeholder | AI Workflow Automation Consulting |
+| Period | auto-filled | From CSV dates |
+| Issued | auto-filled | From last CSV entry date |
+| Due | `Upon Receipt` | Edit if different |
+| Payment | `ACH` | Edit if different |
 
-### 3. Save as PDF
+### 4. Save as PDF
 
 `Cmd+P` → Save as PDF. Margins: default. Background graphics: on.
+
+The import bar disappears automatically in print/PDF output.
+
+---
+
+## Airtable CSV columns used
+
+The template reads these exact column headers from the Airtable export:
+
+| Column | Used for |
+|---|---|
+| `Description` | Line item description |
+| `Phase` | Phase column |
+| `Date` | Entry date (M/D/YYYY format) |
+| `Duration Hours` | Hours worked |
+| `Hourly Rate` | Rate (e.g. `$30.00`) |
+
+All other columns in the export are ignored.
 
 ---
 
@@ -53,14 +65,13 @@ The `note` field renders as a small orange line under the description — use it
 - **Week grouping**: automatic, based on the Sunday that starts each entry's calendar week
 - **Week subtotals**: summed in cents, displayed as dollars
 - **Grand total**: sum of all week subtotals in cents
-
-You never touch the totals manually. Add or remove rows in `entries` and everything recalculates on reload.
+- **Rate change annotation**: if consecutive entries have different rates, a note is added automatically
 
 ---
 
 ## Where the design comes from
 
-All visual tokens (`--mm-navy`, `--color-action-primary`, `--shadow-cut`, etc.) are consumed from `tokens/colors_and_type.css`. If the brand token values ever change, this template picks them up automatically — nothing to update here.
+All visual tokens (`--mm-navy`, `--color-action-primary`, `--shadow-cut`, etc.) are consumed from `tokens/colors_and_type.css`. If brand token values ever change, this template picks them up automatically.
 
 ---
 
@@ -68,4 +79,4 @@ All visual tokens (`--mm-navy`, `--color-action-primary`, `--shadow-cut`, etc.) 
 
 `outputs/` — that directory is gitignored. The template lives here in `templates/`, the rendered invoice lives there.
 
-Suggested filename convention: `inception-point-ai-invoice-2026-001.pdf`
+Suggested filename: `inception-point-ai-invoice-2026-002.pdf`
