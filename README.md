@@ -6,6 +6,7 @@ The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI H
 
 | File | What it is |
 |---|---|
+| `START-HERE.md` | Human operating guide — what is safe to touch, what scripts do, and how to recover when things feel confusing. |
 | `BRAND-CANON.md` | The locked brand canon. Source of truth — values, copy patterns, tagline, NOT list. |
 | `CLAUDE.md` | Working pattern, hard rules, and NOT list for anyone (or anything) generating in the brand. Loaded automatically in Claude sessions. |
 | `SYSTEM.md` | Operational guide: read order, file map, component decision tree, layout vocabulary. Start here for any brand task. |
@@ -23,11 +24,12 @@ The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI H
 
 ## How to use it
 
-1. Read `BRAND-CANON.md` first. It's short and load-bearing.
-2. Read `SYSTEM.md` for the operational guide — file map, decision tree, layout vocabulary.
-3. Open `design-system.html` to see the rendered system.
-4. Open `ui_kits/website/index.html` to see the system applied to a real product surface.
-5. To build something new on the brand: start with `<link rel="stylesheet" href="tokens/colors_and_type.css">` and consume only semantic tokens (`--color-*`, `--font-*`, `--space-*`, `--radius-*`, `--shadow-*`).
+1. Read `START-HERE.md` if you want the human map: what is safe to touch, what scripts do, and how to recover.
+2. Read `BRAND-CANON.md` when you need the locked rules.
+3. Read `SYSTEM.md` for the operational guide — file map, decision tree, layout vocabulary.
+4. Open `design-system.html` to see the rendered system.
+5. Open `ui_kits/website/index.html` to see the system applied to a real product surface.
+6. To build something new on the brand: start with `<link rel="stylesheet" href="tokens/colors_and_type.css">` and consume only semantic tokens (`--color-*`, `--font-*`, `--space-*`, `--radius-*`, `--shadow-*`).
 
 ## Locked decisions (canon)
 
