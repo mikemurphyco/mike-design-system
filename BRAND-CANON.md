@@ -16,7 +16,7 @@ System consolidation pass. No visual changes to the brand itself — every commi
 - `scripts/check-canon.mjs` reports any hex in the repo that doesn't match the canon. Wired up as `npm run check`.
 - Pre-commit hook at `.githooks/pre-commit` runs `npm run check`; commits that introduce drift are rejected.
 - `scripts/sync-figma-builder.mjs` propagates canon hex values into the Figma plugin's `HEX = {...}` object. Wired up as `npm run sync-figma`.
-- `assets/loops-nodes/png/` is now regenerated alongside the rest of the assets when `npm run generate` runs.
+- `assets/loops/png/`, `assets/nodes/png/`, and hand-authored loop/node lockup PNGs are regenerated alongside the rest of the assets when `npm run generate` runs.
 - `#FAF7F2` (the unnamed dark-surface chalk variant) was eliminated and collapsed into canonical `#FCFAF6` chalk. <!-- check-canon-ignore — historical reference to a retired value -->
 
 - Stale `yellow on orange` badge styling in `templates/youtube-thumbnail/` corrected to canonical navy on orange.
@@ -181,27 +181,30 @@ The badge identifies a piece of *content* as Mike's. It is not a corporate locku
 
 ## Brand marks — locked (Phase 2)
 
-Two marks are now part of the system. Both are production SVGs in `assets/loops-nodes/`.
+Two marks are now part of the system, with different jobs and different homes.
 
 ### The Loop
 A single continuous spiral path. One stroke, uniform weight, no fill, no disc container.
 The Loop is the **primary mark** — the face of the brand. Warm, human, a drawn gesture.
 
-- **Stroke:** `#FF6434` (orange) on light surfaces, `#FCFAF6` (chalk) on dark surfaces — same chalk token, no separate variant
+- **Files:** `assets/loops/`
+- **Stroke variants:** `#FF6434` (orange), `#001E3A` (navy), `#F1ECE2` (cream), `#1ECEBE` (teal); chalk variants remain available for bright reversed use on dark or orange surfaces
 - Transparent background — works on any surface
 - Animates by drawing the path (stroke-dashoffset)
 
 Use on: site header, social profiles, podcast art, newsletter header, hero moments.
 
 ### The Node
-An asymmetric constellation in a cream disc. Central orange node, three satellites at different weights and positions, connected by clean lines.
+An asymmetric constellation for system surfaces and subtle motion. The preferred direction is the **floating** node: no disc, no shadow, all nodes opaque, connectors held back with restrained opacity. Badged/disc versions remain available for contained icon moments.
 
-- **Disc fill:** `#FCFAF6` (chalk) with 4px navy cut-shadow offset
+- **Files:** `assets/nodes/`
+- **Primary direction:** `assets/nodes/floating/`
+- **Contained alternates:** `assets/nodes/badged/`
+- **Legacy disc set:** `assets/nodes/legacy/`
 - **Central node:** `#FF6434` (orange)
 - **Upper-left satellite:** `#001E3A` (navy, full opacity — largest, pushed out)
 - **Right satellite:** `#1ECEBE` (teal — the one AI pop per screen rule applies)
-- **Lower-left satellite:** `#001E3A` at 35% opacity (intentional ghost)
-- Navy disc alternate available for dark surfaces
+- **Lower-left satellite:** `#001E3A` (full opacity in floating/badged variants; legacy disc assets retain the older ghost treatment)
 - Animates by building outward — center appears, lines draw, satellites pop in
 
 Use on: tutorial cards, AI Handyman content contexts, video intros, system/technical surfaces.

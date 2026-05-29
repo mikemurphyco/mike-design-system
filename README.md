@@ -14,7 +14,8 @@ The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI H
 | `design-system.html` | The system itself, end-to-end: foundations, identity, components, applications, dark mode, footer. |
 | `ui_kits/website/` | Clickable UI kit for the marketing site. Home → Tutorials list → Tutorial detail → Newsletter → About. |
 | `fonts/` | Self-hosted IBM Plex Mono, IBM Plex Sans, and Murphydoodle. |
-| `assets/loops-nodes/` | Loop and Node SVGs — all sizes and surface variants. Production-ready. |
+| `assets/loops/` | Loop mark SVGs and PNGs — primary logo symbol in brand color variants. |
+| `assets/nodes/` | Node mark SVGs and PNGs — system/motion asset variants. |
 | `assets/logos/` | Wordmark, horizontal lockup, M-mark, AI Handyman badge, tagline lockups. |
 | `assets/avatars/` | Mike avatars — orange-bg, transparent cutout. |
 | `assets/favicon/` | Favicon and app icon set. |

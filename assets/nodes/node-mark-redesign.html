@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node Mark · Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:  #F1ECE2;
+      --chalk:  #FCFAF6;
+      --navy:   #001E3A;
+      --orange: #FF6434;
+      --teal:   #1ECEBE;
+      --mono:   'IBM Plex Mono', monospace;
+      --cut:    4px 4px 0 var(--navy);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      color: var(--navy);
+      font-family: var(--mono);
+      padding: 80px 64px 120px;
+    }
+
+    .page { max-width: 1100px; margin: 0 auto; }
+
+    /* ── Header ── */
+    .header { margin-bottom: 80px; }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .page-title {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .page-meta {
+      font-size: 13px;
+      color: rgba(0,30,58,0.4);
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 0; }
+
+    .section + .section {
+      margin-top: 72px;
+      padding-top: 72px;
+      border-top: 1px solid rgba(0,30,58,0.15);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .format-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      border: 1px solid var(--navy);
+      box-shadow: var(--cut);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .badge-a { background: var(--orange); color: var(--chalk); }
+    .badge-b { background: var(--navy);   color: var(--chalk); }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .section-rules {
+      font-size: 12px;
+      color: rgba(0,30,58,0.4);
+      margin-left: auto;
+    }
+
+    .rule-line {
+      height: 1px;
+      background: rgba(0,30,58,0.12);
+      margin: 20px 0 36px;
+    }
+
+    /* ── Row ── */
+    .row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .gap-sm { width: 24px; flex-shrink: 0; }
+    .gap-md { width: 32px; flex-shrink: 0; }
+    .gap-lg { width: 48px; flex-shrink: 0; }
+
+    .col-sep {
+      width: 1px;
+      align-self: stretch;
+      background: rgba(0,30,58,0.1);
+      margin: 0 40px;
+      flex-shrink: 0;
+    }
+
+    /* ── Variant ── */
+    .variant {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      border: 1px solid rgba(0,30,58,0.12);
+      flex-shrink: 0;
+    }
+
+    .sz-xl { width: 224px; height: 224px; }
+    .sz-md { width: 160px; height: 160px; }
+
+    .on-cream { background: var(--cream); }
+    .on-navy  { background: var(--navy); border-color: rgba(255,255,255,0.07); }
+
+    .v-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .v-meta {
+      font-size: 11px;
+      color: rgba(0,30,58,0.42);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <p class="eyebrow">Mike Murphy · AI Handyman · Marks</p>
+    <h1 class="page-title">Redesign</h1>
+    <p class="page-meta">Node · Loop · v2026.4-draft</p>
+  </header>
+
+
+  <!-- ════════════════════════════
+       A — FLOATING
+  ════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="format-badge badge-a">A</div>
+      <h2 class="section-title">Node — Floating</h2>
+      <p class="section-rules">No disc · Connectors 0.6 · All nodes opaque</p>
+    </div>
+    <div class="rule-line"></div>
+
+    <div class="row">
+
+      <!-- 128px -->
+      <div class="variant">
+        <div class="swatch sz-xl on-cream">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <line x1="64" y1="64" x2="21"  y2="17"  stroke="#001E3A" stroke-width="3"   stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="107" y2="35"  stroke="#001E3A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="35"  y2="107" stroke="#001E3A" stroke-width="2"   stroke-linecap="round" opacity="0.6"/>
+            <circle cx="21"  cy="17"  r="9"   fill="#001E3A"/>
+            <circle cx="107" cy="35"  r="6.5" fill="#1ECEBE"/>
+            <circle cx="35"  cy="107" r="5"   fill="#001E3A"/>
+            <circle cx="64"  cy="64"  r="12"  fill="#FF6434"/>
+          </svg>
+        </div>
+        <p class="v-name">Orange · Navy</p>
+        <p class="v-meta">128px</p>
+      </div>
+
+      <div class="gap-md"></div>
+
+      <!-- 64px -->
+      <div class="variant">
+        <div class="swatch sz-md on-cream">
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <line x1="32" y1="32" x2="10.5" y2="8.5"  stroke="#001E3A" stroke-width="2"   stroke-linecap="round" opacity="0.6"/>
+            <line x1="32" y1="32" x2="53.5" y2="17.5" stroke="#001E3A" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="32" y1="32" x2="17.5" y2="53.5" stroke="#001E3A" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <circle cx="10.5" cy="8.5"  r="4.5" fill="#001E3A"/>
+            <circle cx="53.5" cy="17.5" r="3"   fill="#1ECEBE"/>
+            <circle cx="17.5" cy="53.5" r="2.5" fill="#001E3A"/>
+            <circle cx="32"   cy="32"   r="6"   fill="#FF6434"/>
+          </svg>
+        </div>
+        <p class="v-name">Orange · Navy</p>
+        <p class="v-meta">64px</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════
+       B — BADGED
+  ════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="format-badge badge-b">B</div>
+      <h2 class="section-title">Node — Badged</h2>
+      <p class="section-rules">Solid disc · Four nodes · 128px only</p>
+    </div>
+    <div class="rule-line"></div>
+
+    <div class="row">
+
+      <!-- Navy disc on cream -->
+      <div class="variant">
+        <div class="swatch sz-xl on-cream">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <circle cx="64" cy="64" r="58" fill="#001E3A"/>
+            <line x1="64" y1="64" x2="36"  y2="30"  stroke="#FCFAF6" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="100" y2="42"  stroke="#FCFAF6" stroke-width="2"   stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="40"  y2="100" stroke="#FCFAF6" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <circle cx="36"  cy="30"  r="8"  fill="#FCFAF6"/>
+            <circle cx="100" cy="42"  r="6"  fill="#1ECEBE"/>
+            <circle cx="40"  cy="100" r="5"  fill="#FCFAF6"/>
+            <circle cx="64"  cy="64"  r="12" fill="#FF6434"/>
+          </svg>
+        </div>
+        <p class="v-name">Navy Disc</p>
+        <p class="v-meta">Cream surface</p>
+      </div>
+
+      <div class="gap-md"></div>
+
+      <!-- Cream disc on navy -->
+      <div class="variant">
+        <div class="swatch sz-xl on-navy">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <circle cx="64" cy="64" r="58"   fill="#FCFAF6"/>
+            <circle cx="64" cy="64" r="57.5" fill="none" stroke="#001E3A" stroke-width="1"/>
+            <line x1="64" y1="64" x2="36"  y2="30"  stroke="#001E3A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="100" y2="42"  stroke="#001E3A" stroke-width="2"   stroke-linecap="round" opacity="0.6"/>
+            <line x1="64" y1="64" x2="40"  y2="100" stroke="#001E3A" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <circle cx="36"  cy="30"  r="8"  fill="#001E3A"/>
+            <circle cx="100" cy="42"  r="6"  fill="#1ECEBE"/>
+            <circle cx="40"  cy="100" r="5"  fill="#001E3A"/>
+            <circle cx="64"  cy="64"  r="12" fill="#FF6434"/>
+          </svg>
+        </div>
+        <p class="v-name">Cream Disc</p>
+        <p class="v-meta">Navy surface</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════
+       LOOP
+  ════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Loop</h2>
+      <p class="section-rules">128px · All four color variants</p>
+    </div>
+    <div class="rule-line"></div>
+
+    <div class="row">
+
+      <!-- Orange -->
+      <div class="variant">
+        <div class="swatch sz-xl on-cream">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <path d="M24 64 C24 38 40 16 64 16 C90 16 106 38 106 64 C106 89 90 110 64 110 C42 110 26 95 26 76 C26 59 39 47 54 47 C69 47 80 58 80 72 C80 85 71 93 59 90 C49 87 44 77 47 67"
+                  fill="none" stroke="#FF6434" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="v-name">Orange</p>
+        <p class="v-meta">Cream surface</p>
+      </div>
+
+      <div class="gap-md"></div>
+
+      <!-- Navy -->
+      <div class="variant">
+        <div class="swatch sz-xl on-cream">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <path d="M24 64 C24 38 40 16 64 16 C90 16 106 38 106 64 C106 89 90 110 64 110 C42 110 26 95 26 76 C26 59 39 47 54 47 C69 47 80 58 80 72 C80 85 71 93 59 90 C49 87 44 77 47 67"
+                  fill="none" stroke="#001E3A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="v-name">Navy</p>
+        <p class="v-meta">Cream surface</p>
+      </div>
+
+      <div class="gap-md"></div>
+
+      <!-- Cream on navy -->
+      <div class="variant">
+        <div class="swatch sz-xl on-navy">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <path d="M24 64 C24 38 40 16 64 16 C90 16 106 38 106 64 C106 89 90 110 64 110 C42 110 26 95 26 76 C26 59 39 47 54 47 C69 47 80 58 80 72 C80 85 71 93 59 90 C49 87 44 77 47 67"
+                  fill="none" stroke="#FCFAF6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="v-name">Cream</p>
+        <p class="v-meta">Navy surface</p>
+      </div>
+
+      <div class="gap-md"></div>
+
+      <!-- Teal -->
+      <div class="variant">
+        <div class="swatch sz-xl on-cream">
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <path d="M24 64 C24 38 40 16 64 16 C90 16 106 38 106 64 C106 89 90 110 64 110 C42 110 26 95 26 76 C26 59 39 47 54 47 C69 47 80 58 80 72 C80 85 71 93 59 90 C49 87 44 77 47 67"
+                  fill="none" stroke="#1ECEBE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="v-name">Teal</p>
+        <p class="v-meta">Cream surface</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

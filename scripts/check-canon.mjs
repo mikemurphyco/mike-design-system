@@ -25,7 +25,7 @@
 //   node scripts/check-canon.mjs           # full report
 //   node scripts/check-canon.mjs --quiet   # suppress WARNs, only show DRIFT
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
@@ -65,10 +65,10 @@ const TEXT_EXTS = new Set([
   ".css", ".html", ".svg", ".jsx", ".tsx", ".js", ".mjs", ".ts",
   ".md", ".json", ".yaml", ".yml",
 ]);
-const tracked = execSync("git ls-files", { cwd: ROOT, encoding: "utf8" })
+const tracked = execSync("git ls-files --cached --others --exclude-standard", { cwd: ROOT, encoding: "utf8" })
   .split("\n").filter(Boolean);
 const files = tracked.filter(
-  (f) => TEXT_EXTS.has(extname(f).toLowerCase()) && !IGNORE_FILES.has(f),
+  (f) => TEXT_EXTS.has(extname(f).toLowerCase()) && !IGNORE_FILES.has(f) && existsSync(join(ROOT, f)),
 );
 
 // ── 4. Scan ─────────────────────────────────────────────────────────────────

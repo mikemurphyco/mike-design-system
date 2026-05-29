@@ -53,7 +53,8 @@ mike-design-system/
 │   ├── favicon/              # browser/app icons
 │   ├── fonts/                # IBM Plex Mono/Sans, Murphydoodle
 │   ├── logos/                # wordmark, lockup, m-mark, badge, tagline
-│   └── loops-nodes/          # Loop and Node marks (primary + system)
+│   ├── loops/                # Loop mark (primary logo symbol)
+│   └── nodes/                # Node marks (system/motion assets)
 │
 ├── design-system.html        # living canon reference (the index page)
 │

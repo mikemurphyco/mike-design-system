@@ -36,9 +36,9 @@ const jobs = [
   ['assets/logos/tagline/tagline-cream.svg', [400, 800]],
   // Badge
   ['assets/logos/badge/badge-ai-handyman.svg', [200, 400]],
-  // Loops-nodes pre-existing combined art
-  ['assets/loops-nodes/lockup-loop.svg',     [800]],
-  ['assets/loops-nodes/lockup-loop-ai.svg',  [800]],
+  // Loop/Node lockups
+  ['assets/logos/lockup/lockup-loop.svg',     [800]],
+  ['assets/logos/lockup/lockup-loop-ai.svg',  [800]],
 ];
 
 for (const [svgPath, sizes] of jobs) {

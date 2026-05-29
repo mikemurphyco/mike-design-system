@@ -22,7 +22,7 @@ Single centered column, generous whitespace. Matches the layout vocabulary of th
 
 - **Recolor:** edit the `.loop path` stroke and `.title` / `.subtitle` colors — all reference semantic tokens from `tokens/colors_and_type.css`.
 - **Different newsletter:** swap "AI UNPLUGGED" / "NEWSLETTER" in the editor. The layout holds for short titles up to ~13 characters per line.
-- **Different mark:** swap the inline `<svg>` path with `assets/loops-nodes/node-128.svg` for the Node mark instead of the Loop (would suggest only for AI-content-specific newsletters, since the canon assigns Node to system/content surfaces and Loop to brand/social — the newsletter sits closer to brand).
+- **Different mark:** swap the inline `<svg>` path with `assets/nodes/floating/node-floating-orange-128.svg` for the Node mark instead of the Loop (would suggest only for AI-content-specific newsletters, since the canon assigns Node to system/content surfaces and Loop to brand/social — the newsletter sits closer to brand).
 
 ## Brand notes
 
