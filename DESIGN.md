@@ -301,7 +301,7 @@ Structure (top to bottom): 56×56px thumb (colored square with glyph or avatar, 
 
 ### Code Block
 
-Navy background, 4px radius, cut-shadow. Top bar: filename in muted cream (40% opacity), teal "COPY" label far right. Code area: IBM Plex Mono 14px, line-height 1.5. Prompt character (`$`) in muted color. Cursor: inline teal block — this is the one allowed teal use in the component context.
+Chalk background, navy text, 1px strong border, 4px radius, cut-shadow — same paper-surface language as cards and callouts (matches `.code-block` in `ui_kits/website/site.css`). Top bar: filename in muted navy, teal "COPY" label far right. Code area: IBM Plex Mono 14px, line-height 1.5. Syntax accents on the light ground: keywords/links orange-deep, constants medium blue `#1D5FA0`, strings warm brown `#7A4A21`, comments navy at 55%. Prompt character (`$`) in muted color. Cursor: inline teal block — this is the one allowed teal use in the component context.
 
 ### Callout
 
