@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.3.
+description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.4.
 
 colors:
   primary:     "#FF6434"
@@ -269,7 +269,7 @@ No element in this system uses a radius larger than 8px except the M-mark and pi
 
 Sticky, 60px tall. Background: `{colors.cream}` at 88% opacity with `backdrop-filter: saturate(140%) blur(8px)`. Bottom border: `--color-border-default`. No cut-shadow on the header.
 
-Brand lockup (left): 36px M-mark disc (navy ground, cream "M") + stacked wordmark ("MIKE MURPHY") + orange eyebrow ("AI HANDYMAN"). The AI Handyman badge does **not** appear in the header — only the eyebrow text does.
+Brand lockup (left): 36px orange Loop mark + stacked wordmark ("MIKE MURPHY") + orange eyebrow ("AI HANDYMAN"). The AI Handyman badge does **not** appear in the header — only the eyebrow text does.
 
 Nav links: `{typography.mono-label}`, navy, uppercase. Hover: `{colors.orange}`. Active: `{colors.orange}` + 2px orange underline at bottom of header. Subscribe CTA: small `button-primary`.
 
@@ -315,7 +315,7 @@ On success: yellow "✓ You're in." confirmation chip (yellow bg, navy text, nav
 
 ### Footer
 
-Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.3`). No cut-shadow. No AI Handyman badge.
+Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.4`). No cut-shadow. No AI Handyman badge.
 
 Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7) in `{colors.orange}`.
 

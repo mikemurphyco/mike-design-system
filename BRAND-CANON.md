@@ -1,11 +1,21 @@
 # BRAND CANON
-**Mike Murphy · AI Handyman · v2026.3**
+**Mike Murphy · AI Handyman · v2026.4**
 
 > Clean, calm, technical, warm, lightly handmade, never corporate.
 
 This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page wins.
 
 ---
+
+## What changed in v2026.4
+
+The horizontal lockup (site nav, doc headers) swaps its mark from the navy M-disc to the orange Loop mark, matching what's live on mikemurphy.ai. This also resolves a standing inconsistency: `SYSTEM.md`'s avatar-ladder rule already said "header, social profiles → Loop," while this canon's element table still said the horizontal lockup used the M-mark.
+
+- `scripts/generate-assets.mjs`'s `lockupSvg()` now draws the Loop spiral (always `--mm-orange`, regardless of light/dark scheme) instead of the M-disc + divider. Regenerated `assets/logos/lockup/lockup-horizontal-{navy,cream}.svg` and their PNG exports.
+- Dropped the `·` bullet before `AI HANDYMAN` in the eyebrow line — it now reads as a plain second line, matching the live site.
+- `design-system.html`'s "Horizontal lockup" and "Nav header" previews (section 06 and the components gallery) now render the Loop mark inline instead of `.m-disc`.
+- `ui_kits/website/Header.jsx` and `site.css` updated the same way — the live site nav lockup was already ahead of this repo.
+- The M-mark itself is unchanged and still owns favicon / app icon / footer chrome / ≤32px contexts — this was a lockup-only swap.
 
 ## What changed in v2026.3
 
@@ -134,7 +144,7 @@ Unplugged Sans is not in the system. Don't add it.
 | Element              | What it is                                                                                              | Where it lives                                            |
 | -------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | Wordmark             | `MIKE MURPHY` set in IBM Plex Mono Bold, stacked two lines, line-height 0.92, letter-spacing -0.03em    | Hero, end screens, primary logo lockups                   |
-| Horizontal lockup    | M-mark + `MIKE MURPHY` + `· AI HANDYMAN` orange eyebrow                                                  | Site navigation, document headers                         |
+| Horizontal lockup    | Loop mark + `MIKE MURPHY` + `AI HANDYMAN` orange eyebrow                                                 | Site navigation, document headers                         |
 | M-mark               | IBM Plex Mono "M" centered in a navy disc                                                                | Favicon, app icon, footer chrome, ≤32px contexts          |
 | AI Handyman badge    | `AI HANDYMAN` in IBM Plex Mono Bold, `--mm-navy` text on `--mm-orange` ground, 1px navy border, 4px navy cut-shadow | Tutorial cards, intro/end screens, home hero, sprinkled where it earns its place |
 

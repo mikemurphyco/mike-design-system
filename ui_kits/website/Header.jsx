@@ -12,7 +12,12 @@ function Header({ current = 'home', onNav }) {
     <header className="site-header">
       <div className="container row">
         <div className="brand-lockup" onClick={() => onNav('home')}>
-          <span className="m-disc">M</span>
+          <svg className="loop-mark" viewBox="0 0 64 64" role="img" aria-label="Mike Murphy loop mark">
+            <path
+              d="M12 32 C12 19 20 8 32 8 C45 8 53 19 53 32 C53 44 45 55 32 55 C21 55 13 47 13 38 C13 29 19 23 27 23 C35 23 40 29 40 36 C40 42 35 46 29 44 C24 43 22 38 23 33"
+              fill="none" stroke="var(--mm-orange)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+            />
+          </svg>
           <div>
             <div className="brand-name">MIKE MURPHY</div>
             <div className="brand-eyebrow">AI HANDYMAN</div>

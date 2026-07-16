@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mike Murphy · AI Handyman — Design System v2026.3</title>
+<title>Mike Murphy · AI Handyman — Design System v2026.4</title>
 
 <!-- Canon: tokens + @font-face. Single source of truth for the design system. -->
 <link rel="stylesheet" href="tokens/colors_and_type.css" />
@@ -418,6 +418,7 @@
     text-transform: uppercase;
     color: var(--color-action-primary);
   }
+  .loop-mark { flex-shrink: 0; }
 
   /* M-mark — IBM Plex Mono "M" centered in navy disc */
   .m-disc {
@@ -1134,7 +1135,7 @@
       <span class="badge-ai-handyman">AI Handyman</span>
     </div>
     <div class="ds-header-right">
-      <span class="version-stamp">Design System · v2026.3</span>
+      <span class="version-stamp">Design System · v2026.4</span>
     </div>
   </header>
 
@@ -1389,10 +1390,13 @@
       <div class="logo-card col-6">
         <div class="logo-card-stage">
           <div class="lockup-h">
-            <span class="m-disc m-disc-72" style="width:56px;height:56px;font-size:30px;">M</span>
+            <svg class="loop-mark" width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="Loop mark">
+              <path d="M12 32 C12 19 20 8 32 8 C45 8 53 19 53 32 C53 44 45 55 32 55 C21 55 13 47 13 38 C13 29 19 23 27 23 C35 23 40 29 40 36 C40 42 35 46 29 44 C24 43 22 38 23 33"
+                fill="none" stroke="var(--mm-orange)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <div class="lockup-h-text">
               <span class="lockup-h-name">MIKE MURPHY</span>
-              <span class="lockup-h-eyebrow">· AI Handyman</span>
+              <span class="lockup-h-eyebrow">AI Handyman</span>
             </div>
           </div>
         </div>
@@ -1697,10 +1701,13 @@
         <div class="comp-stage" style="display: block;">
           <div class="nav-header">
             <div class="nav-left">
-              <span class="m-disc m-disc-72" style="width:36px;height:36px;font-size:20px;">M</span>
+              <svg class="loop-mark" width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="Loop mark">
+                <path d="M12 32 C12 19 20 8 32 8 C45 8 53 19 53 32 C53 44 45 55 32 55 C21 55 13 47 13 38 C13 29 19 23 27 23 C35 23 40 29 40 36 C40 42 35 46 29 44 C24 43 22 38 23 33"
+                  fill="none" stroke="var(--mm-orange)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
               <div class="lockup-h-text">
                 <span class="lockup-h-name" style="font-size: 18px;">MIKE MURPHY</span>
-                <span class="lockup-h-eyebrow">· AI Handyman</span>
+                <span class="lockup-h-eyebrow">AI Handyman</span>
               </div>
             </div>
             <nav class="nav-links">
@@ -1905,7 +1912,7 @@
       <span class="m-disc m-disc-72" style="width:32px;height:32px;font-size:18px;">M</span>
       <span class="tagline tagline-footer">LEARN<span class="dot">·</span>BUILD<span class="dot">·</span>MOVE FORWARD</span>
     </div>
-    <span class="version-stamp">v2026.3 · 2026</span>
+    <span class="version-stamp">v2026.4 · 2026</span>
   </footer>
 
 </main>

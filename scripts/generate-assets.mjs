@@ -150,31 +150,38 @@ emit(
 );
 
 // ── 4. Horizontal lockup ──────────────────────────────────────────────────────
-// M-disc (60px) + divider + MIKE MURPHY + · AI HANDYMAN eyebrow
+// Loop mark (64px) + MIKE MURPHY + AI HANDYMAN eyebrow
 
 function lockupSvg(scheme) {
   // scheme: 'navy' (on light) or 'cream' (on dark)
-  const nameInk   = scheme === 'navy' ? T.navy  : T.cream;
-  const discInk   = scheme === 'navy' ? T.cream : T.navy;
-  const discFill  = scheme === 'navy' ? T.navy  : T.cream;
-  const divider   = scheme === 'navy' ? 'rgba(0,30,58,0.2)' : 'rgba(241,236,226,0.3)';
-  const eyebrow   = T.orange;
+  const nameInk = scheme === 'navy' ? T.navy : T.cream;
+  const eyebrow = T.orange;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 72" role="img" aria-label="Mike Murphy horizontal lockup">
   ${fontDefs()}
-  <!-- M disc -->
-  <circle cx="36" cy="36" r="36" fill="${discFill}"/>
-  <text x="36" y="36" text-anchor="middle" dominant-baseline="central"
-    font-family="IBM Plex Mono,monospace" font-weight="700" font-size="40"
-    letter-spacing="-0.02em" fill="${discInk}">M</text>
-  <!-- Divider -->
-  <rect x="84" y="12" width="1" height="48" fill="${divider}"/>
+  <!-- Loop mark -->
+  <path transform="translate(4,4)"
+    d="M12 32
+       C12 19 20 8 32 8
+       C45 8 53 19 53 32
+       C53 44 45 55 32 55
+       C21 55 13 47 13 38
+       C13 29 19 23 27 23
+       C35 23 40 29 40 36
+       C40 42 35 46 29 44
+       C24 43 22 38 23 33"
+    fill="none"
+    stroke="${T.orange}"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
   <!-- MIKE MURPHY name -->
-  <text x="100" y="30" font-family="IBM Plex Mono,monospace" font-weight="700"
+  <text x="92" y="30" font-family="IBM Plex Mono,monospace" font-weight="700"
     font-size="26" letter-spacing="-0.02em" fill="${nameInk}">MIKE MURPHY</text>
-  <!-- · AI HANDYMAN eyebrow -->
-  <text x="100" y="56" font-family="IBM Plex Mono,monospace" font-weight="700"
-    font-size="12" letter-spacing="0.14em" fill="${eyebrow}">· AI HANDYMAN</text>
+  <!-- AI HANDYMAN eyebrow -->
+  <text x="92" y="56" font-family="IBM Plex Mono,monospace" font-weight="700"
+    font-size="14" letter-spacing="0.14em" fill="${eyebrow}">AI HANDYMAN</text>
 </svg>`;
 }
 

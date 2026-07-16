@@ -5,7 +5,7 @@ function Hero({ onNav }) {
     <section className="hero">
       <div className="container row">
         <div className="hero-copy">
-          <p className="h-eyebrow">v2026.3 · New tutorials weekly</p>
+          <p className="h-eyebrow">v2026.4 · New tutorials weekly</p>
           <h1>AI tools, explained clearly.</h1>
           <p className="lede">
             I'm Mike. I make short, practical tutorials for the people the AI industry
