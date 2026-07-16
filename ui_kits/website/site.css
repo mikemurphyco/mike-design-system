@@ -189,7 +189,7 @@ a { color: inherit; }
   padding: var(--space-3) 0;
 }
 .brand-lockup { display: flex; align-items: center; gap: var(--space-3); cursor: pointer; user-select: none; }
-.brand-lockup .m-disc { width: 36px; height: 36px; font-size: 20px; }
+.brand-lockup .loop-mark { width: 36px; height: 36px; flex-shrink: 0; }
 .brand-name {
   font-family: var(--font-mono); font-weight: 700;
   font-size: 18px; line-height: 0.95; letter-spacing: -0.02em;

@@ -4,7 +4,7 @@ This is the working manual. It is the file to read at the start of any brand tas
 
 It does not duplicate the canon or the spec. It points at them and tells you which one is load-bearing for the task in front of you.
 
-`v2026.3`
+`v2026.4`
 
 ---
 
@@ -192,7 +192,7 @@ The pattern, every time:
 2. **Consume semantic tokens only.** `var(--color-action-primary)`, never `#FF6434`. Tokens live in `tokens/colors_and_type.css` and the `:root` block of `design-system.html`.
 3. **Pick a layout from the locked vocabulary.** If your draft requires a new layout, that's the signal to back up.
 4. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review — cartoon Mike, washi tape, toolshed copy, the old tagline, free yellow, two teals — delete it now.
-5. **Stamp only when there's a reason to.** Version stamps (`v2026.3`) belong on canon docs (this file, `BRAND-CANON.md`, `design-system.html` footer), never on shipped outputs. The `Mike Murphy AI` identity stamp is optional — use it where attribution earns its place (about, formal decks, end screens), skip it where the AI Handyman badge or Mike's face is already identifying the work (YouTube thumbnails, social posts, channel art). Full rule: `BRAND-CANON.md` ("Stamp" section).
+5. **Stamp only when there's a reason to.** Version stamps (`v2026.4`) belong on canon docs (this file, `BRAND-CANON.md`, `design-system.html` footer), never on shipped outputs. The `Mike Murphy AI` identity stamp is optional — use it where attribution earns its place (about, formal decks, end screens), skip it where the AI Handyman badge or Mike's face is already identifying the work (YouTube thumbnails, social posts, channel art). Full rule: `BRAND-CANON.md` ("Stamp" section).
 
 ---
 
