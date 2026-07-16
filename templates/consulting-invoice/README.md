@@ -37,7 +37,11 @@ Click any field to edit it in place — no code required:
 
 ### 4. Save as PDF
 
-`Cmd+P` → Save as PDF. Margins: default. Background graphics: on.
+`Cmd+P` → Save as PDF. Under **More settings**, use:
+
+- Margins: default
+- Background graphics: on
+- Headers and footers: off (this removes the local file path from the PDF footer)
 
 The import bar disappears automatically in print/PDF output.
 
