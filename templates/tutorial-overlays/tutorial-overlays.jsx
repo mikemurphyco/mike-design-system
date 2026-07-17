@@ -565,7 +565,7 @@ const CONTENT = {
   t2: { eyebrow: 'OpenAI Codex',  title: 'How to add n8n MCP server' },
   t3: { eyebrow: 'thanks for watching', title: 'See you next one.' },
   t4: { eyebrow: 'TERMINAL',      title: 'Run the install command', terminalPath: '~/code/yours' },
-  t5: { eyebrow: 'WHAT WE BUILD', title: 'A local AI chat that follows you across every device.', lede: 'One Hostinger box. Tailscale + Ollama + Open WebUI. Twelve minutes from a fresh server to a private chatbot on your phone.', url: 'https://mikemurphy.co/tutorials' },
+  t5: { eyebrow: 'WHAT WE BUILD', title: 'A local AI chat that follows you across every device.', lede: 'One Hostinger box. Tailscale + Ollama + Open WebUI. Twelve minutes from a fresh server to a private chatbot on your phone.', url: 'https://mikemurphy.ai/tutorials' },
 };
 
 const TEMPLATES = [
