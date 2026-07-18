@@ -17,6 +17,9 @@
     "thumbnail:orange":   "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-orange",
     "thumbnail:tile":     "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-tile",
     "thumbnail:terminal": "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-terminal",
+    "thumbnail:murphbot-cream":  "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-cream",
+    "thumbnail:murphbot-navy":   "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-navy",
+    "thumbnail:murphbot-orange": "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-orange",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {

@@ -35,6 +35,9 @@ const VARIANTS = {
   'youtube-thumbnail-orange':   { key: 'orange',   thumbId: 'thumb-orange',   hasTopic: false },
   'youtube-thumbnail-tile':     { key: 'tile',     thumbId: 'thumb-tile',     hasTopic: true  },
   'youtube-thumbnail-terminal': { key: 'terminal', thumbId: 'thumb-terminal', hasTopic: false },
+  'murphbot-cream':  { key: 'murphbot-cream',  thumbId: 'thumb-murphbot-cream',  hasTopic: false, isMurphbot: true },
+  'murphbot-navy':   { key: 'murphbot-navy',   thumbId: 'thumb-murphbot-navy',   hasTopic: false, isMurphbot: true },
+  'murphbot-orange': { key: 'murphbot-orange', thumbId: 'thumb-murphbot-orange', hasTopic: false, isMurphbot: true },
 };
 
 // ── arg parsing ───────────────────────────────────────────────────────────────
@@ -44,7 +47,7 @@ const argv = (() => {
   for (let i = 0; i < a.length; i++) {
     if (a[i].startsWith('--')) {
       const key = a[i].slice(2);
-      const val = a[i + 1] && !a[i + 1].startsWith('--') ? a[++i] : true;
+      const val = a[i + 1] !== undefined && !a[i + 1].startsWith('--') ? a[++i] : true;
       out[key] = val;
     }
   }
@@ -97,6 +100,16 @@ if (variant.hasTopic) {
   topicLetter = await ask('Topic letter (1 char)', 'topic', defaultFor('ed-topic'));
 }
 
+let pose = null, cardType = null, termFile = null, termCmd = null;
+if (variant.isMurphbot) {
+  pose = await ask('MurphBot pose (e.g. 07-fixing, or chalk-01-classic for orange bg)', 'pose', defaultFor('ed-pose'));
+  cardType = await ask('Card (none | blank | terminal)', 'card', defaultFor('ed-card'));
+  if (cardType === 'terminal') {
+    termFile = await ask('Terminal filename', 'term-file', defaultFor('ed-term-file') || 'murphbot.sh');
+    termCmd  = await ask('Terminal command',  'term-cmd',  defaultFor('ed-term-cmd')  || '');
+  }
+}
+
 const defaultOut = templateName.replace(/^youtube-thumbnail-?/, '') || 'thumbnail';
 const outName = await ask('Output filename (no extension)', 'out', defaultOut);
 const scale = Number(argv.scale ?? 2);
@@ -105,7 +118,10 @@ rl.close();
 // ── render via Playwright ─────────────────────────────────────────────────────
 console.log(`\nRendering @ ${1280 * scale}×${720 * scale}...`);
 
-const PREFIX = { classic:'cl', dark:'dk', split:'sp', cutout:'co', orange:'or', tile:'ti', terminal:'tm' };
+const PREFIX = {
+  classic:'cl', dark:'dk', split:'sp', cutout:'co', orange:'or', tile:'ti', terminal:'tm',
+  'murphbot-cream':'mc', 'murphbot-navy':'mn', 'murphbot-orange':'mo',
+};
 const p = PREFIX[variant.key];
 
 const browser = await chromium.launch();
@@ -117,7 +133,7 @@ const page = await ctx.newPage();
 await page.goto('file://' + GALLERY);
 
 // Switch to the right variant tab, then inject copy values.
-await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter }) => {
+await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter, pose, cardType, termFile, termCmd }) => {
   // Activate the correct tab
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.thumb-target').forEach(t => t.style.display = 'none');
@@ -133,7 +149,15 @@ await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter 
   set(`${p}-hl2`,     headline2);
   set(`${p}-lede`,    lede);
   if (topicLetter !== null) set(`${p}-topic`, topicLetter);
-}, { key: variant.key, p, eyebrow, headline1, headline2, lede, topicLetter });
+
+  if (pose !== null) {
+    const poseImg = document.getElementById(`${p}-pose`);
+    if (poseImg) poseImg.src = `../../assets/characters/murphbot/poses/murphbot-${pose}.png`;
+  }
+  if (cardType !== null && typeof renderCard === 'function') {
+    renderCard(p, cardType, { filename: termFile, cmd: termCmd });
+  }
+}, { key: variant.key, p, eyebrow, headline1, headline2, lede, topicLetter, pose, cardType, termFile, termCmd });
 
 await page.waitForLoadState('networkidle');
 await page.waitForTimeout(150);
