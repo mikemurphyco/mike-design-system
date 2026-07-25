@@ -46,8 +46,6 @@ const VERSIONED_FILES = [
   { path: "SYSTEM.md",                               re: /v\d{4}\.\d+/g },
   { path: "tokens/colors_and_type.css",              re: /v\d{4}\.\d+/g },
   { path: "design-system.html",                      re: /v\d{4}\.\d+/g },
-  { path: "figma-builder/README.md",                 re: /v\d{4}\.\d+/g },
-  { path: "figma-builder/code.js",                   re: /v\d{4}\.\d+/g },
   { path: "templates/youtube-thumbnails/README.md",     re: /v\d{4}\.\d+/g },
   { path: "templates/youtube-thumbnails/index.html",    re: /v\d{4}\.\d+/g },
   { path: "ui_kits/website/Footer.jsx",              re: /v\d{4}\.\d+/g },

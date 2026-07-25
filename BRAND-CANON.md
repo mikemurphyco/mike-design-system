@@ -17,6 +17,7 @@ Navigation redesign, shipped to mikemurphy.ai. The header grows from 60px to **8
 - **Menus open on click, never hover.** Hover menus fail on trackpads and are unreachable on touch.
 - The Loop mark stays `--mm-orange` in the header in both themes — the lockup rule from the previous version, unchanged. The mobile sheet's navy ground is the one place the cream Loop variant is correct.
 - Header height and mark size are a matched pair — the 84px bar is balanced for a 42px mark. Change them together.
+- **Removed `figma-builder/`** and its `npm run sync-figma` script. The plugin mirrored the canon into Figma, but Figma isn't part of this workflow — in its lifetime it was never the reason for a commit, only ever updated as collateral when something else changed. The earlier changelog entry below still describes it; that's a historical record, not a live pointer.
 - `design-system.html` and `ui_kits/website/` were updated to the new desktop header and dropdown. They stop there **on purpose**: these are visual references, and the mobile sheet, focus trap, and keyboard navigation live only in the shipped Astro component. This is a scoping decision, not an unfinished task — don't "fix" it later.
 
 ## What changed in v2026.4

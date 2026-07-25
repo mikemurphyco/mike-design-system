@@ -168,7 +168,6 @@ Run:
 
 ```bash
 npm run generate
-npm run sync-figma
 npm run check
 ```
 
@@ -235,12 +234,6 @@ npm run check
 ```
 
 Checks canon colors and version consistency.
-
-```bash
-npm run sync-figma
-```
-
-Copies token values into the Figma plugin code.
 
 ```bash
 npm run bump v2026.N

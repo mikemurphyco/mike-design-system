@@ -42,8 +42,6 @@ const VERSIONED_FILES = [
   "SYSTEM.md",
   "tokens/colors_and_type.css",
   "design-system.html",
-  "figma-builder/README.md",
-  "figma-builder/code.js",
   "templates/youtube-thumbnails/README.md",
   "templates/youtube-thumbnails/index.html",
   "ui_kits/website/Footer.jsx",

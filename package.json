@@ -7,7 +7,6 @@
     "generate": "node scripts/generate-assets.mjs",
     "check": "node scripts/check-canon.mjs && node scripts/check-version.mjs",
     "check-version": "node scripts/check-version.mjs",
-    "sync-figma": "node scripts/sync-figma-builder.mjs",
     "bump": "node scripts/bump-version.mjs",
     "serve": "npx http-server . -p 3131 -o /templates/youtube-thumbnails/index.html -c-1",
     "thumbnail":          "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail",

@@ -18,7 +18,6 @@ This repo is a **factory**, not a **warehouse**. Think of it as the place where 
 - **Canonical brand artifacts** — the things that *are* the brand: official logos, marks, favicons, fonts, avatars. These live under `assets/`. They are generated from canon and committed because they are referenced by everything downstream.
 - **Reusable templates** — scaffolding that *can produce* an output but isn't itself the output. The current example is `templates/youtube-thumbnail/`. Any new recurring format (X header, LinkedIn cover, webinar banner, podcast art) becomes a new directory under `templates/`. Each template links the canon CSS so it always renders with current tokens.
 - **Reference implementations** — `ui_kits/website/` shows how the brand looks applied in real product code. Reference, not deliverable.
-- **The Figma plugin** — `figma-builder/` mirrors the canon into Figma. It carries an inline copy of the canon hex values that is kept in sync via `npm run sync-figma`.
 - **Tools** — `scripts/` and `.githooks/`: the things that maintain the factory itself (generate assets, check for drift, bump version, enforce on commit).
 
 ### Does NOT belong in this repo
@@ -64,14 +63,11 @@ mike-design-system/
 ├── ui_kits/                  # reference UI implementations
 │   └── website/              # the brand applied to a real product
 │
-├── figma-builder/            # Figma plugin (mirrors canon into Figma)
-│
 ├── scripts/                  # tools that maintain the factory
 │   ├── generate-assets.mjs   # regenerate canonical SVGs + PNGs
 │   ├── check-canon.mjs       # detect hex drift
 │   ├── check-version.mjs     # detect version drift
 │   ├── bump-version.mjs      # atomic version bump
-│   ├── sync-figma-builder.mjs# propagate canon to Figma plugin
 │   └── experiments/          # one-off / scratch renderers (may be useful again)
 │
 ├── .githooks/                # pre-commit enforcement
@@ -86,7 +82,7 @@ mike-design-system/
 
 | Run when | Command |
 |---|---|
-| You changed a token in `tokens/colors_and_type.css` | `npm run generate && npm run sync-figma && npm run check` |
+| You changed a token in `tokens/colors_and_type.css` | `npm run generate && npm run check` |
 | You're bumping the brand version | `npm run bump v2026.N` |
 | You want to verify nothing has drifted (also runs on commit) | `npm run check` |
 | You're exporting a YouTube thumbnail PNG | `npm run thumbnail` — interactive prompt, full docs in `templates/youtube-thumbnail/README.md` |
