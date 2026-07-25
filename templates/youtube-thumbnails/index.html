@@ -359,7 +359,7 @@ body {
 #thumb-terminal .badge { position:absolute; top:64px; left:72px; background:var(--mm-orange); color:var(--mm-navy); border:2px solid var(--mm-navy); box-shadow:var(--shadow-cut-lg); border-radius:6px; padding:12px 22px; font-weight:700; font-size:20px; letter-spacing:0.18em; }
 #thumb-terminal .text-zone { position:absolute; left:72px; top:232px; width:560px; }
 #thumb-terminal .eyebrow { font-weight:700; font-size:22px; letter-spacing:0.2em; color:var(--mm-orange); margin:0 0 20px; text-transform:uppercase; }
-#thumb-terminal .headline { font-weight:700; font-size:76px; letter-spacing:-0.03em; line-height:0.95; color:var(--mm-navy); margin:0 0 24px; }
+#thumb-terminal .headline { font-weight:700; font-size:76px; letter-spacing:-0.03em; line-height:1.15; color:var(--mm-navy); margin:0 0 32px; }
 #thumb-terminal .lede { font-family:var(--font-sans); font-weight:400; font-size:26px; line-height:1.3; color:rgba(0,30,58,.62); margin:0; max-width:540px; }
 #thumb-terminal .tagline { position:absolute; left:72px; bottom:56px; font-weight:700; font-size:18px; letter-spacing:0.28em; color:var(--mm-navy); }
 #thumb-terminal .tagline .dot { color:var(--mm-orange); margin:0 6px; }
@@ -422,9 +422,8 @@ body {
   font-weight: 700;
   font-size: 84px;
   letter-spacing: -0.03em;
-  line-height: 0.95;
-  text-transform: uppercase;
-  margin: 0 0 24px;
+  line-height: 1.15;
+  margin: 0 0 32px;
 }
 [id^="thumb-murphbot"] .lede {
   font-family: var(--font-sans);
@@ -593,6 +592,7 @@ body {
   <span class="shell-wordmark">AI HANDYMAN</span>
   <span class="shell-title">/ YOUTUBE THUMBNAILS</span>
   <button class="shell-export-btn" id="btn-export">⬇ Export PNG</button>
+  <button class="shell-export-btn" id="btn-clear-fields" title="Clear saved field text for this variant">Clear fields</button>
 </div>
 
 <!-- ── Tab strip ── -->
@@ -1066,18 +1066,53 @@ body {
     rescale();
   });
 
+  // ── Field persistence (survives Live Server reloads / accidental refreshes) ──
+  // Every editor input is saved to localStorage on input and restored on load,
+  // so a reload repopulates the DOM instead of snapping back to the hardcoded
+  // template defaults baked into this file.
+  const STORAGE_KEY = 'mm-thumbnail-editor-state-v1';
+
+  function loadStoredState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch {
+      return {};
+    }
+  }
+
+  function saveStoredField(variant, cls, value) {
+    const state = loadStoredState();
+    state[variant] = state[variant] || {};
+    state[variant][cls] = value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  const storedState = loadStoredState();
+
   // ── Live field binding ──
   // Each editor panel wires its inputs to the thumbnail on input events.
   function wireVariant(variant) {
     const panel = document.querySelector(`.template-panel[data-variant="${variant}"]`);
     if (!panel) return;
     const p = VARIANTS[variant].prefix;
+    const savedFields = storedState[variant] || {};
 
     const bind = (cls, targetId) => {
       const input = panel.querySelector(cls);
       const target = document.getElementById(targetId);
       if (!input || !target) return;
-      input.addEventListener('input', () => { target.textContent = input.value; });
+
+      // Restore from localStorage, if we have it, before wiring live updates.
+      const key = cls.replace(/^\./, '');
+      if (Object.prototype.hasOwnProperty.call(savedFields, key)) {
+        input.value = savedFields[key];
+        target.textContent = savedFields[key];
+      }
+
+      input.addEventListener('input', () => {
+        target.textContent = input.value;
+        saveStoredField(variant, key, input.value);
+      });
     };
 
     bind('.ed-eyebrow', `${p}-eyebrow`);
@@ -1090,14 +1125,30 @@ body {
     const poseSelect = panel.querySelector('.ed-pose');
     const poseImg = document.getElementById(`${p}-pose`);
     if (poseSelect && poseImg) {
+      if (Object.prototype.hasOwnProperty.call(savedFields, 'ed-pose')) {
+        poseSelect.value = savedFields['ed-pose'];
+        poseImg.src = `../../assets/characters/murphbot/poses/murphbot-${poseSelect.value}.png`;
+      }
       poseSelect.addEventListener('change', () => {
         poseImg.src = `../../assets/characters/murphbot/poses/murphbot-${poseSelect.value}.png`;
+        saveStoredField(variant, 'ed-pose', poseSelect.value);
       });
     }
 
     const cardSelect = panel.querySelector('.ed-card');
     const termFile = panel.querySelector('.ed-term-file');
     const termCmd = panel.querySelector('.ed-term-cmd');
+
+    if (cardSelect && Object.prototype.hasOwnProperty.call(savedFields, 'ed-card')) {
+      cardSelect.value = savedFields['ed-card'];
+    }
+    if (termFile && Object.prototype.hasOwnProperty.call(savedFields, 'ed-term-file')) {
+      termFile.value = savedFields['ed-term-file'];
+    }
+    if (termCmd && Object.prototype.hasOwnProperty.call(savedFields, 'ed-term-cmd')) {
+      termCmd.value = savedFields['ed-term-cmd'];
+    }
+
     const updateCard = () => {
       if (!cardSelect) return;
       renderCard(p, cardSelect.value, {
@@ -1106,14 +1157,32 @@ body {
       });
     };
     if (cardSelect) {
-      cardSelect.addEventListener('change', updateCard);
+      cardSelect.addEventListener('change', () => {
+        saveStoredField(variant, 'ed-card', cardSelect.value);
+        updateCard();
+      });
       updateCard();
     }
-    if (termFile) termFile.addEventListener('input', updateCard);
-    if (termCmd) termCmd.addEventListener('input', updateCard);
+    if (termFile) termFile.addEventListener('input', () => {
+      saveStoredField(variant, 'ed-term-file', termFile.value);
+      updateCard();
+    });
+    if (termCmd) termCmd.addEventListener('input', () => {
+      saveStoredField(variant, 'ed-term-cmd', termCmd.value);
+      updateCard();
+    });
   }
 
   Object.keys(VARIANTS).forEach(wireVariant);
+
+  // ── Clear saved fields for the active variant ──
+  document.getElementById('btn-clear-fields').addEventListener('click', () => {
+    if (!confirm(`Clear saved text for ${VARIANTS[activeVariant].label}? This resets its fields back to the template defaults.`)) return;
+    const state = loadStoredState();
+    delete state[activeVariant];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    location.reload();
+  });
 
   // ── Responsive scale ──
   // The thumbnail is 1280px wide. Scale it to fit the canvas-area width.
