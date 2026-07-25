@@ -243,7 +243,9 @@ Type roles and their use cases:
 
 ## Layout
 
-Maximum content width: 1160px, centered. Page padding: 32px horizontal.
+Maximum content width: **1152px (72rem), centered, with a 16px gutter** — `width: min(100% - 2rem, 72rem)`. Every full-width element, including the site header, shares this measure so left and right edges line up down the page.
+
+> Earlier versions of this doc specified 1160px + 32px padding. The site never implemented that, and when the redesigned header was built to the quoted numbers it sat 28px inside the content below it. The 72rem container is what ships; these are now the real numbers.
 
 Spacing uses a 4px base grid. Prefer named steps (`space-4` = 16px, `space-6` = 24px, `space-8` = 32px) over arbitrary values. Full scale: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128px.
 
@@ -278,9 +280,9 @@ No element in this system uses a radius larger than 8px except the M-mark and pi
 
 ### Navigation Header
 
-Sticky, **84px** tall (64px below the 820px breakpoint). Background: `{colors.cream}` at 88% opacity — dark: navy at 88% — with `backdrop-filter: saturate(140%) blur(8px)`. This is the one sanctioned blur surface in the system. Bottom border: `--color-border-default`. No cut-shadow on the header.
+Sticky, **84px** tall (64px below the 1024px breakpoint). Background: `{colors.cream}` at 88% opacity — dark: navy at 88% — with `backdrop-filter: saturate(140%) blur(8px)`. This is the one sanctioned blur surface in the system. Bottom border: `--color-border-default`. No cut-shadow on the header.
 
-Inner container: max-width 1160px, centered, 32px horizontal padding (20px mobile).
+Inner container: the shared page measure (`min(100% - 2rem, 72rem)`) — not a header-specific width. The lockup's left edge must line up with the page's H1, and the Subscribe button's right edge with the content's right edge.
 
 Brand lockup (left): **42px** orange Loop mark + two-line wordmark — "MIKE MURPHY" (Mono 700, 16px/1.15, +0.06em) over the orange "AI HANDYMAN" eyebrow (Mono 700, 11px/1.3, +0.16em). The Loop is orange in **both** themes, per the canon lockup rule. The AI Handyman badge does **not** appear in the header — only the eyebrow text does.
 
@@ -290,7 +292,9 @@ Nav links: `{typography.mono-label}` at 12px/+0.15em, navy (dark: chalk), upperc
 
 Utility cluster (far right, separated by a 1px hairline with 28px padding): a 38px square bordered **search icon button**, the theme toggle in the same button style, and the Subscribe `button-primary`. Search is an icon, not a nav link and not an inline field — the header holds no text input.
 
-Below 820px the nav collapses: lockup shrinks to a 30px mark, and the right side is a 44px search button plus a 44px hamburger opening the mobile sheet.
+Below **1024px** the nav collapses: lockup shrinks to a 30px mark, and the right side is a 44px search button plus a 44px hamburger opening the mobile sheet.
+
+The breakpoint is set by measurement, not by device class. The desktop header needs roughly **881px** to lay out (lockup 170 + links 396 + utility cluster 235, plus gaps); below that it overflows its container and scrolls the whole page sideways. 1024px clears that with margin. **If you add a nav link or widen the utility cluster, re-measure and raise the breakpoint to match** — this is the constraint that decides it, not the number itself.
 
 ### Navigation Dropdown
 
@@ -310,7 +314,7 @@ Body: section labels ("CONTENT", "MORE") in orange Mono 700 10px/+0.18em; items 
 
 All hit targets are ≥ 44px. Body scroll locks while open.
 
-**Where the nav actually lives.** `design-system.html` and `ui_kits/website/` show the **desktop** header only — they are visual references, not implementations. The mobile sheet, the focus trap, arrow-key menu navigation, the theme toggle, and the 820px breakpoint exist only in `SiteHeader.astro` on mikemurphy.ai, which is authoritative for all nav behavior. Don't read the kit's omissions as the spec; this document is the spec.
+**Where the nav actually lives.** `design-system.html` and `ui_kits/website/` show the **desktop** header only — they are visual references, not implementations. The mobile sheet, the focus trap, arrow-key menu navigation, the theme toggle, and the 1024px breakpoint exist only in `SiteHeader.astro` on mikemurphy.ai, which is authoritative for all nav behavior. Don't read the kit's omissions as the spec; this document is the spec.
 
 ### Hero
 
