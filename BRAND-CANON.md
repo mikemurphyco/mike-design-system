@@ -1,11 +1,23 @@
 # BRAND CANON
-**Mike Murphy · AI Handyman · v2026.4**
+**Mike Murphy · AI Handyman · v2026.5**
 
 > Clean, calm, technical, warm, lightly handmade, never corporate.
 
 This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page wins.
 
 ---
+
+## What changed in v2026.5
+
+Navigation redesign, shipped to mikemurphy.ai. The header grows from 60px to **84px**, the Loop mark in the lockup from 36px to **42px**, and the flat nav is replaced by a CONTENT dropdown with a full-screen navy sheet on mobile. Search stops being a nav link and becomes an icon button.
+
+- **New color: `--mm-navy-raised` (`#06263F`).** Dark-mode elevated surfaces only — dropdowns, menus, popovers that must sit above `--color-bg-surface`. Light mode has no counterpart; chalk is already the lift. This is a *surface* value, not a fifth brand color: it never becomes text, border, or a light-mode background, and it doesn't change the four-colors-on-warm-paper rule.
+- **Chrome vs. card, clarified.** "No cut-shadow on nav/header/footer" stands, but a dropdown anchored to the nav is a **card**, not chrome, and keeps the cut-shadow. The rule is about the persistent bar, not everything attached to it.
+- **Hover fills over navy are neutral, never orange.** Translucent orange on a navy ground muddies to brown. Hover washes use `--color-text-primary` at 5–7%. A lightened orange variant was tried for small text on navy and rejected — the single orange stays single.
+- **Menus open on click, never hover.** Hover menus fail on trackpads and are unreachable on touch.
+- The Loop mark stays `--mm-orange` in the header in both themes — the lockup rule from the previous version, unchanged. The mobile sheet's navy ground is the one place the cream Loop variant is correct.
+- Header height and mark size are a matched pair — the 84px bar is balanced for a 42px mark. Change them together.
+- `design-system.html` and `ui_kits/website/` were updated to the new desktop header and dropdown. They stop there **on purpose**: these are visual references, and the mobile sheet, focus trap, and keyboard navigation live only in the shipped Astro component. This is a scoping decision, not an unfinished task — don't "fix" it later.
 
 ## What changed in v2026.4
 
@@ -122,6 +134,7 @@ Four colors on warm neutral paper. Locked hex values, no alternatives.
 | `--mm-orange-deep` | `#E8501C` | Hover / pressed state for orange.                            |
 | `--mm-yellow`      | `#F5C842` | Reserved for success-state chips (e.g., `✓ You're in.` newsletter confirmation). Small surface area, narrow semantic role. Almost never sits on cream directly; never as primary text ink. |
 | `--mm-teal`        | `#1ECEBE` | "AI pop." Reserve for: terminal cursors, code accents, "live/new" status indicators. **One use per screen.** |
+| `--mm-navy-raised` | `#06263F` | Dark-mode elevated surfaces only (dropdowns, menus, popovers). A surface lift above `--color-bg-surface`, not a brand color — never text, never a border, never a light-mode background. |
 
 ---
 

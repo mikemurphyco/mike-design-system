@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.4.
+description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.5.
 
 colors:
   primary:     "#FF6434"
@@ -12,6 +12,7 @@ colors:
   orange-deep: "#E8501C"
   yellow:      "#F5C842"
   teal:        "#1ECEBE"
+  navy-raised: "#06263F"
 
 typography:
   display:
@@ -147,7 +148,15 @@ components:
   nav-header:
     backgroundColor: "{colors.cream}"
     textColor:       "{colors.navy}"
-    height:          60px
+    height:          84px
+    heightMobile:    64px
+
+  nav-dropdown:
+    backgroundColor: "{colors.chalk}"
+    textColor:       "{colors.navy}"
+    rounded:         "{rounded.md}"
+    padding:         8px
+    width:           300px
 
   newsletter-form:
     backgroundColor: "{colors.chalk}"
@@ -188,6 +197,7 @@ The palette is four named values and three functional extensions. All components
 - **Navy (`#001E3A`):** All body text, borders, and the offset cut-shadow ink. Never pure black.
 - **Orange (`#FF6434`):** The only primary action color. CTAs, eyebrows, active states, the AI Handyman badge background. One dominant orange per screen.
 - **Orange-deep (`#E8501C`):** Hover and pressed state for orange. Never used at rest.
+- **Navy-raised (`#06263F`):** Dark-mode only. Navy lifted one step for surfaces that must read as elevated *above* the dark card surface — dropdowns, menus, popovers. In light mode there is no counterpart: chalk already is the lift, so `--color-bg-raised` aliases chalk and components consume it unconditionally. Never a page or card background in light mode, never a text or border color.
 - **Yellow (`#F5C842`):** Reserved for success-state chips such as `✓ You're in.`. Do not use as badge ink, hero color, body type, or button color.
 - **Teal (`#1ECEBE`):** The "AI pop." Rationed to exactly one element per screen: a terminal cursor, a `live` status dot, a teal-ring on the M-mark. Never on two things at once.
 
@@ -197,6 +207,7 @@ Semantic mapping consumed by components:
 |---|---|
 | `--color-bg-page` | `{colors.cream}` |
 | `--color-bg-surface` | `{colors.chalk}` |
+| `--color-bg-raised` | `{colors.chalk}` (dark: `{colors.navy-raised}`) |
 | `--color-text-primary` | `{colors.navy}` |
 | `--color-text-muted` | navy @ 62% opacity |
 | `--color-action-primary` | `{colors.orange}` |
@@ -267,11 +278,39 @@ No element in this system uses a radius larger than 8px except the M-mark and pi
 
 ### Navigation Header
 
-Sticky, 60px tall. Background: `{colors.cream}` at 88% opacity with `backdrop-filter: saturate(140%) blur(8px)`. Bottom border: `--color-border-default`. No cut-shadow on the header.
+Sticky, **84px** tall (64px below the 820px breakpoint). Background: `{colors.cream}` at 88% opacity — dark: navy at 88% — with `backdrop-filter: saturate(140%) blur(8px)`. This is the one sanctioned blur surface in the system. Bottom border: `--color-border-default`. No cut-shadow on the header.
 
-Brand lockup (left): 36px orange Loop mark + stacked wordmark ("MIKE MURPHY") + orange eyebrow ("AI HANDYMAN"). The AI Handyman badge does **not** appear in the header — only the eyebrow text does.
+Inner container: max-width 1160px, centered, 32px horizontal padding (20px mobile).
 
-Nav links: `{typography.mono-label}`, navy, uppercase. Hover: `{colors.orange}`. Active: `{colors.orange}` + 2px orange underline at bottom of header. Subscribe CTA: small `button-primary`.
+Brand lockup (left): **42px** orange Loop mark + two-line wordmark — "MIKE MURPHY" (Mono 700, 16px/1.15, +0.06em) over the orange "AI HANDYMAN" eyebrow (Mono 700, 11px/1.3, +0.16em). The Loop is orange in **both** themes, per the canon lockup rule. The AI Handyman badge does **not** appear in the header — only the eyebrow text does.
+
+The mark size and header height are tuned together: at 84px the 42px mark balances the taller bar without crowding the wordmark. Changing one without the other unbalances the top-left corner.
+
+Nav links: `{typography.mono-label}` at 12px/+0.15em, navy (dark: chalk), uppercase, 28px gap. Hover and active: `{colors.orange}`.
+
+Utility cluster (far right, separated by a 1px hairline with 28px padding): a 38px square bordered **search icon button**, the theme toggle in the same button style, and the Subscribe `button-primary`. Search is an icon, not a nav link and not an inline field — the header holds no text input.
+
+Below 820px the nav collapses: lockup shrinks to a 30px mark, and the right side is a 44px search button plus a 44px hamburger opening the mobile sheet.
+
+### Navigation Dropdown
+
+Anchored below its trigger, 300px wide. `--color-bg-raised` ground, 1px strong border, 4px radius, cut-shadow — the dropdown is a **card**, not chrome, so the cut-shadow applies here even though the header itself never carries one.
+
+Each row (11px/14px padding, 4px radius): a mono-label title with a trailing orange `→` that appears on hover, and an optional IBM Plex Sans 13px description beneath in `--color-text-muted`. A footer row above a hairline carries an orange "BROWSE ALL TOPICS →" link.
+
+**Hover is a neutral wash** — `--color-text-primary` at 5% (7% in dark) — with the label turning orange. Do **not** use a translucent orange fill: orange over navy muddies to brown. This was tested and rejected.
+
+The trigger is a nav link with a 9px chevron that rotates 180° over 120ms while open, and it takes a 2px orange bottom border in the open state. **Click to open, never hover** — hover menus fail on trackpads and touch. Outside click and Escape both close.
+
+### Mobile Menu Sheet
+
+Full-screen fixed overlay on solid `{colors.navy}` — not translucent, not a slide-in drawer. Top bar mirrors the header at 64px with the **cream** Loop variant (the one place the mark is not orange) and a 44px bordered close button.
+
+Body: section labels ("CONTENT", "MORE") in orange Mono 700 10px/+0.18em; items in IBM Plex Sans 600 17px chalk with chalk-@10% hairline dividers and a trailing muted `→`. Action row: full-width Subscribe (chalk border, chalk cut-shadow) beside a 46px theme toggle. Footer: the locked tagline with orange mid-dots.
+
+All hit targets are ≥ 44px. Body scroll locks while open.
+
+**Where the nav actually lives.** `design-system.html` and `ui_kits/website/` show the **desktop** header only — they are visual references, not implementations. The mobile sheet, the focus trap, arrow-key menu navigation, the theme toggle, and the 820px breakpoint exist only in `SiteHeader.astro` on mikemurphy.ai, which is authoritative for all nav behavior. Don't read the kit's omissions as the spec; this document is the spec.
 
 ### Hero
 
@@ -315,7 +354,7 @@ On success: yellow "✓ You're in." confirmation chip (yellow bg, navy text, nav
 
 ### Footer
 
-Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.4`). No cut-shadow. No AI Handyman badge.
+Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.5`). No cut-shadow. No AI Handyman badge.
 
 Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7) in `{colors.orange}`.
 
@@ -336,7 +375,9 @@ Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7)
 **Don't:**
 - Use Unplugged Sans, Georgia, or any serif as a fallback for the polaroid caption.
 - Bring back: cartoon Mike, washi tape, hand-drawn arrows, lighthouse, toolshed metaphor copy ("wire up," "under the hood," "blueprint"), `LEARN. CREATE. MOVE FORWARD.`
-- Apply the cut-shadow to nav, header, or footer chrome.
+- Apply the cut-shadow to nav, header, or footer chrome. (Dropdowns and menus *are* cards, not chrome — those keep it.)
+- Fill a hover state with translucent orange over navy. It muddies to brown. Use a neutral wash of `--color-text-primary` instead.
+- Open a menu on hover. Click only.
 - Use `{colors.yellow}` on cream, chalk, or any non-orange surface.
 - Use teal on two elements in the same screen view.
 - Place the AI Handyman badge in the header nav or footer.

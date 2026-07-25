@@ -75,6 +75,31 @@ function AboutScreen() {
   );
 }
 
+// The nav reaches more surfaces than this kit mocks up. Rather than render a
+// blank body for those, name the screen so the nav stays fully clickable.
+const STUB_SCREENS = {
+  articles:      ['Articles', 'Longer reads and how-tos'],
+  'field-notes': ['Field Notes', 'Quick tips, snippets, and shortcuts'],
+  podcast:       ['Podcast', 'Mike Murphy Unplugged'],
+  resources:     ['Resources', 'Tools and links worth keeping'],
+  search:        ['Search', 'Full-text across every surface'],
+  topics:        ['All Topics', 'Every tag, one page'],
+};
+
+function StubScreen({ id }) {
+  const [title, note] = STUB_SCREENS[id];
+  return (
+    <section className="screen container" style={{ padding: 'var(--space-16) 28px', maxWidth: 880 }}>
+      <span className="eyebrow">{title}</span>
+      <h1 className="h-article" style={{ marginTop: 8 }}>{title}</h1>
+      <p className="lede" style={{ marginTop: 'var(--space-4)' }}>{note}</p>
+      <p className="prose" style={{ marginTop: 'var(--space-6)', color: 'var(--color-text-muted)' }}>
+        Not mocked up in this kit — see the live site.
+      </p>
+    </section>
+  );
+}
+
 function App() {
   const [screen, setScreen] = React.useState(() => localStorage.getItem('mm-screen') || 'home');
   const [open, setOpen] = React.useState(null);
@@ -93,6 +118,7 @@ function App() {
       {screen === 'detail' && open && <TutorialDetail tutorial={open} onBack={() => nav('tutorials')} onNav={nav} />}
       {screen === 'about'      && <AboutScreen />}
       {screen === 'newsletter' && <NewsletterCta />}
+      {STUB_SCREENS[screen]    && <StubScreen id={screen} />}
       <Footer onNav={nav} />
     </div>
   );

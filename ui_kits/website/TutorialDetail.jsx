@@ -13,7 +13,7 @@ function TutorialDetail({ tutorial, onBack, onNav }) {
             </div>
             <div className="detail-meta" style={{ marginTop: -8 }}>
               <span className="pill-topic">{tutorial.tag}</span>
-              <span className="stamp">{tutorial.time} read · v2026.4</span>
+              <span className="stamp">{tutorial.time} read · v2026.5</span>
             </div>
             <h1 className="h-article">{tutorial.title}</h1>
             <p className="lede" style={{ marginTop: 16 }}>{tutorial.lede}</p>

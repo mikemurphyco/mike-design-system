@@ -1,4 +1,4 @@
-/* Mike Murphy · AI Handyman — Design System v2026.4
+/* Mike Murphy · AI Handyman — Design System v2026.5
    Colors + type tokens. Brand layer → semantic layer.
    Components consume semantic tokens only. */
 
@@ -32,10 +32,14 @@
   --mm-orange-deep:  #E8501C;
   --mm-yellow:       #F5C842;
   --mm-teal:         #1ECEBE;
+  /* Dark-mode surface lift only (dropdowns, menus). Not a brand color. */
+  --mm-navy-raised:  #06263F;
 
   /* Semantic */
   --color-bg-page:              var(--mm-cream);
   --color-bg-surface:           var(--mm-chalk);
+  /* Elevated surfaces; chalk is already the lift in light mode. */
+  --color-bg-raised:            var(--mm-chalk);
   --color-text-primary:         var(--mm-navy);
   --color-text-muted:           rgba(0,30,58, 0.62);
   --color-action-primary:       var(--mm-orange);

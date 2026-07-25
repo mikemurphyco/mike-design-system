@@ -4,7 +4,7 @@ This is the working manual. It is the file to read at the start of any brand tas
 
 It does not duplicate the canon or the spec. It points at them and tells you which one is load-bearing for the task in front of you.
 
-`v2026.4`
+`v2026.5`
 
 ---
 
@@ -104,6 +104,8 @@ When a task touches the Mike Murphy / AI Handyman brand, read in this order:
 5. **`design-system.html`** — the rendered system. Reach for it when you need to *see* the component or copy structural HTML.
 6. **`ui_kits/website/`** — the system applied to a real product. Reach for it when building site surfaces or wanting a working pattern in JSX.
 
+**A caveat on 5 and 6:** both render **desktop, light-mode** views for looking at. They are deliberately not complete implementations — responsive behavior, focus management, and keyboard navigation are mostly absent, and the nav in particular has no mobile sheet. When they disagree with `DESIGN.md`, `DESIGN.md` wins; for shipped nav behavior, `SiteHeader.astro` on mikemurphy.ai is authoritative. Lift structure and values from them, not completeness.
+
 For most tasks, steps 1–3 are enough to start. Open 4 and 5 when you need a value or a structure.
 
 ---
@@ -192,7 +194,7 @@ The pattern, every time:
 2. **Consume semantic tokens only.** `var(--color-action-primary)`, never `#FF6434`. Tokens live in `tokens/colors_and_type.css` and the `:root` block of `design-system.html`.
 3. **Pick a layout from the locked vocabulary.** If your draft requires a new layout, that's the signal to back up.
 4. **Audit against the NOT list before you ship.** If anything in your draft would have to be deleted on review — cartoon Mike, washi tape, toolshed copy, the old tagline, free yellow, two teals — delete it now.
-5. **Stamp only when there's a reason to.** Version stamps (`v2026.4`) belong on canon docs (this file, `BRAND-CANON.md`, `design-system.html` footer), never on shipped outputs. The `Mike Murphy AI` identity stamp is optional — use it where attribution earns its place (about, formal decks, end screens), skip it where the AI Handyman badge or Mike's face is already identifying the work (YouTube thumbnails, social posts, channel art). Full rule: `BRAND-CANON.md` ("Stamp" section).
+5. **Stamp only when there's a reason to.** Version stamps (`v2026.5`) belong on canon docs (this file, `BRAND-CANON.md`, `design-system.html` footer), never on shipped outputs. The `Mike Murphy AI` identity stamp is optional — use it where attribution earns its place (about, formal decks, end screens), skip it where the AI Handyman badge or Mike's face is already identifying the work (YouTube thumbnails, social posts, channel art). Full rule: `BRAND-CANON.md` ("Stamp" section).
 
 ---
 
