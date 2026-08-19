@@ -1,6 +1,6 @@
 # Consulting Invoice Template
 
-A data-driven HTML invoice using the Mike Murphy design system tokens. Import an Airtable CSV, fill in a few fields, print to PDF.
+A data-driven HTML invoice using the Mike Murphy design system tokens. Import a time-log CSV (Directus or Airtable), fill in a few fields, print to PDF.
 
 > **Bookmark this file in your browser** — `file:///Users/mikemurphy/Code/Projects/mike-design-system/templates/consulting-invoice/index.html`
 
@@ -8,9 +8,9 @@ A data-driven HTML invoice using the Mike Murphy design system tokens. Import an
 
 ## Each billing period workflow
 
-### 1. Export from Airtable
+### 1. Export from Directus
 
-Open your **Unsubmitted Time** view → Download CSV. No other view or configuration needed.
+Export your unsubmitted time entries from the Directus time-log collection as CSV. (Also still accepts a legacy Airtable "Unsubmitted Time" view export — see column mapping below.)
 
 ### 2. Drop the CSV
 
@@ -47,17 +47,17 @@ The import bar disappears automatically in print/PDF output.
 
 ---
 
-## Airtable CSV columns used
+## CSV columns used
 
-The template reads these exact column headers from the Airtable export:
+Header matching is case-insensitive and treats `_` and spaces the same, so both Directus (`snake_case`) and Airtable (`Title Case`) exports work:
 
-| Column | Used for |
-|---|---|
-| `Description` | Line item description |
-| `Phase` | Phase column |
-| `Date` | Entry date (M/D/YYYY format) |
-| `Duration Hours` | Hours worked |
-| `Hourly Rate` | Rate (e.g. `$30.00`) |
+| Column | Directus header | Airtable header | Used for |
+|---|---|---|---|
+| Description | `description` | `Description` | Line item description |
+| Phase | `phase` | `Phase` | Phase column |
+| Date | `date` | `Date` | Entry date — accepts `YYYY-MM-DD` or `M/D/YYYY` |
+| Duration Hours | `duration_hours` | `Duration Hours` | Hours worked |
+| Hourly Rate | `hourly_rate` | `Hourly Rate` | Rate (e.g. `$30.00` or `30.00`) |
 
 All other columns in the export are ignored.
 
