@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="264" viewBox="0 0 240 264" role="img" aria-label="MurphBot, a small robot built from the Node mark, waving">
+  <title>MurphBot — Unit 404, Blue Eyes</title>
+  <desc>Mike Murphy's MurphBot character, built from the Node mark. Orange head, fixed navy-blue eyes, navy satellites, and one teal antenna dot. Static (no animation).</desc>
+  <style>
+    .mb-ink { stroke: #001E3A; }
+    .mb-ink-fill { fill: #001E3A; }
+    .mb-eye-fill { fill: #001E3A; }
+    .mb-face-stroke { stroke: #001E3A; }
+  </style>
+
+  <g class="mb-body">
+    <line x1="120" y1="118" x2="52" y2="196" class="mb-ink" stroke-width="2.5" stroke-linecap="round" opacity="0.6"></line>
+    <line x1="120" y1="118" x2="176" y2="204" class="mb-ink" stroke-width="2" stroke-linecap="round" opacity="0.6"></line>
+    <circle cx="52" cy="196" r="9" class="mb-ink-fill"></circle>
+    <circle cx="176" cy="204" r="6.5" class="mb-ink-fill"></circle>
+    <g class="mb-hand">
+      <line x1="152" y1="76" x2="204" y2="40" class="mb-ink" stroke-width="2.5" stroke-linecap="round" opacity="0.6"></line>
+      <circle cx="204" cy="40" r="8" class="mb-ink-fill"></circle>
+    </g>
+    <line x1="120" y1="52" x2="120" y2="26" class="mb-ink" stroke-width="2.5" stroke-linecap="round" opacity="0.6"></line>
+    <circle cx="120" cy="20" r="7" fill="#1ECEBE"></circle>
+    <circle cx="120" cy="104" r="52" fill="#FF6434"></circle>
+    <g class="mb-eyes">
+      <circle cx="101" cy="96" r="6.5" class="mb-eye-fill"></circle>
+      <circle cx="139" cy="96" r="6.5" class="mb-eye-fill"></circle>
+    </g>
+    <path d="M 106 122 Q 120 132 134 122" class="mb-face-stroke" stroke-width="4" stroke-linecap="round" fill="none"></path>
+  </g>
+</svg>
