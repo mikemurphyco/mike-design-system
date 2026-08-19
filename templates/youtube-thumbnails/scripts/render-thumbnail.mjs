@@ -38,6 +38,8 @@ const VARIANTS = {
   'murphbot-cream':  { key: 'murphbot-cream',  thumbId: 'thumb-murphbot-cream',  hasTopic: false, isMurphbot: true },
   'murphbot-navy':   { key: 'murphbot-navy',   thumbId: 'thumb-murphbot-navy',   hasTopic: false, isMurphbot: true },
   'murphbot-orange': { key: 'murphbot-orange', thumbId: 'thumb-murphbot-orange', hasTopic: false, isMurphbot: true },
+  'youtube-thumbnail-pipeline': { key: 'pipeline', thumbId: 'thumb-pipeline', hasTopic: false, hasPipeline: true },
+  'youtube-thumbnail-bigtype':  { key: 'bigtype',  thumbId: 'thumb-bigtype',  hasTopic: false },
 };
 
 // ── arg parsing ───────────────────────────────────────────────────────────────
@@ -100,6 +102,14 @@ if (variant.hasTopic) {
   topicLetter = await ask('Topic letter (1 char)', 'topic', defaultFor('ed-topic'));
 }
 
+let chip1Label = null, chip2Label = null, chip1Icon = null, chip2Icon = null;
+if (variant.hasPipeline) {
+  chip1Label = await ask('Chip 1 label', 'chip1', defaultFor('ed-chip1'));
+  chip1Icon  = await ask('Chip 1 icon (keyword or emoji)', 'chip1-icon', defaultFor('ed-chip1-icon') || 'site');
+  chip2Label = await ask('Chip 2 label', 'chip2', defaultFor('ed-chip2'));
+  chip2Icon  = await ask('Chip 2 icon (keyword or emoji)', 'chip2-icon', defaultFor('ed-chip2-icon') || 'cloud');
+}
+
 let pose = null, cardType = null, termFile = null, termCmd = null;
 if (variant.isMurphbot) {
   pose = await ask('MurphBot pose (e.g. 07-fixing, or chalk-01-classic for orange bg)', 'pose', defaultFor('ed-pose'));
@@ -121,6 +131,7 @@ console.log(`\nRendering @ ${1280 * scale}×${720 * scale}...`);
 const PREFIX = {
   classic:'cl', dark:'dk', split:'sp', cutout:'co', orange:'or', tile:'ti', terminal:'tm',
   'murphbot-cream':'mc', 'murphbot-navy':'mn', 'murphbot-orange':'mo',
+  pipeline:'pi', bigtype:'bt',
 };
 const p = PREFIX[variant.key];
 
@@ -133,7 +144,7 @@ const page = await ctx.newPage();
 await page.goto('file://' + GALLERY);
 
 // Switch to the right variant tab, then inject copy values.
-await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter, pose, cardType, termFile, termCmd }) => {
+await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter, chip1Label, chip2Label, chip1Icon, chip2Icon, pose, cardType, termFile, termCmd }) => {
   // Activate the correct tab
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.thumb-target').forEach(t => t.style.display = 'none');
@@ -149,6 +160,10 @@ await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter,
   set(`${p}-hl2`,     headline2);
   set(`${p}-lede`,    lede);
   if (topicLetter !== null) set(`${p}-topic`, topicLetter);
+  if (chip1Label !== null) set(`${p}-chip1`, chip1Label);
+  if (chip2Label !== null) set(`${p}-chip2`, chip2Label);
+  if (chip1Icon !== null && typeof setChipIcon === 'function') setChipIcon(`${p}-chip1-icon`, chip1Icon);
+  if (chip2Icon !== null && typeof setChipIcon === 'function') setChipIcon(`${p}-chip2-icon`, chip2Icon);
 
   if (pose !== null) {
     const poseImg = document.getElementById(`${p}-pose`);
@@ -157,7 +172,7 @@ await page.evaluate(({ key, p, eyebrow, headline1, headline2, lede, topicLetter,
   if (cardType !== null && typeof renderCard === 'function') {
     renderCard(p, cardType, { filename: termFile, cmd: termCmd });
   }
-}, { key: variant.key, p, eyebrow, headline1, headline2, lede, topicLetter, pose, cardType, termFile, termCmd });
+}, { key: variant.key, p, eyebrow, headline1, headline2, lede, topicLetter, chip1Label, chip2Label, chip1Icon, chip2Icon, pose, cardType, termFile, termCmd });
 
 await page.waitForLoadState('networkidle');
 await page.waitForTimeout(150);

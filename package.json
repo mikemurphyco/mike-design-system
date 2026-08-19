@@ -19,6 +19,8 @@
     "thumbnail:murphbot-cream":  "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-cream",
     "thumbnail:murphbot-navy":   "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-navy",
     "thumbnail:murphbot-orange": "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template murphbot-orange",
+    "thumbnail:pipeline": "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-pipeline",
+    "thumbnail:bigtype":  "node templates/youtube-thumbnails/scripts/render-thumbnail.mjs --template youtube-thumbnail-bigtype",
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {

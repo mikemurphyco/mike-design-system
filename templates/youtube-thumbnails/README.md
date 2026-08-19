@@ -1,6 +1,6 @@
 # YouTube Thumbnails
 
-Seven brand-consistent thumbnail variants for Mike Murphy · AI Handyman. One gallery file to rule them all.
+Twelve brand-consistent thumbnail variants for Mike Murphy · AI Handyman. One gallery file to rule them all.
 
 `v2026.5`
 
@@ -36,6 +36,9 @@ Output lands in `outputs/` at the repo root (gitignored).
 | V5 · Orange Full-Bleed | `npm run thumbnail:orange` | Launches, announcements — use sparingly |
 | V6 · Topic Tile | `npm run thumbnail:tile` | Tool-specific tutorials with a clean 1-char icon (M, C, $, etc.) |
 | V7 · Terminal | `npm run thumbnail:terminal` | CLI and dev-focused tutorials |
+| V8-V10 · MurphBot (Cream/Navy/Orange) | `npm run thumbnail:murphbot-*` | Blog post cover images |
+| V11 · Pipeline Arrow | `npm run thumbnail:pipeline` | Deploy/connect/migrate "A to B" videos |
+| V12 · Big Type Minimal | `npm run thumbnail:bigtype` | Stripped-back, type-only — no photo |
 
 ## One-shot render (skip all prompts)
 
@@ -52,6 +55,26 @@ npm run thumbnail:tile -- \
 ```
 
 Any flag you omit will be asked at the prompt, defaulting to the template's example values.
+
+### Pipeline Arrow's chip icons
+
+V11's two icon chips take `--chip1-icon` / `--chip2-icon` (also editable live in the sidebar). Each accepts either:
+
+- a built-in keyword: `site`, `cloud`, `server`, `terminal`, `database`, `globe`, `git`, `rocket`, `folder`, `gear` — swaps in a stroke SVG matching the rest of the brand's icon style
+- anything else, including an emoji (e.g. `🌐`) — renders as a literal glyph at the same size
+
+```bash
+npm run thumbnail:pipeline -- \
+  --eyebrow "VPS + DOMAIN" \
+  --headline1 "Point your domain" \
+  --headline2 "at your VPS." \
+  --lede "DNS, step by step." \
+  --chip1 "VPS" --chip1-icon "server" \
+  --chip2 "DOMAIN" --chip2-icon "🌐" \
+  --out "vps-domain"
+```
+
+Emoji render via the OS's color-emoji font — reliable on macOS, but may show blank on a machine without one (some Linux CI boxes) if this script ever runs there.
 
 ## Editing a variant's layout
 
@@ -71,7 +94,7 @@ Live Server defaults its root to the folder of the open file. Opening `youtube-t
 
 ```
 templates/youtube-thumbnails/
-├── index.html                        ← all 7 variants — open this in Live Server
+├── index.html                        ← all 12 variants — open this in Live Server
 ├── README.md                         ← you are here
 └── scripts/
     └── render-thumbnail.mjs          ← Playwright render script (reads index.html)
