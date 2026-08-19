@@ -1203,10 +1203,19 @@ body {
   document.getElementById('btn-export').addEventListener('click', async () => {
     const { thumbId, label } = VARIANTS[activeVariant];
     const thumb = document.getElementById(thumbId);
+    const wrap = document.getElementById('canvas-scale-wrap');
 
     const btn = document.getElementById('btn-export');
     btn.textContent = 'Rendering…';
     btn.disabled = true;
+
+    // html2canvas measures the element's live layout box. canvas-scale-wrap
+    // carries a CSS scale() transform (see rescale()) so the 1280px canvas
+    // fits the viewport on screen — if left in place, html2canvas captures
+    // the shrunk box and stretches it back to 1280x720, producing a blurry,
+    // misaligned render. Neutralize the transform for the capture, restore after.
+    const prevTransform = wrap.style.transform;
+    wrap.style.transform = 'none';
 
     try {
       if (typeof html2canvas === 'undefined') {
@@ -1233,6 +1242,7 @@ body {
       );
       console.error(err);
     } finally {
+      wrap.style.transform = prevTransform;
       btn.textContent = '⬇ Export PNG';
       btn.disabled = false;
     }
