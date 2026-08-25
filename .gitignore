@@ -30,3 +30,6 @@ npm-debug.log*
 
 # Render-script artifacts (regenerable)
 outputs/
+
+# Oversized source files that exceed GitHub's 100MB limit (kept locally only)
+assets/agent-evergreen/icon/icon-agent-evergreen.psd
