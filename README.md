@@ -47,3 +47,41 @@ Cartoon Mike. Toolshed metaphors. Washi tape and hand-drawn arrows. Unplugged Sa
 ## Versioning
 
 Current: **v2026.5**. Stamped in the design-system footer and on every tutorial detail page.
+
+## Portable use and design sandbox
+
+This repository remains canonical. Use `mike-design-sandbox/projects/` for editable graphics and experiments, and `mike-design-sandbox/exports/` for finished files. See the [sandbox guide](../mike-design-sandbox/README.md).
+
+With Node.js installed (verified with Node 26), open Terminal in this repository and run:
+
+```bash
+npm run portable -- --to /Users/mikemurphy/Code/Projects/mike-design-sandbox
+```
+
+No dependency installation is needed. The command creates or refreshes only the destination's `design-system/` folder. It bundles generated `tokens.json`, canonical CSS, local fonts, runtime assets, brand docs, visual references, and a file-hash manifest. PSD source files, templates, dependencies, and rendered outputs stay in canon.
+
+Use the same command after changing the canonical system. Refresh stops if the previous bundle contains local edits, missing files, or extra files; move custom work outside it or restore the affected file before retrying. Projects and exports are never refreshed or deleted. Existing projects that link the shared CSS will use the updated tokens on their next render; already-exported images stay unchanged.
+
+### Use it in another directory
+
+Choose either method below. Portable copies are snapshots: they do not update automatically when canon changes.
+
+**Generate the latest copy directly in another project (recommended).** From this repository, run the following, replacing `/path/to/another-project` with your destination:
+
+```bash
+npm run portable -- --to /path/to/another-project
+```
+
+This creates or refreshes `another-project/design-system/` from the current canonical source. It does not use the existing `dist/portable/` copy.
+
+**Copy the local bundle.** A generated copy lives at `mike-design-system/dist/portable/`. To create or refresh that local copy, run from this repository:
+
+```bash
+npm run portable
+```
+
+Then copy the whole `dist/portable/` folder into another project and rename the copied folder `design-system/`. Its relative paths work without access to this repository. The local bundle is gitignored, so a fresh clone needs `npm run portable` before there is a bundle to copy.
+
+Refreshing the local bundle does not refresh copies already placed elsewhere. Run the destination command again for each copy you want to update.
+
+Read the generated `README.md` for the JSON interface. To remove a portable copy, remove only its `design-system/` folder after checking that no projects still need it.

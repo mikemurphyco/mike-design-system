@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "generate": "node scripts/generate-assets.mjs",
+    "portable": "node scripts/export-portable.mjs",
     "check": "node scripts/check-canon.mjs && node scripts/check-version.mjs",
     "check-version": "node scripts/check-version.mjs",
     "bump": "node scripts/bump-version.mjs",
