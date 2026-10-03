@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.co — clean, calm, technical, warm, lightly handmade, never corporate. v2026.5.
+description: Design system for mikemurphy.ai — clean, calm, technical, warm, lightly handmade, never corporate. v2026.5.
 
 colors:
   primary:     "#FF6434"

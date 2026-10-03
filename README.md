@@ -1,6 +1,6 @@
 # Mike Murphy · AI Handyman — Design System v2026.5
 
-The locked design system for [mikemurphy.co](https://mikemurphy.co) and the AI Handyman content brand.
+The locked design system for [mikemurphy.ai](https://mikemurphy.ai/) and the AI Handyman content brand.
 
 ## What's in this project
 

@@ -63,17 +63,17 @@ Before we touch anything, capture the current state so we can compare against it
 - [ ] In a terminal, dump the current public DNS for the domain:
 
 ```bash
-dig mikemurphy.co ANY +noall +answer
-dig mikemurphy.co MX +short
-dig mikemurphy.co TXT +short
-dig www.mikemurphy.co +short
+dig mikemurphy.ai ANY +noall +answer
+dig mikemurphy.ai MX +short
+dig mikemurphy.ai TXT +short
+dig www.mikemurphy.ai +short
 ```
 
 - [ ] Save the output to a text file — this is your "before" snapshot
 - [ ] Confirm the current nameservers (they'll point at SiteGround):
 
 ```bash
-dig mikemurphy.co NS +short
+dig mikemurphy.ai NS +short
 ```
 
 > ⚠️ Don't skip this. If something looks wrong after the cutover, this snapshot is what you compare against to figure out what changed.
@@ -93,7 +93,7 @@ SiteGround needs to be serving HTTPS cleanly before CloudFlare sits in front of 
 - [ ] Log into **SiteGround** → **Websites** → pick the site → **Site Tools**
 - [ ] Go to **Security** → **SSL Manager** → confirm an active SSL certificate is installed (Let's Encrypt is fine)
 - [ ] Go to **Security** → **HTTPS Enforce** → confirm the toggle is **ON** for the domain (and `www` if you use it)
-- [ ] In a private browser window, visit `http://mikemurphy.co` and confirm it redirects to `https://`
+- [ ] In a private browser window, visit `http://mikemurphy.ai` and confirm it redirects to `https://`
 
 ---
 
@@ -102,7 +102,7 @@ SiteGround needs to be serving HTTPS cleanly before CloudFlare sits in front of 
 CloudFlare scans your current public DNS and tries to import everything it can see. Trust the scan, but verify it.
 
 - [ ] Log into **CloudFlare** → **Add a site**
-- [ ] Type `mikemurphy.co` (root domain — no `www`, no `https://`)
+- [ ] Type `mikemurphy.ai` (root domain — no `www`, no `https://`)
 - [ ] Pick the **Free** plan
 - [ ] Let CloudFlare run the **automatic DNS scan**
 - [ ] When the scan finishes, **do not click Continue yet**
@@ -190,14 +190,14 @@ This is the boring part, and that's the point. Walk away.
 - [ ] In **CloudFlare**, click **Done, check nameservers**
 - [ ] Status reads **"Pending Nameserver Update"**
 - [ ] Wait — usually under an hour, can take up to 24
-- [ ] CloudFlare emails you: **"mikemurphy.co is now active on Cloudflare"**
+- [ ] CloudFlare emails you: **"mikemurphy.ai is now active on Cloudflare"**
 
 While you wait, watch propagation:
 
 ```bash
-dig mikemurphy.co NS +short
-dig @1.1.1.1 mikemurphy.co NS +short
-dig @8.8.8.8 mikemurphy.co NS +short
+dig mikemurphy.ai NS +short
+dig @1.1.1.1 mikemurphy.ai NS +short
+dig @8.8.8.8 mikemurphy.ai NS +short
 ```
 
 | You see | What it means |
@@ -214,8 +214,8 @@ dig @8.8.8.8 mikemurphy.co NS +short
 
 Once CloudFlare confirms the domain is active:
 
-- [ ] Visit `https://mikemurphy.co` in a fresh private window — loads cleanly over HTTPS
-- [ ] Visit `https://www.mikemurphy.co` — same
+- [ ] Visit `https://mikemurphy.ai` in a fresh private window — loads cleanly over HTTPS
+- [ ] Visit `https://www.mikemurphy.ai` — same
 - [ ] Send a test email **to** an address on the domain — arrives
 - [ ] Send a test email **from** an address on the domain — arrives, not spam-flagged
 - [ ] All subdomains load
@@ -271,7 +271,7 @@ Both actions live in the same GoDaddy settings screen.
 ## Step 10: Initiate The Transfer At CloudFlare
 
 - [ ] Log into **CloudFlare** → top nav → **Domain Registration** → **Transfer Domains**
-- [ ] Type `mikemurphy.co` and click **Confirm Domains**
+- [ ] Type `mikemurphy.ai` and click **Confirm Domains**
 - [ ] CloudFlare checks eligibility — should pass because:
   - You're using CloudFlare nameservers (Phase 1) ✓
   - Domain isn't within an ICANN 60-day lock ✓
@@ -289,7 +289,7 @@ By default, GoDaddy will hold the outbound transfer for up to 5 days before it a
 
 - [ ] Log into **GoDaddy** → top nav → **Domains** (or "All products")
 - [ ] Go to **Transfers** → **Transfer Out** → **Pending Transfers**
-- [ ] Find `mikemurphy.co` in the list
+- [ ] Find `mikemurphy.ai` in the list
 - [ ] Click **Accept** (or "Approve transfer")
 - [ ] Confirm
 
@@ -313,16 +313,16 @@ By default, GoDaddy will hold the outbound transfer for up to 5 days before it a
 ## Step 13: Confirm CloudFlare Now Owns The Domain
 
 - [ ] Log into **CloudFlare** → **Domain Registration** → **Manage Domains**
-- [ ] `mikemurphy.co` appears in the list with its new CloudFlare-managed expiration date
+- [ ] `mikemurphy.ai` appears in the list with its new CloudFlare-managed expiration date
 - [ ] Click the domain → confirm **Registration status: Active**
 - [ ] Confirm WHOIS shows CloudFlare as the registrar:
 
 ```bash
-whois mikemurphy.co | grep -i "registrar"
+whois mikemurphy.ai | grep -i "registrar"
 ```
 
 - [ ] Output should read something like `Registrar: Cloudflare, Inc.` (was previously `GoDaddy.com, LLC`)
-- [ ] Site still loads at `https://mikemurphy.co` — registrar transfer doesn't touch DNS, so this should be unchanged
+- [ ] Site still loads at `https://mikemurphy.ai` — registrar transfer doesn't touch DNS, so this should be unchanged
 
 ---
 
@@ -330,8 +330,8 @@ whois mikemurphy.co | grep -i "registrar"
 
 Walk through this one more time before you close the laptop:
 
-- [ ] Site loads at `https://mikemurphy.co` ✓
-- [ ] Site loads at `https://www.mikemurphy.co` ✓
+- [ ] Site loads at `https://mikemurphy.ai` ✓
+- [ ] Site loads at `https://www.mikemurphy.ai` ✓
 - [ ] HTTP redirects to HTTPS ✓
 - [ ] Inbound email works ✓
 - [ ] Outbound email works and isn't spam-flagged ✓
@@ -343,7 +343,7 @@ Walk through this one more time before you close the laptop:
 - [ ] SiteGround **Force SSL** is still on ✓
 - [ ] CloudFlare Registrar shows the domain in **Manage Domains** ✓
 - [ ] `whois` confirms CloudFlare as registrar ✓
-- [ ] GoDaddy account no longer lists `mikemurphy.co` under My Products ✓
+- [ ] GoDaddy account no longer lists `mikemurphy.ai` under My Products ✓
 - [ ] You still have the "before" DNS snapshot saved somewhere ✓
 
 ---
@@ -353,36 +353,36 @@ Walk through this one more time before you close the laptop:
 ### Check current nameservers
 
 ```bash
-dig mikemurphy.co NS +short
+dig mikemurphy.ai NS +short
 ```
 
 ### Check what specific resolvers see (catches partial propagation)
 
 ```bash
-dig @1.1.1.1 mikemurphy.co NS +short
-dig @8.8.8.8 mikemurphy.co NS +short
+dig @1.1.1.1 mikemurphy.ai NS +short
+dig @8.8.8.8 mikemurphy.ai NS +short
 ```
 
 ### Snapshot the full public zone
 
 ```bash
-dig mikemurphy.co ANY +noall +answer
-dig mikemurphy.co MX +short
-dig mikemurphy.co TXT +short
-dig www.mikemurphy.co +short
+dig mikemurphy.ai ANY +noall +answer
+dig mikemurphy.ai MX +short
+dig mikemurphy.ai TXT +short
+dig www.mikemurphy.ai +short
 ```
 
 ### Confirm HTTPS is serving cleanly
 
 ```bash
-curl -I https://mikemurphy.co
-curl -I https://www.mikemurphy.co
+curl -I https://mikemurphy.ai
+curl -I https://www.mikemurphy.ai
 ```
 
 ### Confirm registrar after transfer
 
 ```bash
-whois mikemurphy.co | grep -i "registrar"
+whois mikemurphy.ai | grep -i "registrar"
 ```
 
 ---

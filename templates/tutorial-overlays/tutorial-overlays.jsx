@@ -35,7 +35,7 @@ const FONT_HAND = '"Murphydoodle", "Caveat", cursive';
 
 // ── shared chrome atoms ────────────────────────────────────────────────────
 
-// • AI HANDYMAN   /   • MIKEMURPHY.CO  — used as small corner markers.
+// • AI HANDYMAN   /   • MIKEMURPHY.AI  — used as small corner markers.
 function CornerMark({ children, align = 'left' }) {
   return (
     <span style={{
@@ -193,7 +193,7 @@ function Frame({ children, showCorners = true, showFooter = true, footer = 'tagl
             <CornerMark>AI HANDYMAN</CornerMark>
           </div>
           <div style={{ position: 'absolute', top: 64, right: 88 }}>
-            <CornerMark align="right">MIKEMURPHY.CO</CornerMark>
+            <CornerMark align="right">MIKEMURPHY.AI</CornerMark>
           </div>
         </>
       )}
