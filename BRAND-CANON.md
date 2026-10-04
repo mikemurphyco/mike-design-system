@@ -1,11 +1,15 @@
 # BRAND CANON
-**Mike Murphy · AI Handyman · v2026.5**
+**Mike Murphy · AI Handyman · v2026.6**
 
 > Clean, calm, technical, warm, lightly handmade, never corporate.
 
-This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page wins.
+This is the locked brand. Every decision below has been made. If something on the website, in a deck, on YouTube, or in a PDF disagrees with what's on this page, this page defines the defaults. An explicit request from Mike for a cartoon or stylized depiction of himself takes precedence over the default photo treatment, as described below.
 
 ---
+
+## What changed in v2026.6
+
+Cartoon Mike is allowed when Mike requests it. Photos remain the default identity treatment; the former cartoon mascot is retired as a default, not banned as a creative option. Claude Code and other tools should fulfill explicit requests for cartoon, vector, illustrated, stylized, or animated depictions of Mike without asking for a brand exception.
 
 ## What changed in v2026.5
 
@@ -181,6 +185,16 @@ The polaroid is the brand's most personal asset. Use it intentionally, not casua
 
 ---
 
+## Cartoon Mike and stylized depictions
+
+**Cartoon Mike is allowed.** Use the photo avatars and polaroid as the default when no character style is specified. When Mike asks for a non-realistic, cartoon, vector, illustrated, caricature, or animated version of himself, create it in the requested style. Animation may use either a photographic or stylized Mike; realism is not required.
+
+The request itself is authorization. Claude Code and other tools must not refuse the request, substitute a photo, or ask for an additional brand exception because of the retired mascot guidance. Apply the usual brand palette, type, and tone where compatible with the requested creative direction.
+
+The old tablet-Mike and thumbs-up-Mike mascot treatments are retired from automatic use. Mike may explicitly request those treatments too. A project-specific depiction does not automatically replace the canonical avatars, logos, or site identity; promote it into the default system only when Mike asks for that change.
+
+---
+
 ## AI Handyman badge — usage rule
 
 The badge is used selectively, not formulaically.
@@ -258,11 +272,10 @@ These were part of earlier versions. They are gone. Do not reintroduce them.
 
 - Unplugged Sans as a display face.
 - The hand-drawn vocabulary: lighthouse, cloud, arrows, washi tape, orange underline, paper texture, graph-paper "blueprint" overlays.
-- Cartoon-Mike illustrations as mascot moments (tablet Mike, thumbs-up Mike).
 - The "toolshed" copy metaphor — "in the toolshed", "under the hood", "wiring it up", "rough draft / blueprint".
 - The tagline `LEARN. CREATE. MOVE FORWARD.` (with periods, with "CREATE").
 
-These assets remain in the repository under `_legacy/` for archival reference only. They are not part of the live system. If a future contributor reaches for one of them, the answer is no.
+These assets remain in the repository under `_legacy/` for archival reference only. They are not part of the live system. Cartoon Mike is governed separately by “Cartoon Mike and stylized depictions” above; that permission includes explicitly requested legacy mascot treatments.
 
 ---
 

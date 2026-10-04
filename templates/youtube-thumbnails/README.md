@@ -2,7 +2,7 @@
 
 Twelve brand-consistent thumbnail variants for Mike Murphy · AI Handyman. One gallery file to rule them all.
 
-`v2026.5`
+`v2026.6`
 
 ## How to open
 

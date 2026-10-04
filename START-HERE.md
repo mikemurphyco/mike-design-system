@@ -147,6 +147,10 @@ Use `badged/` when the node needs to sit inside a contained icon shape.
 
 Use `legacy/` only when you need the older disc treatment or are comparing past versions.
 
+### I want a cartoon or animated Mike
+
+Ask for the style you want: cartoon, vector, illustration, caricature, or a non-realistic animated Mike. Your request is enough authorization. Photos remain the default when no style is specified; Cartoon Mike is allowed on request. See `BRAND-CANON.md` (Cartoon Mike and stylized depictions).
+
 ### I changed an SVG
 
 Run:

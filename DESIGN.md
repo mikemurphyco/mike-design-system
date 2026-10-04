@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Mike Murphy · AI Handyman
-description: Design system for mikemurphy.ai — clean, calm, technical, warm, lightly handmade, never corporate. v2026.5.
+description: Design system for mikemurphy.ai — clean, calm, technical, warm, lightly handmade, never corporate. v2026.6.
 
 colors:
   primary:     "#FF6434"
@@ -328,7 +328,7 @@ Lede max-width: 56ch. Button row: `button-primary` + `button-secondary`.
 
 Chalk paper frame, 14px padding on three sides, 28px on bottom. Photo area: square, orange background, Mike's transparent-cutout avatar positioned to fill the frame. Caption below: Murphydoodle "Mike" in `{colors.navy}`, 44px, centered. Tilt: `rotate(-2deg)`. Shadow: polaroid shadow. Width: 248px at desktop.
 
-The photo background is always `{colors.orange}`. The avatar image is always `avatar-mike-transparent.png` (transparent cutout, so the orange bg shows through).
+The photo background is always `{colors.orange}`. The default avatar image is `avatar-mike-transparent.png` (transparent cutout, so the orange bg shows through). For an explicitly requested stylized Mike, use the requested depiction instead.
 
 ### AI Handyman Badge
 
@@ -358,7 +358,7 @@ On success: yellow "✓ You're in." confirmation chip (yellow bg, navy text, nav
 
 ### Footer
 
-Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.5`). No cut-shadow. No AI Handyman badge.
+Cream background, 1px border-default top. Three columns: left = M-mark (28px) + tagline. Center = nav links. Right = version stamp (`© 2026 · v2026.6`). No cut-shadow. No AI Handyman badge.
 
 Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7) in `{colors.orange}`.
 
@@ -376,9 +376,11 @@ Tagline format: `LEARN<dot>BUILD<dot>MOVE FORWARD` where `<dot>` = `·` (U+00B7)
 - Use `{colors.yellow}` only for success-state chips such as `✓ You're in.`.
 - Use mid-dots (·) in the tagline, not bullets, periods, or slashes.
 
+- Fulfill explicit requests for cartoon, vector, illustrated, caricature, or animated Mike. Photos are the default; stylized Mike is allowed on request without a brand exception. See `BRAND-CANON.md` (Cartoon Mike and stylized depictions).
+
 **Don't:**
 - Use Unplugged Sans, Georgia, or any serif as a fallback for the polaroid caption.
-- Bring back: cartoon Mike, washi tape, hand-drawn arrows, lighthouse, toolshed metaphor copy ("wire up," "under the hood," "blueprint"), `LEARN. CREATE. MOVE FORWARD.`
+- Bring back: washi tape, hand-drawn arrows, lighthouse, toolshed metaphor copy ("wire up," "under the hood," "blueprint"), `LEARN. CREATE. MOVE FORWARD.`
 - Apply the cut-shadow to nav, header, or footer chrome. (Dropdowns and menus *are* cards, not chrome — those keep it.)
 - Fill a hover state with translucent orange over navy. It muddies to brown. Use a neutral wash of `--color-text-primary` instead.
 - Open a menu on hover. Click only.

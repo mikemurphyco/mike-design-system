@@ -12,7 +12,7 @@ If it feels like a calm, slightly handmade workbook from someone who actually us
 
 ## Hard rules (do not break)
 
-1. **Read `BRAND-CANON.md` first, then `SYSTEM.md`.** The canon is the locked brand bible — it overrides anything in this file or any prior chat. `SYSTEM.md` is the operational guide: file map, component decision tree, layout recipes. Together they get you started on any task.
+1. **Read `BRAND-CANON.md` first, then `SYSTEM.md`.** The canon is the locked brand bible — it defines brand defaults and overrides conflicting guidance in this file. An explicit request from Mike for a cartoon or stylized Mike overrides the default photo treatment; follow the canon’s “Cartoon Mike and stylized depictions” section. `SYSTEM.md` is the operational guide: file map, component decision tree, layout recipes. Together they get you started on any task.
 2. **Consume semantic tokens only.** Never hardcode hex values in components. `var(--color-action-primary)`, not `#FF6434`.
 3. **The tagline is locked:** `LEARN · BUILD · MOVE FORWARD`. Mid-dots, ALL CAPS, IBM Plex Mono Bold. No periods, no commas, no "create," no "ship."
 4. **One AI pop per screen.** Teal `#1ECEBE` shows up on exactly one element — the cursor in a code block, a "live" status dot, the teal satellite in the Node mark. Never on two things at once.
@@ -30,11 +30,14 @@ If it feels like a calm, slightly handmade workbook from someone who actually us
 - Phrases that are on-brand: "Here's what this actually does." "This is where people get stuck." "This part is a little janky, but it works."
 - Phrases that are off-brand: "wire up," "ship it," "level up," "10x," "game-changer," anything from the toolshed metaphor era.
 
+## Cartoon Mike is allowed on request
+
+Photos are the default. When Mike requests a non-realistic, cartoon, vector, illustrated, caricature, or animated Mike, fulfill that request in the chosen style. The request is sufficient authorization: do not refuse, substitute a photo, or ask for a brand exception. The old cartoon mascot is retired from automatic use, but may also be used when explicitly requested. A one-off character does not change the default identity assets.
+
 ## The NOT list
 
 Never bring these back, no matter how nostalgic they look:
 
-- Cartoon Mike (illustrated character)
 - The toolshed / workshop metaphor in copy or visuals
 - Washi tape, hand-drawn arrows, deco illustrations, lighthouse, cloud
 - Unplugged Sans (the previous display font)

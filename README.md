@@ -1,4 +1,4 @@
-# Mike Murphy · AI Handyman — Design System v2026.5
+# Mike Murphy · AI Handyman — Design System v2026.6
 
 The locked design system for [mikemurphy.ai](https://mikemurphy.ai/) and the AI Handyman content brand.
 
@@ -42,11 +42,15 @@ The locked design system for [mikemurphy.ai](https://mikemurphy.ai/) and the AI 
 
 ## What's deliberately out
 
-Cartoon Mike. Toolshed metaphors. Washi tape and hand-drawn arrows. Unplugged Sans. `LEARN. CREATE. MOVE FORWARD.` — none of these come back, regardless of how charming they look in old screenshots.
+Toolshed metaphors. Washi tape and hand-drawn arrows. Unplugged Sans. `LEARN. CREATE. MOVE FORWARD.` — none of these come back, regardless of how charming they look in old screenshots.
+
+## Cartoon Mike
+
+Cartoon Mike is allowed on request. Photos remain the default; ask for a cartoon, vector, illustrated, caricature, or animated Mike and tools should create it without refusing or requiring a brand exception. The old mascot is retired from automatic use, but can be used when explicitly requested. See `BRAND-CANON.md` (Cartoon Mike and stylized depictions).
 
 ## Versioning
 
-Current: **v2026.5**. Stamped in the design-system footer and on every tutorial detail page.
+Current: **v2026.6**. Stamped in the design-system footer and on every tutorial detail page.
 
 ## Portable use and design sandbox
 
