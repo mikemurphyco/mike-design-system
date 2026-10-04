@@ -308,7 +308,7 @@ The trigger is a nav link with a 9px chevron that rotates 180° over 120ms while
 
 ### Mobile Menu Sheet
 
-Full-screen fixed overlay on solid `{colors.navy}` — not translucent, not a slide-in drawer. Top bar mirrors the header at 64px with the **cream** Loop variant (the one place the mark is not orange) and a 44px bordered close button.
+Full-screen fixed overlay on solid `{colors.navy}` — not translucent, not a slide-in drawer. Top bar mirrors the header at 64px with the **orange** Loop mark in both light and dark mode and a 44px bordered close button. The Loop stays orange in every site lockup: header, mobile menu, and footer.
 
 Body: section labels ("CONTENT", "MORE") in orange Mono 700 10px/+0.18em; items in IBM Plex Sans 600 17px chalk with chalk-@10% hairline dividers and a trailing muted `→`. Action row: full-width Subscribe (chalk border, chalk cut-shadow) beside a 46px theme toggle. Footer: the locked tagline with orange mid-dots.
 

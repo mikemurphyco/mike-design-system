@@ -19,7 +19,7 @@ Navigation redesign, shipped to mikemurphy.ai. The header grows from 60px to **8
 - **Chrome vs. card, clarified.** "No cut-shadow on nav/header/footer" stands, but a dropdown anchored to the nav is a **card**, not chrome, and keeps the cut-shadow. The rule is about the persistent bar, not everything attached to it.
 - **Hover fills over navy are neutral, never orange.** Translucent orange on a navy ground muddies to brown. Hover washes use `--color-text-primary` at 5–7%. A lightened orange variant was tried for small text on navy and rejected — the single orange stays single.
 - **Menus open on click, never hover.** Hover menus fail on trackpads and are unreachable on touch.
-- The Loop mark stays `--mm-orange` in the header in both themes — the lockup rule from the previous version, unchanged. The mobile sheet's navy ground is the one place the cream Loop variant is correct.
+- The Loop mark stays `--mm-orange` in every site lockup — header, mobile menu, and footer — in both light and dark mode. The mobile sheet uses the orange Loop on its navy ground; there is no cream-mark exception.
 - Header height and mark size are a matched pair — the 84px bar is balanced for a 42px mark. Change them together.
 - **Content width corrected to 1152px (72rem) with a 16px gutter.** This doc and `DESIGN.md` had long quoted 1160px + 32px padding, but the site never implemented it. Building the new header to the quoted numbers left it sitting 28px inside the content below it, which is how the drift surfaced. The header now shares the page container, so both edges align.
 - **Nav collapses at 1024px, not 820px.** The desktop header needs ~881px to lay out; the original breakpoint left it overflowing and scrolling the page horizontally between roughly 820px and 1010px. The breakpoint follows the measurement — re-measure if the nav gains links.
@@ -228,6 +228,7 @@ A single continuous spiral path. One stroke, uniform weight, no fill, no disc co
 The Loop is the **primary mark** — the face of the brand. Warm, human, a drawn gesture.
 
 - **Files:** `assets/loops/`
+- **Site lockups:** Always use the orange Loop (`--mm-orange`, `#FF6434`) in the header, mobile menu, and footer, in both light and dark mode.
 - **Stroke variants:** `#FF6434` (orange), `#001E3A` (navy), `#F1ECE2` (cream), `#1ECEBE` (teal); chalk variants remain available for bright reversed use on dark or orange surfaces
 - Transparent background — works on any surface
 - Animates by drawing the path (stroke-dashoffset)
